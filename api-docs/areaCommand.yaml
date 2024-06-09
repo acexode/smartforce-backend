@@ -1,0 +1,155 @@
+tags:
+- name: areaCommands
+  description: Area Commands API
+
+paths:
+  /area-commands:
+    get:
+      tags:
+      - areaCommands
+      summary: Find All Area Commands
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - areaCommands
+      summary: Add Area Command
+      parameters:
+      - name: body
+        in: body
+        description: Area Command Data
+        required: true
+        schema:
+          $ref: '#/definitions/areaCommand'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /area-commands/{id}:
+    get:
+      tags:
+      - areaCommands
+      summary: Find Area Command By Id
+      parameters:
+      - name: id
+        in: path
+        description: Area Command Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - areaCommands
+      summary: Update Area Command By Id
+      parameters:
+      - name: id
+        in: path
+        description: Area Command Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Area Command Data
+        required: true
+        schema:
+          $ref: '#/definitions/areaCommand'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - areaCommands
+      summary: Delete Area Command By Id
+      parameters:
+      - name: id
+        in: path
+        description: Area Command Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  areaCommand:
+    type: object
+    required:
+      - refNo
+      - name
+      - type
+      - unit
+      - stateCommand
+      - department
+      - country
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      name:
+        type: string
+        description: Name
+      type:
+        type: string
+        description: Type
+      unit:
+        type: string
+        description: Unit
+      stateCommand:
+        type: string
+        description: State Command
+      department:
+        type: string
+        description: Department
+      country:
+        type: string
+        description: Country
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

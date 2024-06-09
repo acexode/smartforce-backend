@@ -1,0 +1,179 @@
+tags:
+- name: policeOutpost
+  description: Police Outposts API
+
+paths:
+  /police-outposts:
+    get:
+      tags:
+      - policeOutpost
+      summary: Find All Police Outposts
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - policeOutpost
+      summary: Add Police Outpost
+      parameters:
+      - name: body
+        in: body
+        description: Police Outpost Data
+        required: true
+        schema:
+          $ref: '#/definitions/policeOutpost'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /police-outposts/{id}:
+    get:
+      tags:
+      - policeOutpost
+      summary: Find Police Outpost By Id
+      parameters:
+      - name: id
+        in: path
+        description: Police Outpost Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - policeOutpost
+      summary: Update Police Outpost By Id
+      parameters:
+      - name: id
+        in: path
+        description: Police Outpost Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Police Outpost Data
+        required: true
+        schema:
+          $ref: '#/definitions/policeOutpost'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - policeOutpost
+      summary: Delete Police Outpost By Id
+      parameters:
+      - name: id
+        in: path
+        description: Police Outpost Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  policeOutpost:
+    type: object
+    required:
+      - refNo
+      - name
+      - type
+      - station
+      - divisionalHq
+      - unit
+      - subunit
+      - areaCommand
+      - department
+      - formation
+      - state
+      - parent
+      - country
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      name:
+        type: string
+        description: Name
+      type:
+        type: string
+        description: Type
+      station:
+        type: string
+        description: Station
+      divisionalHq:
+        type: string
+        description: Divisional Headquarters
+      unit:
+        type: string
+        description: Unit
+      subunit:
+        type: string
+        description: Subunit
+      areaCommand:
+        type: string
+        description: Area Command
+      department:
+        type: string
+        description: Department
+      formation:
+        type: string
+        description: Formation
+      state:
+        type: string
+        description: State
+      parent:
+        type: string
+        description: Parent
+      country:
+        type: string
+        description: Country
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

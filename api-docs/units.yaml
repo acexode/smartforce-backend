@@ -1,0 +1,155 @@
+tags:
+- name: units
+  description: Units API
+
+paths:
+  /units:
+    get:
+      tags:
+      - units
+      summary: Find All Units
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - units
+      summary: Add Unit
+      parameters:
+      - name: body
+        in: body
+        description: Unit Data
+        required: true
+        schema:
+          $ref: '#/definitions/unit'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /units/{id}:
+    get:
+      tags:
+      - units
+      summary: Find Unit By Id
+      parameters:
+      - name: id
+        in: path
+        description: Unit Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - units
+      summary: Update Unit By Id
+      parameters:
+      - name: id
+        in: path
+        description: Unit Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Unit Data
+        required: true
+        schema:
+          $ref: '#/definitions/unit'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - units
+      summary: Delete Unit By Id
+      parameters:
+      - name: id
+        in: path
+        description: Unit Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  unit:
+    type: object
+    required:
+      - refNo
+      - name
+      - type
+      - department
+      - formation
+      - state
+      - parent
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      name:
+        type: string
+        description: Name
+      type:
+        type: string
+        description: Type
+      department:
+        type: string
+        description: Department
+      formation:
+        type: string
+        description: Formation
+      state:
+        type: string
+        description: State
+      parent:
+        type: string
+        description: Parent
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

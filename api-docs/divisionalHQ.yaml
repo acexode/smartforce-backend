@@ -1,0 +1,151 @@
+
+### Divisional Headquarters Swagger
+
+```yaml
+tags:
+- name: divisionalHeadquarters
+  description: Divisional Headquarters API
+
+paths:
+  /divisional-headquarters:
+    get:
+      tags:
+      - divisionalHeadquarters
+      summary: Find All Divisional Headquarters
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - divisionalHeadquarters
+      summary: Add Divisional Headquarters
+      parameters:
+      - name: body
+        in: body
+        description: Divisional Headquarters Data
+        required: true
+        schema:
+          $ref: '#/definitions/divisionalHeadquarters'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /divisional-headquarters/{id}:
+    get:
+      tags:
+      - divisionalHeadquarters
+      summary: Find Divisional Headquarters By Id
+      parameters:
+      - name: id
+        in: path
+        description: Divisional Headquarters Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - divisionalHeadquarters
+      summary: Update Divisional Headquarters By Id
+      parameters:
+      - name: id
+        in: path
+        description: Divisional Headquarters Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Divisional Headquarters Data
+        required: true
+        schema:
+          $ref: '#/definitions/divisionalHeadquarters'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - divisionalHeadquarters
+      summary: Delete Divisional Headquarters By Id
+      parameters:
+      - name: id
+        in: path
+        description: Divisional Headquarters Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  divisionalHeadquarters:
+    type: object
+    required:
+      - refNo
+      - name
+      - areaCommand
+      - state
+      - country
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      name:
+        type: string
+        description: Name
+      areaCommand:
+        type: string
+        description: Area Command
+      state:
+        type: string
+        description: State
+      country:
+        type: string
+        description: Country
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

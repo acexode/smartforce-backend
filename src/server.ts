@@ -13,6 +13,14 @@ import { ProfessionalAssociationRoute } from './routes/professionalAssociation.r
 import { SalaryDetailsRoute } from './routes/salaryDetails.route';
 import { WorkExperienceRoute } from './routes/workExperience.route';
 import { DepartmentRoute } from './routes/department.route';
+import { AreaCommandRoute } from './routes/areaCommand.route';
+import { DivisionalHeadquartersRoute } from './routes/divisionalHQ.route';
+import { FormationRoute } from './routes/formation.route';
+import { PoliceOutpostRoute } from './routes/policeOutpost.route';
+import { PoliceStationRoute } from './routes/policeStation.route';
+import { RankRoute } from './routes/ranks.route';
+import { StateCommandRoute } from './routes/statecommand.route';
+import { UnitRoute } from './routes/units.route';
 
 ValidateEnv();
 
@@ -29,7 +37,15 @@ const app = new App([
   new ProfessionalAssociationRoute(),
   new SalaryDetailsRoute(),
   new WorkExperienceRoute(),
+  new AreaCommandRoute(),
   new DepartmentRoute(),
+  new DivisionalHeadquartersRoute(),
+  new FormationRoute(),
+  new PoliceOutpostRoute(),
+  new PoliceStationRoute(),
+  new RankRoute(),
+  new StateCommandRoute(),
+  new UnitRoute(),
 ]);
 
 app.listen();

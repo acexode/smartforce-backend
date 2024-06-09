@@ -1,0 +1,143 @@
+tags:
+- name: ranks
+  description: Ranks API
+
+paths:
+  /ranks:
+    get:
+      tags:
+      - ranks
+      summary: Find All Ranks
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - ranks
+      summary: Add Rank
+      parameters:
+      - name: body
+        in: body
+        description: Rank Data
+        required: true
+        schema:
+          $ref: '#/definitions/rank'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /ranks/{id}:
+    get:
+      tags:
+      - ranks
+      summary: Find Rank By Id
+      parameters:
+      - name: id
+        in: path
+        description: Rank Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - ranks
+      summary: Update Rank By Id
+      parameters:
+      - name: id
+        in: path
+        description: Rank Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Rank Data
+        required: true
+        schema:
+          $ref: '#/definitions/rank'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - ranks
+      summary: Delete Rank By Id
+      parameters:
+      - name: id
+        in: path
+        description: Rank Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  rank:
+    type: object
+    required:
+      - refNo
+      - name
+      - type
+      - parent
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      name:
+        type: string
+        description: Name
+      type:
+        type: string
+        description: Type
+      parent:
+        type: string
+        description: Parent
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

@@ -1,0 +1,151 @@
+tags:
+- name: policeStation
+  description: Police Station API
+
+paths:
+  /police-stations:
+    get:
+      tags:
+      - policeStation
+      summary: Find All Police Stations
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - policeStation
+      summary: Add Police Station
+      parameters:
+      - name: body
+        in: body
+        description: Police Station Data
+        required: true
+        schema:
+          $ref: '#/definitions/policeStation'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /police-stations/{id}:
+    get:
+      tags:
+      - policeStation
+      summary: Find Police Station By Id
+      parameters:
+      - name: id
+        in: path
+        description: Police Station Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - policeStation
+      summary: Update Police Station By Id
+      parameters:
+      - name: id
+        in: path
+        description: Police Station Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Police Station Data
+        required: true
+        schema:
+          $ref: '#/definitions/policeStation'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - policeStation
+      summary: Delete Police Station By Id
+      parameters:
+      - name: id
+        in: path
+        description: Police Station Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  policeStation:
+    type: object
+    required:
+      - refNo
+      - name
+      - divisionalHeadquarters
+      - areaCommand
+      - state
+      - country
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      name:
+        type: string
+        description: Name
+      divisionalHeadquarters:
+        type: string
+        description: Divisional Headquarters
+      areaCommand:
+        type: string
+        description: Area Command
+      state:
+        type: string
+        description: State
+      country:
+        type: string
+        description: Country
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

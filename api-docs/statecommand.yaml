@@ -1,0 +1,167 @@
+tags:
+- name: stateCommands
+  description: State Commands API
+
+paths:
+  /state-commands:
+    get:
+      tags:
+      - stateCommands
+      summary: Find All State Commands
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - stateCommands
+      summary: Add State Command
+      parameters:
+      - name: body
+        in: body
+        description: State Command Data
+        required: true
+        schema:
+          $ref: '#/definitions/stateCommand'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /state-commands/{id}:
+    get:
+      tags:
+      - stateCommands
+      summary: Find State Command By Id
+      parameters:
+      - name: id
+        in: path
+        description: State Command Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - stateCommands
+      summary: Update State Command By Id
+      parameters:
+      - name: id
+        in: path
+        description: State Command Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: State Command Data
+        required: true
+        schema:
+          $ref: '#/definitions/stateCommand'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - stateCommands
+      summary: Delete State Command By Id
+      parameters:
+      - name: id
+        in: path
+        description: State Command Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  stateCommand:
+    type: object
+    required:
+      - refNo
+      - name
+      - department
+      - location
+      - phone
+      - email
+      - geoCode
+      - type
+      - parent
+      - section
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      name:
+        type: string
+        description: Name
+      department:
+        type: string
+        description: Department
+      location:
+        type: string
+        description: Location
+      phone:
+        type: string
+        description: Phone
+      email:
+        type: string
+        description: Email
+      geoCode:
+        type: string
+        description: Geo Code
+      type:
+        type: string
+        description: Type
+      parent:
+        type: string
+        description: Parent
+      section:
+        type: string
+        description: Section
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

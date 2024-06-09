@@ -1,0 +1,155 @@
+tags:
+- name: professionalAssociation
+  description: Professional Association API
+
+paths:
+  /professional-association:
+    get:
+      tags:
+      - professionalAssociation
+      summary: Find All Professional Association
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - professionalAssociation
+      summary: Add Professional Association
+      parameters:
+      - name: body
+        in: body
+        description: Professional Association Data
+        required: true
+        schema:
+          $ref: '#/definitions/professionalAssociation'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /professional-association/{id}:
+    get:
+      tags:
+      - professionalAssociation
+      summary: Find Professional Association By Id
+      parameters:
+      - name: id
+        in: path
+        description: Professional Association Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - professionalAssociation
+      summary: Update Professional Association By Id
+      parameters:
+      - name: id
+        in: path
+        description: Professional Association Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Professional Association Data
+        required: true
+        schema:
+          $ref: '#/definitions/professionalAssociation'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - professionalAssociation
+      summary: Delete Professional Association By Id
+      parameters:
+      - name: id
+        in: path
+        description: Professional Association Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  professionalAssociation:
+    type: object
+    required:
+      - refNo
+      - employee
+      - institution
+      - year
+      - certificateObtained
+      - membershipClass
+      - comment
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      employee:
+        type: string
+        description: Employee
+      institution:
+        type: string
+        description: Institution
+      year:
+        type: integer
+        description: Year
+      certificateObtained:
+        type: string
+        description: Certificate Obtained
+      membershipClass:
+        type: string
+        description: Membership Class
+      comment:
+        type: string
+        description: Comment
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

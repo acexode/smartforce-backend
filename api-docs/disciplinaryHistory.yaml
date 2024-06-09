@@ -1,0 +1,212 @@
+tags:
+- name: disciplinaryHistory
+  description: Disciplinary History API
+
+paths:
+  /disciplinary-history:
+    get:
+      tags:
+      - disciplinaryHistory
+      summary: Find All Disciplinary History
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - disciplinaryHistory
+      summary: Add Disciplinary History
+      parameters:
+      - name: body
+        in: body
+        description: Disciplinary History Data
+        required: true
+        schema:
+          $ref: '#/definitions/disciplinaryHistory'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /disciplinary-history/{id}:
+    get:
+      tags:
+      - disciplinaryHistory
+      summary: Find Disciplinary History By Id
+      parameters:
+      - name: id
+        in: path
+        description: Disciplinary History Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - disciplinaryHistory
+      summary: Update Disciplinary History By Id
+      parameters:
+      - name: id
+        in: path
+        description: Disciplinary History Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Disciplinary History Data
+        required: true
+        schema:
+          $ref: '#/definitions/disciplinaryHistory'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - disciplinaryHistory
+      summary: Delete Disciplinary History By Id
+      parameters:
+      - name: id
+        in: path
+        description: Disciplinary History Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  disciplinaryHistory:
+    type: object
+    required:
+      - refNo
+      - employee
+      - date
+      - type
+      - category
+      - subcategory
+      - charges
+      - offence
+      - disciplinaryMeasure
+      - employeeResponse
+      - circumstance
+      - employeeRepentantAction
+      - supervisorSupport
+      - behavioralExpectations
+      - generalRemarks
+      - comment
+      - status
+      - store
+      - supervisor
+      - reference
+      - referenceTable
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      employee:
+        type: string
+        description: Employee
+      date:
+        type: string
+        format: date-time
+        description: Date
+      type:
+        type: string
+        description: Type
+      category:
+        type: string
+        description: Category
+      subcategory:
+        type: string
+        description: Subcategory
+      charges:
+        type: string
+        description: Charges
+      offence:
+        type: string
+        description: Offence
+      disciplinaryMeasure:
+        type: string
+        description: Disciplinary Measure
+      employeeResponse:
+        type: string
+        description: Employee Response
+      circumstance:
+        type: string
+        description: Circumstance
+      employeeRepentantAction:
+        type: string
+        description: Employee Repentant Action
+      supervisorSupport:
+        type: string
+        description: Supervisor Support
+      behavioralExpectations:
+        type: string
+        description: Behavioral Expectations
+      generalRemarks:
+        type: string
+        description: General Remarks
+      comment:
+        type: string
+        description: Comment
+      status:
+        type: string
+        description: Status
+      store:
+        type: string
+        description: Store
+      supervisor:
+        type: string
+        description: Supervisor
+      reference:
+        type: string
+        description: Reference
+      referenceTable:
+        type: string
+        description: Reference Table
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

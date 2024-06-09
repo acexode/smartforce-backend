@@ -1,0 +1,167 @@
+tags:
+- name: nextOfKin
+  description: Next of Kin API
+
+paths:
+  /next-of-kin:
+    get:
+      tags:
+      - nextOfKin
+      summary: Find All Next of Kin
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - nextOfKin
+      summary: Add Next of Kin
+      parameters:
+      - name: body
+        in: body
+        description: Next of Kin Data
+        required: true
+        schema:
+          $ref: '#/definitions/nextOfKin'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /next-of-kin/{id}:
+    get:
+      tags:
+      - nextOfKin
+      summary: Find Next of Kin By Id
+      parameters:
+      - name: id
+        in: path
+        description: Next of Kin Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - nextOfKin
+      summary: Update Next of Kin By Id
+      parameters:
+      - name: id
+        in: path
+        description: Next of Kin Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Next of Kin Data
+        required: true
+        schema:
+          $ref: '#/definitions/nextOfKin'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - nextOfKin
+      summary: Delete Next of Kin By Id
+      parameters:
+      - name: id
+        in: path
+        description: Next of Kin Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  nextOfKin:
+    type: object
+    required:
+      - refNo
+      - employee
+      - firstName
+      - lastName
+      - otherNames
+      - phoneNumber
+      - sex
+      - email
+      - contactAddress
+      - relationship
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      employee:
+        type: string
+        description: Employee
+      firstName:
+        type: string
+        description: First Name
+      lastName:
+        type: string
+        description: Last Name
+      otherNames:
+        type: string
+        description: Other Names
+      phoneNumber:
+        type: string
+        description: Phone Number
+      sex:
+        type: string
+        description: Sex
+      email:
+        type: string
+        description: Email
+      contactAddress:
+        type: string
+        description: Contact Address
+      relationship:
+        type: string
+        description: Relationship
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

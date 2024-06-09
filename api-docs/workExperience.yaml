@@ -1,0 +1,163 @@
+tags:
+- name: workExperience
+  description: Work Experience API
+
+paths:
+  /work-experience:
+    get:
+      tags:
+      - workExperience
+      summary: Find All Work Experience
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - workExperience
+      summary: Add Work Experience
+      parameters:
+      - name: body
+        in: body
+        description: Work Experience Data
+        required: true
+        schema:
+          $ref: '#/definitions/workExperience'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /work-experience/{id}:
+    get:
+      tags:
+      - workExperience
+      summary: Find Work Experience By Id
+      parameters:
+      - name: id
+        in: path
+        description: Work Experience Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - workExperience
+      summary: Update Work Experience By Id
+      parameters:
+      - name: id
+        in: path
+        description: Work Experience Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Work Experience Data
+        required: true
+        schema:
+          $ref: '#/definitions/workExperience'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - workExperience
+      summary: Delete Work Experience By Id
+      parameters:
+      - name: id
+        in: path
+        description: Work Experience Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  workExperience:
+    type: object
+    required:
+      - refNo
+      - employee
+      - companyName
+      - positionHeld
+      - responsibilities
+      - yearOfEntry
+      - yearOfExit
+      - reasonForExit
+      - commentOptional
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      employee:
+        type: string
+        description: Employee
+      companyName:
+        type: string
+        description: Company Name
+      positionHeld:
+        type: string
+        description: Position Held
+      responsibilities:
+        type: string
+        description: Responsibilities
+      yearOfEntry:
+        type: integer
+        description: Year of Entry
+      yearOfExit:
+        type: integer
+        description: Year of Exit
+      reasonForExit:
+        type: string
+        description: Reason for Exit
+      commentOptional:
+        type: string
+        description: Comment (optional)
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

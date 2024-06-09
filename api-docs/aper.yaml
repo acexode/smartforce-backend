@@ -1,0 +1,229 @@
+tags:
+- name: aper
+  description: APER API
+
+paths:
+  /aper:
+    get:
+      tags:
+      - aper
+      summary: Find All APER
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - aper
+      summary: Add APER
+      parameters:
+      - name: body
+        in: body
+        description: APER Data
+        required: true
+        schema:
+          $ref: '#/definitions/aper'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /aper/{id}:
+    get:
+      tags:
+      - aper
+      summary: Find APER By Id
+      parameters:
+      - name: id
+        in: path
+        description: APER Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - aper
+      summary: Update APER By Id
+      parameters:
+      - name: id
+        in: path
+        description: APER Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: APER Data
+        required: true
+        schema:
+          $ref: '#/definitions/aper'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - aper
+      summary: Delete APER By Id
+      parameters:
+      - name: id
+        in: path
+        description: APER Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  aper:
+    type: object
+    required:
+      - refNo
+      - title
+      - employee
+      - division
+      - store
+      - department
+      - startDate
+      - endDate
+      - typeOfAppraisal
+      - employeeGoals
+      - targetScore
+      - score
+      - colleague
+      - colleagueComment
+      - hrOfficer
+      - hrComment
+      - supervisor
+      - supervisorComment
+      - seniorSupervisor
+      - seniorSupervisorComment
+      - commentOptional
+      - status
+      - reference
+      - referenceTable
+      - plugin
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      title:
+        type: string
+        description: Title
+      employee:
+        type: string
+        description: Employee
+      division:
+        type: string
+        description: Division
+      store:
+        type: string
+        description: Store
+      department:
+        type: string
+        description: Department
+      startDate:
+        type: string
+        format: date-time
+        description: Start Date
+      endDate:
+        type: string
+        format: date-time
+        description: End Date
+      typeOfAppraisal:
+        type: string
+        description: Type of Appraisal
+      employeeGoals:
+        type: string
+        description: Employee Goals
+      targetScore:
+        type: number
+        description: Target Score
+      score:
+        type: number
+        description: Score
+      colleague:
+        type: string
+        description: Colleague
+      colleagueComment:
+        type: string
+        description: Colleague Comment
+      hrOfficer:
+        type: string
+        description: HR Officer
+      hrComment:
+        type: string
+        description: HR Comment
+      supervisor:
+        type: string
+        description: Supervisor
+      supervisorComment:
+        type: string
+        description: Supervisor Comment
+      seniorSupervisor:
+        type: string
+        description: Senior Supervisor
+      seniorSupervisorComment:
+        type: string
+        description: Senior Supervisor Comment
+      commentOptional:
+        type: string
+        description: Comment (optional)
+      status:
+        type: string
+        description: Status
+      reference:
+        type: string
+        description: Reference
+      referenceTable:
+        type: string
+        description: Reference Table
+      plugin:
+        type: string
+        description: Plugin
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

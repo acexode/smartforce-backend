@@ -1,0 +1,184 @@
+tags:
+- name: dependents
+  description: Dependents API
+
+paths:
+  /dependents:
+    get:
+      tags:
+      - dependents
+      summary: Find All Dependents
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - dependents
+      summary: Add Dependents
+      parameters:
+      - name: body
+        in: body
+        description: Dependents Data
+        required: true
+        schema:
+          $ref: '#/definitions/dependents'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /dependents/{id}:
+    get:
+      tags:
+      - dependents
+      summary: Find Dependents By Id
+      parameters:
+      - name: id
+        in: path
+        description: Dependents Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - dependents
+      summary: Update Dependents By Id
+      parameters:
+      - name: id
+        in: path
+        description: Dependents Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Dependents Data
+        required: true
+        schema:
+          $ref: '#/definitions/dependents'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - dependents
+      summary: Delete Dependents By Id
+      parameters:
+      - name: id
+        in: path
+        description: Dependents Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  dependents:
+    type: object
+    required:
+      - refNo
+      - employee
+      - nameOfDependent
+      - dateOfBirth
+      - relationship
+      - sex
+      - phoneNumber
+      - email
+      - address
+      - meansOfIdentification
+      - idPolicyNumber
+      - commentOptional
+      - percentageBenefit
+      - type
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      employee:
+        type: string
+        description: Employee
+      nameOfDependent:
+        type: string
+        description: Name of Dependent
+      dateOfBirth:
+        type: string
+        format: date-time
+        description: Date of Birth
+      relationship:
+        type: string
+        description: Relationship
+      sex:
+        type: string
+        description: Sex
+      phoneNumber:
+        type: string
+        description: Phone Number
+      email:
+        type: string
+        description: Email
+      address:
+        type: string
+        description: Address
+      meansOfIdentification:
+        type: string
+        description: Means of Identification
+      idPolicyNumber:
+        type: string
+        description: ID / Policy Number
+      commentOptional:
+        type: string
+        description: Comment (optional)
+      percentageBenefit:
+        type: number
+        description: Percentage Benefit
+      type:
+        type: string
+        description: Type
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

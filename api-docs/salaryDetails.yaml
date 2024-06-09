@@ -1,0 +1,360 @@
+tags:
+- name: salaryDetails
+  description: Salary Details API
+
+paths:
+  /salary-details:
+    get:
+      tags:
+      - salaryDetails
+      summary: Find All Salary Details
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - salaryDetails
+      summary: Add Salary Details
+      parameters:
+      - name: body
+        in: body
+        description: Salary Details Data
+        required: true
+        schema:
+          $ref: '#/definitions/salaryDetails'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /salary-details/{id}:
+    get:
+      tags:
+      - salaryDetails
+      summary: Find Salary Details By Id
+      parameters:
+      - name: id
+        in: path
+        description: Salary Details Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - salaryDetails
+      summary: Update Salary Details By Id
+      parameters:
+      - name: id
+        in: path
+        description: Salary Details Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Salary Details Data
+        required: true
+        schema:
+          $ref: '#/definitions/salaryDetails'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - salaryDetails
+      summary: Delete Salary Details By Id
+      parameters:
+      - name: id
+        in: path
+        description: Salary Details Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  salaryDetails:
+    type: object
+    required:
+      - refNo
+      - employee
+      - currency
+      - date
+      - basic
+      - housing
+      - transport
+      - hazard
+      - inconvenience
+      - utility
+      - lunch
+      - bonus
+      - leave
+      - call
+      - arrears
+      - addedResponsibility
+      - compound
+      - extraDuty
+      - overtime
+      - sundayOvertime
+      - publicHolidayOvertime
+      - medicalAllowance
+      - otherAllowance
+      - repatriationAllowance
+      - terminalBenefit
+      - maternityLeave
+      - allowance
+      - grossSalary
+      - tax
+      - pensionsVoluntary
+      - pensionsEmployee
+      - pensionEmployer
+      - housingNHF
+      - absent
+      - salaryAdvance
+      - nmaDeduction
+      - cooperative
+      - medicalBill
+      - loan
+      - disciplinaryDeduction
+      - otherDeduction
+      - noOfDaysInMonth
+      - noOfWorkingDays
+      - noOfDaysOnLeave
+      - overtimeDays
+      - noOfDaysAbsent
+      - normalHours
+      - sundayHours
+      - phHours
+      - maternityLeaveDays
+      - casualLeaveDays
+      - unpaidDays
+      - suspensionDays
+      - unionDue
+      - itfContribution
+      - status
+      - nsitfContribution
+      - totalDeduction
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      employee:
+        type: string
+        description: Employee
+      currency:
+        type: string
+        description: Currency
+      date:
+        type: string
+        format: date-time
+        description: Date
+      basic:
+        type: number
+        description: Basic
+      housing:
+        type: number
+        description: Housing
+      transport:
+        type: number
+        description: Transport
+      hazard:
+        type: number
+        description: Hazard
+      inconvenience:
+        type: number
+        description: Inconvenience
+      utility:
+        type: number
+        description: Utility
+      lunch:
+        type: number
+        description: Lunch
+      bonus:
+        type: number
+        description: Bonus
+      leave:
+        type: number
+        description: Leave
+      call:
+        type: number
+        description: Call
+      arrears:
+        type: number
+        description: Arrears
+      addedResponsibility:
+        type: number
+        description: Added Responsibility
+      compound:
+        type: number
+        description: Compound
+      extraDuty:
+        type: number
+        description: Extra Duty
+      overtime:
+        type: number
+        description: Overtime
+      sundayOvertime:
+        type: number
+        description: Sunday Overtime
+      publicHolidayOvertime:
+        type: number
+        description: Public Holiday Overtime
+      medicalAllowance:
+        type: number
+        description: Medical Allowance
+      otherAllowance:
+        type: number
+        description: Other Allowance
+      repatriationAllowance:
+        type: number
+        description: Repatriation Allowance
+      terminalBenefit:
+        type: number
+        description: Terminal Benefit
+      maternityLeave:
+        type: number
+        description: Maternity Leave
+      allowance:
+        type: number
+        description: Allowance
+      grossSalary:
+        type: number
+        description: Gross Salary
+      tax:
+        type: number
+        description: Tax
+      pensionsVoluntary:
+        type: number
+        description: Pensions Voluntary
+      pensionsEmployee:
+        type: number
+        description: Pensions (Employee)
+      pensionEmployer:
+        type: number
+        description: Pension (Employer)
+      housingNHF:
+        type: number
+        description: Housing (NHF)
+      absent:
+        type: number
+        description: Absent
+      salaryAdvance:
+        type: number
+        description: Salary Advance
+      nmaDeduction:
+        type: number
+        description: NMA Deduction
+      cooperative:
+        type: number
+        description: Cooperative
+      medicalBill:
+        type: number
+        description: Medical Bill
+      loan:
+        type: number
+        description: Loan
+      disciplinaryDeduction:
+        type: number
+        description: Disciplinary Deduction
+      otherDeduction:
+        type: number
+        description: Other Deduction
+      noOfDaysInMonth:
+        type: number
+        description: No. of Days in Month
+      noOfWorkingDays:
+        type: number
+        description: No. of Working Days
+      noOfDaysOnLeave:
+        type: number
+        description: No. of Days on Leave
+      overtimeDays:
+        type: number
+        description: Overtime Days
+      noOfDaysAbsent:
+        type: number
+        description: No. of Days Absent
+      normalHours:
+        type: number
+        description: Normal Hours
+      sundayHours:
+        type: number
+        description: Sunday Hours
+      phHours:
+        type: number
+        description: PH Hours
+      maternityLeaveDays:
+        type: number
+        description: Maternity Leave Days
+      casualLeaveDays:
+        type: number
+        description: Casual Leave Days
+      unpaidDays:
+        type: number
+        description: Unpaid Days
+      suspensionDays:
+        type: number
+        description: Suspension Days
+      unionDue:
+        type: number
+        description: Union Due
+      itfContribution:
+        type: number
+        description: ITF Contribution
+      status:
+        type: string
+        description: Status
+      nsitfContribution:
+        type: number
+        description: NSITF Contribution
+      totalDeduction:
+        type: number
+        description: Total Deduction
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

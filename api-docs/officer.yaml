@@ -1,0 +1,217 @@
+tags:
+- name: ippisOfficersInfo
+  description: IPPIS Officers Info API
+
+paths:
+  /ippis-officers-info:
+    get:
+      tags:
+      - ippisOfficersInfo
+      summary: Find All IPPIS Officers Info
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - ippisOfficersInfo
+      summary: Add IPPIS Officers Info
+      parameters:
+      - name: body
+        in: body
+        description: IPPIS Officers Info Data
+        required: true
+        schema:
+          $ref: '#/definitions/ippisOfficersInfo'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /ippis-officers-info/{id}:
+    get:
+      tags:
+      - ippisOfficersInfo
+      summary: Find IPPIS Officers Info By Id
+      parameters:
+      - name: id
+        in: path
+        description: IPPIS Officers Info Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - ippisOfficersInfo
+      summary: Update IPPIS Officers Info By Id
+      parameters:
+      - name: id
+        in: path
+        description: IPPIS Officers Info Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: IPPIS Officers Info Data
+        required: true
+        schema:
+          $ref: '#/definitions/ippisOfficersInfo'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - ippisOfficersInfo
+      summary: Delete IPPIS Officers Info By Id
+      parameters:
+      - name: id
+        in: path
+        description: IPPIS Officers Info Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  ippisOfficersInfo:
+    type: object
+    required:
+      - refNo
+      - apNo
+      - lastname
+      - firstname
+      - otherNames
+      - gender
+      - maritalStatus
+      - phoneNumber
+      - dateOfBirth
+      - lga
+      - state
+      - dateOfEnlistment
+      - rank
+      - salaryStructure
+      - gradeLevel
+      - level
+      - ippis
+      - bankName
+      - accountNo
+      - pfa
+      - pfaNumber
+      - category
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      apNo:
+        type: string
+        description: AP No.
+      lastname:
+        type: string
+        description: Lastname
+      firstname:
+        type: string
+        description: Firstname
+      otherNames:
+        type: string
+        description: Other Names
+      gender:
+        type: string
+        description: Gender
+      maritalStatus:
+        type: string
+        description: Marital Status
+      phoneNumber:
+        type: string
+        description: Phone Number
+      dateOfBirth:
+        type: string
+        format: date-time
+        description: Date Of Birth
+      lga:
+        type: string
+        description: LGA
+      state:
+        type: string
+        description: State
+      dateOfEnlistment:
+        type: string
+        format: date-time
+        description: Date Of Enlistment
+      rank:
+        type: string
+        description: Rank
+      salaryStructure:
+        type: string
+        description: Salary Structure
+      gradeLevel:
+        type: string
+        description: Grade Level
+      level:
+        type: integer
+        description: Level
+      ippis:
+        type: string
+        description: IPPIS
+      bankName:
+        type: string
+        description: Bank Name
+      accountNo:
+        type: string
+        description: Account No.
+      pfa:
+        type: string
+        description: PFA
+      pfaNumber:
+        type: string
+        description: PFA Number
+      category:
+        type: string
+        description: Category
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

@@ -12,6 +12,7 @@ import { IPPISOfficersInfoRoute } from './routes/officer.route';
 import { ProfessionalAssociationRoute } from './routes/professionalAssociation.route';
 import { SalaryDetailsRoute } from './routes/salaryDetails.route';
 import { WorkExperienceRoute } from './routes/workExperience.route';
+import { DepartmentRoute } from './routes/department.route';
 
 ValidateEnv();
 
@@ -28,6 +29,7 @@ const app = new App([
   new ProfessionalAssociationRoute(),
   new SalaryDetailsRoute(),
   new WorkExperienceRoute(),
+  new DepartmentRoute(),
 ]);
 
 app.listen();

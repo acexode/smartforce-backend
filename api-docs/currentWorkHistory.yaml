@@ -1,0 +1,226 @@
+tags:
+- name: currentWorkHistory
+  description: Current Work History API
+
+paths:
+  /current-work-history:
+    get:
+      tags:
+      - currentWorkHistory
+      summary: Find All Current Work History
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - currentWorkHistory
+      summary: Add Current Work History
+      parameters:
+      - name: body
+        in: body
+        description: Current Work History Data
+        required: true
+        schema:
+          $ref: '#/definitions/currentWorkHistory'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /current-work-history/{id}:
+    get:
+      tags:
+      - currentWorkHistory
+      summary: Find Current Work History By Id
+      parameters:
+      - name: id
+        in: path
+        description: Current Work History Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - currentWorkHistory
+      summary: Update Current Work History By Id
+      parameters:
+      - name: id
+        in: path
+        description: Current Work History Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Current Work History Data
+        required: true
+        schema:
+          $ref: '#/definitions/currentWorkHistory'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - currentWorkHistory
+      summary: Delete Current Work History By Id
+      parameters:
+      - name: id
+        in: path
+        description: Current Work History Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  currentWorkHistory:
+    type: object
+    required:
+      - refNo
+      - employee
+      - reasonForChange
+      - role
+      - rank
+      - formation
+      - stateCommand
+      - specialization
+      - areaCommand
+      - divisionalHQ
+      - policeStation
+      - policeOutpost
+      - villageOutpost
+      - supervisor
+      - promotionIntervalInDays
+      - seniorSupervisor
+      - gradeLevel
+      - responsibilities
+      - proposedStartDate
+      - startDate
+      - endDate
+      - status
+      - comment
+      - data
+      - createdBy
+      - creationDate
+      - modifiedBy
+      - modificationDate
+    properties:
+      refNo:
+        type: string
+        description: Reference Number
+      employee:
+        type: string
+        description: Employee
+      reasonForChange:
+        type: string
+        description: Reason for Change
+      role:
+        type: string
+        description: Role
+      rank:
+        type: string
+        description: Rank
+      formation:
+        type: string
+        description: Formation
+      stateCommand:
+        type: string
+        description: State Command
+      specialization:
+        type: string
+        description: Specialization
+      areaCommand:
+        type: string
+        description: Area Command
+      divisionalHQ:
+        type: string
+        description: Divisional HQ
+      policeStation:
+        type: string
+        description: Police Station
+      policeOutpost:
+        type: string
+        description: Police Outpost
+      villageOutpost:
+        type: string
+        description: Village Outpost
+      supervisor:
+        type: string
+        description: Supervisor
+      promotionIntervalInDays:
+        type: number
+        description: Promotion Interval in Days
+      seniorSupervisor:
+        type: string
+        description: Senior Supervisor
+      gradeLevel:
+        type: string
+        description: Grade Level
+      responsibilities:
+        type: string
+        description: Responsibilities
+      proposedStartDate:
+        type: string
+        format: date-time
+        description: Proposed Start Date
+      startDate:
+        type: string
+        format: date-time
+        description: Start Date
+      endDate:
+        type: string
+        format: date-time
+        description: End Date
+      status:
+        type: string
+        description: Status
+      comment:
+        type: string
+        description: Comment
+      data:
+        type: string
+        description: Data
+      createdBy:
+        type: string
+        description: Created By
+      creationDate:
+        type: string
+        format: date-time
+        description: Creation Date
+      modifiedBy:
+        type: string
+        description: Modified By
+      modificationDate:
+        type: string
+        format: date-time
+        description: Modification Date
+
+schemes:
+ - https
+ - http

@@ -1,0 +1,173 @@
+tags:
+- name: officerWelfareInformation
+  description: Officer Welfare Information API
+
+paths:
+  /officer-welfare-information:
+    get:
+      tags:
+      - officerWelfareInformation
+      summary: Find All Officer Welfare Information
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - officerWelfareInformation
+      summary: Add Officer Welfare Information
+      parameters:
+      - name: body
+        in: body
+        description: Officer Welfare Information Data
+        required: true
+        schema:
+          $ref: '#/definitions/officerWelfareInformation'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /officer-welfare-information/{id}:
+    get:
+      tags:
+      - officerWelfareInformation
+      summary: Find Officer Welfare Information By Id
+      parameters:
+      - name: id
+        in: path
+        description: Officer Welfare Information Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - officerWelfareInformation
+      summary: Update Officer Welfare Information By Id
+      parameters:
+      - name: id
+        in: path
+        description: Officer Welfare Information Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Officer Welfare Information Data
+        required: true
+        schema:
+          $ref: '#/definitions/officerWelfareInformation'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - officerWelfareInformation
+      summary: Delete Officer Welfare Information By Id
+      parameters:
+      - name: id
+        in: path
+        description: Officer Welfare Information Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  officerWelfareInformation:
+    type: object
+    required:
+      - ippis
+      - bank
+      - accountNumber
+      - gifMis
+      - taxId
+      - gradeLevel
+      - salaryStructure
+      - noTaxOffice
+      - pfaName
+      - pensionId
+      - cooperativeNo
+      - housingSchemeRefNumber
+      - housingScheme
+      - healthInsurancePin
+      - healthInsurance
+      - officerBioDataId
+    properties:
+      ippis:
+        type: string
+        description: IPPIS
+      bank:
+        type: string
+        description: Bank
+      accountNumber:
+        type: string
+        description: Account number
+      gifMis:
+        type: string
+        description: GIF MIS
+      taxId:
+        type: string
+        description: Tax ID
+      gradeLevel:
+        type: string
+        description: Grade level
+      salaryStructure:
+        type: string
+        description: Salary structure
+      noTaxOffice:
+        type: string
+        description: No tax office
+      pfaName:
+        type: string
+        description: PFA Name
+      pensionId:
+        type: string
+        description: Pension ID
+      cooperativeNo:
+        type: string
+        description: Cooperative No
+      housingSchemeRefNumber:
+        type: string
+        description: Housing Scheme Ref. Number
+      housingScheme:
+        type: string
+        description: Housing Scheme
+      healthInsurancePin:
+        type: string
+        description: Health Insurance pin
+      healthInsurance:
+        type: string
+        description: Health Insurance
+      officerBioDataId:
+        type: integer
+        description: ID of related Officer Bio Data
+
+schemes:
+ - https
+ - http

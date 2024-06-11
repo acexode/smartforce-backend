@@ -1,43 +1,43 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Service } from 'typedi';
-import { CurrentWorkHistory, CurrentWorkHistoryEntity } from '@entities/currentWorkHistory.entity';
+import { OfficerCurrentPostingEntity, OfficerCurrentPosting } from '@entities/currentWorkHistory.entity';
 import { HttpException } from '@/exceptions/httpException';
 
 @Service()
 @EntityRepository()
-export class CurrentWorkHistoryService extends Repository<CurrentWorkHistoryEntity> {
-  public async findAllCurrentWorkHistory(): Promise<CurrentWorkHistory[]> {
-    const currentWorkHistory: CurrentWorkHistory[] = await CurrentWorkHistoryEntity.find();
-    return currentWorkHistory;
+export class OfficerCurrentPostingService extends Repository<OfficerCurrentPostingEntity> {
+  public async findAllCurrentPostings(): Promise<OfficerCurrentPosting[]> {
+    const currentPostings: OfficerCurrentPosting[] = await OfficerCurrentPostingEntity.find();
+    return currentPostings;
   }
 
-  public async findCurrentWorkHistoryById(currentWorkHistoryId: number): Promise<CurrentWorkHistory> {
-    const findCurrentWorkHistory: CurrentWorkHistory = await CurrentWorkHistoryEntity.findOne({ where: { id: currentWorkHistoryId } });
-    if (!findCurrentWorkHistory) throw new HttpException(409, "Current work history doesn't exist");
+  public async findCurrentPostingById(currentPostingId: number): Promise<OfficerCurrentPosting> {
+    const findCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { id: currentPostingId } });
+    if (!findCurrentPosting) throw new HttpException(409, "Current Posting doesn't exist");
 
-    return findCurrentWorkHistory;
+    return findCurrentPosting;
   }
 
-  public async createCurrentWorkHistory(currentWorkHistoryData: CurrentWorkHistory): Promise<CurrentWorkHistory> {
-    const createCurrentWorkHistoryData: CurrentWorkHistory = await CurrentWorkHistoryEntity.create(currentWorkHistoryData).save();
-    return createCurrentWorkHistoryData;
+  public async createCurrentPosting(currentPostingData: OfficerCurrentPosting): Promise<OfficerCurrentPosting> {
+    const createCurrentPostingData: OfficerCurrentPosting = await OfficerCurrentPostingEntity.create(currentPostingData).save();
+    return createCurrentPostingData;
   }
 
-  public async updateCurrentWorkHistory(currentWorkHistoryId: number, currentWorkHistoryData: CurrentWorkHistory): Promise<CurrentWorkHistory> {
-    const findCurrentWorkHistory: CurrentWorkHistory = await CurrentWorkHistoryEntity.findOne({ where: { id: currentWorkHistoryId } });
-    if (!findCurrentWorkHistory) throw new HttpException(409, "Current work history doesn't exist");
+  public async updateCurrentPosting(currentPostingId: number, currentPostingData: OfficerCurrentPosting): Promise<OfficerCurrentPosting> {
+    const findCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { id: currentPostingId } });
+    if (!findCurrentPosting) throw new HttpException(409, "Current Posting doesn't exist");
 
-    await CurrentWorkHistoryEntity.update(currentWorkHistoryId, currentWorkHistoryData);
+    await OfficerCurrentPostingEntity.update(currentPostingId, currentPostingData);
 
-    const updateCurrentWorkHistory: CurrentWorkHistory = await CurrentWorkHistoryEntity.findOne({ where: { id: currentWorkHistoryId } });
-    return updateCurrentWorkHistory;
+    const updateCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { id: currentPostingId } });
+    return updateCurrentPosting;
   }
 
-  public async deleteCurrentWorkHistory(currentWorkHistoryId: number): Promise<CurrentWorkHistory> {
-    const findCurrentWorkHistory: CurrentWorkHistory = await CurrentWorkHistoryEntity.findOne({ where: { id: currentWorkHistoryId } });
-    if (!findCurrentWorkHistory) throw new HttpException(409, "Current work history doesn't exist");
+  public async deleteCurrentPosting(currentPostingId: number): Promise<OfficerCurrentPosting> {
+    const findCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { id: currentPostingId } });
+    if (!findCurrentPosting) throw new HttpException(409, "Current Posting doesn't exist");
 
-    await CurrentWorkHistoryEntity.delete({ id: currentWorkHistoryId });
-    return findCurrentWorkHistory;
+    await OfficerCurrentPostingEntity.delete({ id: currentPostingId });
+    return findCurrentPosting;
   }
 }

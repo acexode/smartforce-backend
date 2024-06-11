@@ -73,10 +73,24 @@ export class App {
           version: '1.0.0',
           description: 'Example docs',
         },
+        securityDefinitions: {
+          bearerAuth: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+            description: 'JWT Authorization header using the Bearer scheme. Example: "Bearer {token}"',
+          },
+        },
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
       },
       apis: [
         'swagger.yaml',
         'api-docs/aper.yaml',
+        'api-docs/auth.yaml',
         'api-docs/areaCommand.yaml',
         'api-docs/currentWorkHistory.yaml',
         'api-docs/department.yaml',
@@ -85,8 +99,11 @@ export class App {
         'api-docs/divisionalHQ.yaml',
         'api-docs/educationalHistory.yaml',
         'api-docs/formation.yaml',
+        'api-docs/medical.yaml',
         'api-docs/nextOfKin.yaml',
-        'api-docs/officer.yaml',
+        'api-docs/officer-biodata.yaml',
+        'api-docs/officerPromotionHistory.yaml',
+        'api-docs/officerTraining.yaml',
         'api-docs/policeOutpost.yaml',
         'api-docs/policeStation.yaml',
         'api-docs/professionalAssociation.yaml',
@@ -94,6 +111,7 @@ export class App {
         'api-docs/salaryDetails.yaml',
         'api-docs/statecommand.yaml',
         'api-docs/units.yaml',
+        'api-docs/welfare.yaml',
         'api-docs/workExperience.yaml',
       ],
     };

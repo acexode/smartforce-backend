@@ -1,194 +1,165 @@
-import { IsString, IsNotEmpty, IsDateString, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsDateString, IsOptional, IsEmail } from 'class-validator';
 
-export class CreateIPPISOfficersInfoDto {
-  @IsString()
+export class CreateOfficerBioDataDto {
   @IsNotEmpty()
-  public refNo: string;
+  @IsString()
+  public name: string;
 
-  @IsString()
   @IsNotEmpty()
-  public apNo: string;
+  @IsString()
+  public lastName: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public lastname: string;
+  public otherName?: string;
 
-  @IsString()
   @IsNotEmpty()
-  public firstname: string;
+  @IsEmail()
+  public email: string;
 
-  @IsString()
   @IsNotEmpty()
-  public otherNames: string;
-
   @IsString()
-  @IsNotEmpty()
-  public gender: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public maritalStatus: string;
-
-  @IsString()
-  @IsNotEmpty()
   public phoneNumber: string;
 
+  @IsNotEmpty()
+  @IsString()
+  public nin: string;
+
+  @IsNotEmpty()
   @IsDateString()
   public dateOfBirth: Date;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public lga: string;
+  public sex: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public state: string;
+  public residentialAddress: string;
 
-  @IsDateString()
-  public dateOfEnlistment: Date;
-
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public rank: string;
+  public alternativeAddress?: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public salaryStructure: string;
+  public maritalStatus: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public gradeLevel: string;
+  public otherMeansOfIdentification?: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  public level: number;
-
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public ippis: string;
+  public idNumber?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public bankName: string;
+  public ethnicity?: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public accountNo: string;
+  public nationality: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public pfa: string;
+  public stateOfOrigin: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public pfaNumber: string;
+  public localGovernmentArea: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public category: string;
+  public placeOfBirth: string;
 
+  @IsNotEmpty()
   @IsString()
+  public religion: string;
+
   @IsNotEmpty()
-  public createdBy: string;
-
-  @IsDateString()
-  public creationDate: Date;
-
   @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
-
-  @IsDateString()
-  public modificationDate: Date;
+  public tribe: string;
 }
 
-export class UpdateIPPISOfficersInfoDto {
+export class UpdateOfficerBioDataDto {
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public apNo: string;
+  public name?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public lastname: string;
+  public lastName?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public firstname: string;
+  public otherName?: string;
 
+  @IsOptional()
+  @IsEmail()
+  public email?: string;
+
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public otherNames: string;
+  public phoneNumber?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public gender: string;
+  public nin?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  public maritalStatus: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public phoneNumber: string;
-
+  @IsOptional()
   @IsDateString()
-  public dateOfBirth: Date;
+  public dateOfBirth?: Date;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public lga: string;
+  public sex?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public state: string;
+  public residentialAddress?: string;
 
-  @IsDateString()
-  public dateOfEnlistment: Date;
-
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public rank: string;
+  public alternativeAddress?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public salaryStructure: string;
+  public maritalStatus?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public gradeLevel: string;
+  public otherMeansOfIdentification?: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  public level: number;
-
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public ippis: string;
+  public idNumber?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public bankName: string;
+  public ethnicity?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public accountNo: string;
+  public nationality?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public pfa: string;
+  public stateOfOrigin?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public pfaNumber: string;
+  public localGovernmentArea?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public category: string;
+  public placeOfBirth?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
+  public religion?: string;
 
-  @IsDateString()
-  public modificationDate: Date;
+  @IsOptional()
+  @IsString()
+  public tribe?: string;
 }

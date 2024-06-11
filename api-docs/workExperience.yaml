@@ -102,61 +102,23 @@ definitions:
   workExperience:
     type: object
     required:
-      - refNo
-      - employee
       - companyName
-      - positionHeld
-      - responsibilities
       - yearOfEntry
       - yearOfExit
-      - reasonForExit
-      - commentOptional
-      - createdBy
-      - creationDate
-      - modifiedBy
-      - modificationDate
+      - employmentLetter
     properties:
-      refNo:
-        type: string
-        description: Reference Number
-      employee:
-        type: string
-        description: Employee
       companyName:
         type: string
         description: Company Name
-      positionHeld:
-        type: string
-        description: Position Held
-      responsibilities:
-        type: string
-        description: Responsibilities
       yearOfEntry:
         type: integer
         description: Year of Entry
       yearOfExit:
         type: integer
         description: Year of Exit
-      reasonForExit:
+      employmentLetter:
         type: string
-        description: Reason for Exit
-      commentOptional:
-        type: string
-        description: Comment (optional)
-      createdBy:
-        type: string
-        description: Created By
-      creationDate:
-        type: string
-        format: date-time
-        description: Creation Date
-      modifiedBy:
-        type: string
-        description: Modified By
-      modificationDate:
-        type: string
-        format: date-time
-        description: Modification Date
+        description: Employment Letter
 
 schemes:
  - https

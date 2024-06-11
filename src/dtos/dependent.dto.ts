@@ -1,126 +1,45 @@
-import { IsString, IsNotEmpty, IsDateString, IsEmail, IsOptional, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsInt } from 'class-validator';
 
 export class CreateDependentsDto {
-  @IsString()
   @IsNotEmpty()
-  public refNo: string;
-
   @IsString()
-  @IsNotEmpty()
-  public employee: string;
+  public names: string;
 
+  @IsNotEmpty()
   @IsString()
+  public relationshipWithDependents: string;
+
   @IsNotEmpty()
-  public nameOfDependent: string;
+  @IsInt()
+  public noOfDependents: number;
 
-  @IsDateString()
-  public dateOfBirth: Date;
-
+  @IsNotEmpty()
   @IsString()
+  public contactAddress: string;
+
   @IsNotEmpty()
-  public relationship: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public sex: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public phoneNumber: string;
-
-  @IsEmail()
-  public email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public address: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public meansOfIdentification: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public idPolicyNumber: string;
-
-  @IsString()
-  @IsOptional()
-  public commentOptional: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  public percentageBenefit: number;
-
-  @IsString()
-  @IsNotEmpty()
-  public type: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public createdBy: string;
-
-  @IsDateString()
-  public creationDate: Date;
-
-  @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
-
-  @IsDateString()
-  public modificationDate: Date;
+  @IsInt()
+  public officerId: number;
 }
 
 export class UpdateDependentsDto {
-  @IsString()
   @IsNotEmpty()
-  public nameOfDependent: string;
-
-  @IsDateString()
-  public dateOfBirth: Date;
-
   @IsString()
-  @IsNotEmpty()
-  public relationship: string;
+  public names?: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public sex: string;
+  public relationshipWithDependents?: string;
 
+  @IsNotEmpty()
+  @IsInt()
+  public noOfDependents?: number;
+
+  @IsNotEmpty()
   @IsString()
+  public contactAddress?: string;
+
   @IsNotEmpty()
-  public phoneNumber: string;
-
-  @IsEmail()
-  public email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public address: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public meansOfIdentification: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public idPolicyNumber: string;
-
-  @IsString()
-  @IsOptional()
-  public commentOptional: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  public percentageBenefit: number;
-
-  @IsString()
-  @IsNotEmpty()
-  public type: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
-
-  @IsDateString()
-  public modificationDate: Date;
+  @IsInt()
+  public officerId?: number;
 }

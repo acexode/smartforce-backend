@@ -1,155 +1,78 @@
-import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from 'typeorm';
-import { IPPISOfficersInfoEntity } from './officer.entity';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
+import { OfficerBioDataEntity } from './officer.entity';
 
-export interface CurrentWorkHistory {
-  refNo: string;
+export interface OfficerCurrentPosting {
   id: number;
-  employee: string;
-  reasonForChange: string;
-  role: string;
+  category: string;
   rank: string;
+  apForceNo: string;
+  currentRole: string;
+  dateOfEnlistment: Date;
+  existingPostStation: string;
+  department: string;
   formation: string;
   stateCommand: string;
-  specialization: string;
   areaCommand: string;
-  divisionalHQ: string;
+  unit: string;
+  subunit: string;
+  divisionHq: string;
   policeStation: string;
-  policeOutpost: string;
-  villageOutpost: string;
-  supervisor: string;
-  promotionIntervalInDays: number;
-  seniorSupervisor: string;
-  gradeLevel: string;
-  responsibilities: string;
-  proposedStartDate: Date;
-  startDate: Date;
-  endDate: Date;
-  status: string;
-  comment: string;
-  data: string;
-  createdBy: string;
-  creationDate: Date;
-  modifiedBy: string;
-  modificationDate: Date;
+  officer: any; // Assuming there's a relationship with OfficerBioData
 }
 
 @Entity()
-export class CurrentWorkHistoryEntity extends BaseEntity implements CurrentWorkHistory {
+export class OfficerCurrentPostingEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  @IsNotEmpty()
-  refNo: string;
+  category: string;
 
   @Column()
-  @IsNotEmpty()
-  employee: string;
-
-  @Column()
-  @IsNotEmpty()
-  reasonForChange: string;
-
-  @Column()
-  @IsNotEmpty()
-  role: string;
-
-  @Column()
-  @IsNotEmpty()
   rank: string;
 
   @Column()
-  @IsNotEmpty()
+  apForceNo: string;
+
+  @Column()
+  currentRole: string;
+
+  @Column()
+  dateOfEnlistment: Date;
+
+  @Column()
+  existingPostStation: string;
+
+  @Column()
+  department: string;
+
+  @Column()
   formation: string;
 
   @Column()
-  @IsNotEmpty()
   stateCommand: string;
 
   @Column()
-  @IsNotEmpty()
-  specialization: string;
-
-  @Column()
-  @IsNotEmpty()
   areaCommand: string;
 
   @Column()
-  @IsNotEmpty()
-  divisionalHQ: string;
+  unit: string;
 
   @Column()
-  @IsNotEmpty()
+  subunit: string;
+
+  @Column()
+  divisionHq: string;
+
+  @Column()
   policeStation: string;
 
-  @Column()
-  @IsNotEmpty()
-  policeOutpost: string;
-
-  @Column()
-  @IsNotEmpty()
-  villageOutpost: string;
-
-  @Column()
-  @IsNotEmpty()
-  supervisor: string;
-
-  @Column()
-  @IsNotEmpty()
-  promotionIntervalInDays: number;
-
-  @Column()
-  @IsNotEmpty()
-  seniorSupervisor: string;
-
-  @Column()
-  @IsNotEmpty()
-  gradeLevel: string;
-
-  @Column()
-  @IsNotEmpty()
-  responsibilities: string;
-
-  @Column()
-  @IsNotEmpty()
-  proposedStartDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  startDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  endDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  status: string;
-
-  @Column()
-  @IsNotEmpty()
-  comment: string;
-
-  @Column()
-  @IsNotEmpty()
-  data: string;
-
-  @Column()
-  @IsNotEmpty()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 
-  @OneToOne(() => IPPISOfficersInfoEntity, ippisOfficer => ippisOfficer.currentWorkHistory)
-  @JoinColumn()
-  ippisOfficer: IPPISOfficersInfoEntity;
+  @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.currentPostings)
+  officer: OfficerBioDataEntity;
 }

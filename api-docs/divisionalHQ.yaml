@@ -1,7 +1,3 @@
-
-### Divisional Headquarters Swagger
-
-```yaml
 tags:
 - name: divisionalHeadquarters
   description: Divisional Headquarters API

@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { IPPISOfficersInfoEntity } from './officer.entity';
+import { OfficerBioDataEntity } from './officer.entity';
 
 export interface SalaryDetails {
   refNo: string;
@@ -319,6 +319,6 @@ export class SalaryDetailsEntity extends BaseEntity implements SalaryDetails {
   @UpdateDateColumn()
   modificationDate: Date;
 
-  @ManyToOne(() => IPPISOfficersInfoEntity, ippisOfficer => ippisOfficer.salaryDetails)
-  ippisOfficer: IPPISOfficersInfoEntity;
+  @ManyToOne(() => OfficerBioDataEntity, officer => officer.salaryDetails)
+  officer: OfficerBioDataEntity;
 }

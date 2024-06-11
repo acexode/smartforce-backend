@@ -3,12 +3,12 @@ import { AuthRoute } from '@routes/auth.route';
 import { UserRoute } from '@routes/users.route';
 import { ValidateEnv } from '@utils/validateEnv';
 import { APERRoute } from './routes/aper.route';
-import { CurrentWorkHistoryRoute } from './routes/currrentWorkHistory.route';
+import { OfficerCurrentPostingRoute } from './routes/currrentWorkHistory.route';
 import { DependentsRoute } from './routes/dependent.route';
 import { DisciplinaryHistoryRoute } from './routes/disciplinaryHistory.route';
 import { EducationalHistoryRoute } from './routes/educationalHistory.route';
 import { NextOfKinRoute } from './routes/nextofKin.route';
-import { IPPISOfficersInfoRoute } from './routes/officer.route';
+import { OfficerBioDataRoute } from './routes/officer.route';
 import { ProfessionalAssociationRoute } from './routes/professionalAssociation.route';
 import { SalaryDetailsRoute } from './routes/salaryDetails.route';
 import { WorkExperienceRoute } from './routes/workExperience.route';
@@ -21,6 +21,10 @@ import { PoliceStationRoute } from './routes/policeStation.route';
 import { RankRoute } from './routes/ranks.route';
 import { StateCommandRoute } from './routes/statecommand.route';
 import { UnitRoute } from './routes/units.route';
+import { OfficerMedicalInfoRoute } from './routes/medical.route';
+import { OfficerPromotionHistoryRoute } from './routes/officerPromotionHistory.route';
+import { OfficerTrainingRoute } from './routes/officerTraining.route';
+import { OfficerWelfareInformationRoute } from './routes/welfare.route';
 
 ValidateEnv();
 
@@ -28,12 +32,16 @@ const app = new App([
   new AuthRoute(),
   new UserRoute(),
   new APERRoute(),
-  new CurrentWorkHistoryRoute(),
+  new OfficerCurrentPostingRoute(),
   new DependentsRoute(),
   new DisciplinaryHistoryRoute(),
   new EducationalHistoryRoute(),
   new NextOfKinRoute(),
-  new IPPISOfficersInfoRoute(),
+  new OfficerBioDataRoute(),
+  new OfficerMedicalInfoRoute(),
+  new OfficerPromotionHistoryRoute(),
+  new OfficerTrainingRoute(),
+  new OfficerWelfareInformationRoute(),
   new ProfessionalAssociationRoute(),
   new SalaryDetailsRoute(),
   new WorkExperienceRoute(),

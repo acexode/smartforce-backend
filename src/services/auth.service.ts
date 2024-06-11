@@ -24,6 +24,7 @@ const createCookie = (tokenData: TokenData): string => {
 @EntityRepository()
 export class AuthService extends Repository<UserEntity> {
   public async signup(userData: User): Promise<User> {
+    console.log(userData);
     const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
     if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
 
@@ -32,17 +33,18 @@ export class AuthService extends Repository<UserEntity> {
     return createUserData;
   }
 
-  public async login(userData: User): Promise<{ cookie: string; findUser: User }> {
+  public async login(userData: User): Promise<{ cookie: string; findUser: User; token: any }> {
     const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
     if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
 
     const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
     if (!isPasswordMatching) throw new HttpException(409, 'Password not matching');
 
-    const tokenData = createToken(findUser);
-    const cookie = createCookie(tokenData);
+    const token = createToken(findUser);
+    const cookie = createCookie(token);
+    console.log(token, cookie);
 
-    return { cookie, findUser };
+    return { cookie, findUser, token };
   }
 
   public async logout(userData: User): Promise<User> {

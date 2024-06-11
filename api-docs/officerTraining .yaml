@@ -1,13 +1,13 @@
 tags:
-- name: nextOfKin
-  description: Next of Kin API
+- name: officerTrainings
+  description: Officer Trainings API
 
 paths:
-  /next-of-kin:
+  /officer-trainings:
     get:
       tags:
-      - nextOfKin
-      summary: Find All Next of Kin
+      - officerTrainings
+      summary: Find All Officer Trainings
       responses:
         200:
           description: 'OK'
@@ -16,15 +16,15 @@ paths:
 
     post:
       tags:
-      - nextOfKin
-      summary: Add Next of Kin
+      - officerTrainings
+      summary: Add Officer Training
       parameters:
       - name: body
         in: body
-        description: Next of Kin Data
+        description: Officer Training Data
         required: true
         schema:
-          $ref: '#/definitions/nextOfKin'
+          $ref: '#/definitions/officerTraining'
       responses:
         201:
           description: 'Created'
@@ -35,15 +35,15 @@ paths:
         500:
           description: 'Server Error'
 
-  /next-of-kin/{id}:
+  /officer-trainings/{id}:
     get:
       tags:
-      - nextOfKin
-      summary: Find Next of Kin By Id
+      - officerTrainings
+      summary: Find Officer Training By Id
       parameters:
       - name: id
         in: path
-        description: Next of Kin Id
+        description: Officer Training Id
         required: true
         type: integer
       responses:
@@ -56,20 +56,20 @@ paths:
 
     put:
       tags:
-      - nextOfKin
-      summary: Update Next of Kin By Id
+      - officerTrainings
+      summary: Update Officer Training By Id
       parameters:
       - name: id
         in: path
-        description: Next of Kin Id
+        description: Officer Training Id
         required: true
         type: integer
       - name: body
         in: body
-        description: Next of Kin Data
+        description: Officer Training Data
         required: true
         schema:
-          $ref: '#/definitions/nextOfKin'
+          $ref: '#/definitions/officerTraining'
       responses:
         200:
           description: 'OK'
@@ -82,12 +82,12 @@ paths:
 
     delete:
       tags:
-      - nextOfKin
-      summary: Delete Next of Kin By Id
+      - officerTrainings
+      summary: Delete Officer Training By Id
       parameters:
       - name: id
         in: path
-        description: Next of Kin Id
+        description: Officer Training Id
         required: true
         type: integer
       responses:
@@ -99,37 +99,27 @@ paths:
           description: 'Server Error'
 
 definitions:
-  nextOfKin:
+  officerTraining:
     type: object
     required:
-      - name
-      - relationship
-      - address
-      - phoneNumber
-      - email
-      - nin
-
-
-      - modificationDate
+      - nameOfTraining
+      - dateOfCompletion
+      - certificate
+      - officerBioDataId
     properties:
-      Name:
+      nameOfTraining:
         type: string
-        description: Full Name
-      phoneNumber:
+        description: Name of Training
+      dateOfCompletion:
         type: string
-        description: Phone Number
-      address:
+        format: date
+        description: Date of Completion
+      certificate:
         type: string
-        description: Address
-      email:
-        type: string
-        description: Email
-      nin:
-        type: string
-        description: nin
-      relationship:
-        type: string
-        description: Relationship
+        description: Certificate
+      officerBioDataId:
+        type: integer
+        description: ID of related Officer Bio Data
 
 schemes:
  - https

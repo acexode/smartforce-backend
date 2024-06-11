@@ -1,6 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { IPPISOfficersInfoEntity } from './officer.entity';
+import { OfficerBioDataEntity } from './officer.entity';
 
 export interface NextOfKin {
   refNo: string;
@@ -21,64 +20,34 @@ export interface NextOfKin {
 }
 
 @Entity()
-export class NextOfKinEntity extends BaseEntity implements NextOfKin {
+export class NextOfKinEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  @IsNotEmpty()
-  refNo: string;
+  name: string;
 
   @Column()
-  @IsNotEmpty()
-  employee: string;
-
-  @Column()
-  @IsNotEmpty()
-  firstName: string;
-
-  @Column()
-  @IsNotEmpty()
-  lastName: string;
-
-  @Column()
-  @IsNotEmpty()
-  otherNames: string;
-
-  @Column()
-  @IsNotEmpty()
-  phoneNumber: string;
-
-  @Column()
-  @IsNotEmpty()
-  sex: string;
-
-  @Column()
-  @IsNotEmpty()
-  email: string;
-
-  @Column()
-  @IsNotEmpty()
-  contactAddress: string;
-
-  @Column()
-  @IsNotEmpty()
   relationship: string;
 
   @Column()
-  @IsNotEmpty()
-  createdBy: string;
-
-  @CreateDateColumn()
-  creationDate: Date;
+  address: string;
 
   @Column()
-  @IsNotEmpty()
-  modifiedBy: string;
+  phoneNo: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  nin: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 
-  @ManyToOne(() => IPPISOfficersInfoEntity, ippisOfficer => ippisOfficer.nextOfKin)
-  ippisOfficer: IPPISOfficersInfoEntity;
+  @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.nextOfKin)
+  officer: OfficerBioDataEntity;
 }

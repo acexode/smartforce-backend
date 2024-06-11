@@ -118,6 +118,15 @@ definitions:
         type: string
         description: user Password
 
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: 'JWT Authorization header using the Bearer scheme. Example: "Bearer {token}"'
+
+security:
+  - bearerAuth: []
 schemes:
  - https
  - http

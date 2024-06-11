@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { IPPISOfficersInfoEntity } from './officer.entity';
+import { OfficerBioDataEntity } from './officer.entity';
 
 export interface DisciplinaryHistory {
   refNo: string;
@@ -134,6 +134,6 @@ export class DisciplinaryHistoryEntity extends BaseEntity implements Disciplinar
   @UpdateDateColumn()
   modificationDate: Date;
 
-  @ManyToOne(() => IPPISOfficersInfoEntity, ippisOfficer => ippisOfficer.disciplinaryHistory)
-  ippisOfficer: IPPISOfficersInfoEntity;
+  @ManyToOne(() => OfficerBioDataEntity, officer => officer.disciplinaryHistory)
+  officer: OfficerBioDataEntity;
 }

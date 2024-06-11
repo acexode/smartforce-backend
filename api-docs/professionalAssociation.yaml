@@ -102,53 +102,19 @@ definitions:
   professionalAssociation:
     type: object
     required:
-      - refNo
-      - employee
       - institution
-      - year
-      - certificateObtained
-      - membershipClass
-      - comment
-      - createdBy
-      - creationDate
-      - modifiedBy
-      - modificationDate
+      - certificate
+      - membershipId
     properties:
-      refNo:
-        type: string
-        description: Reference Number
-      employee:
-        type: string
-        description: Employee
       institution:
         type: string
         description: Institution
-      year:
-        type: integer
-        description: Year
-      certificateObtained:
+      certificate:
         type: string
-        description: Certificate Obtained
-      membershipClass:
+        description: Certificate / Attachment
+      membershipId:
         type: string
-        description: Membership Class
-      comment:
-        type: string
-        description: Comment
-      createdBy:
-        type: string
-        description: Created By
-      creationDate:
-        type: string
-        format: date-time
-        description: Creation Date
-      modifiedBy:
-        type: string
-        description: Modified By
-      modificationDate:
-        type: string
-        format: date-time
-        description: Modification Date
+        description: Membership ID
 
 schemes:
  - https

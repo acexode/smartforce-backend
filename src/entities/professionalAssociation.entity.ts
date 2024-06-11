@@ -1,20 +1,12 @@
 import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { IPPISOfficersInfoEntity } from './officer.entity';
+import { OfficerBioDataEntity } from './officer.entity';
 
 export interface ProfessionalAssociation {
-  refNo: string;
   id: number;
-  employee: string;
   institution: string;
-  year: number;
-  certificateObtained: string;
-  membershipClass: string;
-  comment: string;
-  createdBy: string;
-  creationDate: Date;
-  modifiedBy: string;
-  modificationDate: Date;
+  membershipId: string;
+  certificate?: string;
 }
 
 @Entity()
@@ -24,46 +16,22 @@ export class ProfessionalAssociationEntity extends BaseEntity implements Profess
 
   @Column()
   @IsNotEmpty()
-  refNo: string;
-
-  @Column()
-  @IsNotEmpty()
-  employee: string;
+  membershipId: string;
 
   @Column()
   @IsNotEmpty()
   institution: string;
 
-  @Column()
+  @Column({ nullable: true })
   @IsNotEmpty()
-  year: number;
-
-  @Column()
-  @IsNotEmpty()
-  certificateObtained: string;
-
-  @Column()
-  @IsNotEmpty()
-  membershipClass: string;
-
-  @Column()
-  @IsNotEmpty()
-  comment: string;
-
-  @Column()
-  @IsNotEmpty()
-  createdBy: string;
+  certificate: string;
 
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 
-  @ManyToOne(() => IPPISOfficersInfoEntity, ippisOfficer => ippisOfficer.professionalAssociation)
-  ippisOfficer: IPPISOfficersInfoEntity;
+  @ManyToOne(() => OfficerBioDataEntity, officer => officer.professionalAssociation)
+  officer: OfficerBioDataEntity;
 }

@@ -1,27 +1,27 @@
 import { Router } from 'express';
-import { CreateCurrentWorkHistoryDto, UpdateCurrentWorkHistoryDto } from '@dtos/currentWorkHistory.dto';
+import { OfficerCurrentPostingController } from '@controllers/currrentWorkHistory.controller';
+import { CreateOfficerCurrentPostingDto, UpdateOfficerCurrentPostingDto } from '@dtos/currentWorkHistory.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { CurrentWorkHistoryController } from '@/controllers/currrentWorkHistory.controller';
 
-export class CurrentWorkHistoryRoute implements Routes {
-  public path = '/current-work-history';
+export class OfficerCurrentPostingRoute implements Routes {
+  public path = '/officer-current-postings';
   public router = Router();
-  public currentWorkHistory = new CurrentWorkHistoryController();
+  public officerCurrentPostingController = new OfficerCurrentPostingController();
 
   constructor() {
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.currentWorkHistory.getCurrentWorkHistory);
-    this.router.get(`${this.path}/:id(\\d+)`, this.currentWorkHistory.getCurrentWorkHistoryById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreateCurrentWorkHistoryDto), this.currentWorkHistory.createCurrentWorkHistory);
+    this.router.get(`${this.path}`, this.officerCurrentPostingController.getCurrentPostings);
+    this.router.get(`${this.path}/:id(\\d+)`, this.officerCurrentPostingController.getCurrentPostingById);
+    this.router.post(`${this.path}`, ValidationMiddleware(CreateOfficerCurrentPostingDto), this.officerCurrentPostingController.createCurrentPosting);
     this.router.put(
       `${this.path}/:id(\\d+)`,
-      ValidationMiddleware(UpdateCurrentWorkHistoryDto, true),
-      this.currentWorkHistory.updateCurrentWorkHistory,
+      ValidationMiddleware(UpdateOfficerCurrentPostingDto, true),
+      this.officerCurrentPostingController.updateCurrentPosting,
     );
-    this.router.delete(`${this.path}/:id(\\d+)`, this.currentWorkHistory.deleteCurrentWorkHistory);
+    this.router.delete(`${this.path}/:id(\\d+)`, this.officerCurrentPostingController.deleteCurrentPosting);
   }
 }

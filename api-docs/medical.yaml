@@ -1,13 +1,13 @@
 tags:
-- name: dependents
-  description: Dependents API
+- name: officerMedicalInfo
+  description: Officer Medical Info API
 
 paths:
-  /dependents:
+  /officer-medical:
     get:
       tags:
-      - dependents
-      summary: Find All Dependents
+      - officerMedicalInfo
+      summary: Find All Officer Medical Info
       responses:
         200:
           description: 'OK'
@@ -16,15 +16,15 @@ paths:
 
     post:
       tags:
-      - dependents
-      summary: Add Dependent
+      - officerMedicalInfo
+      summary: Add Officer Medical Info
       parameters:
       - name: body
         in: body
-        description: Dependent Data
+        description: Officer Medical Info Data
         required: true
         schema:
-          $ref: '#/definitions/dependent'
+          $ref: '#/definitions/officerMedicalInfo'
       responses:
         201:
           description: 'Created'
@@ -35,15 +35,15 @@ paths:
         500:
           description: 'Server Error'
 
-  /dependents/{id}:
+  /officer-medical/{id}:
     get:
       tags:
-      - dependents
-      summary: Find Dependent By Id
+      - officerMedicalInfo
+      summary: Find Officer Medical Info By Id
       parameters:
       - name: id
         in: path
-        description: Dependent Id
+        description: Officer Medical Info Id
         required: true
         type: integer
       responses:
@@ -56,20 +56,20 @@ paths:
 
     put:
       tags:
-      - dependents
-      summary: Update Dependent By Id
+      - officerMedicalInfo
+      summary: Update Officer Medical Info By Id
       parameters:
       - name: id
         in: path
-        description: Dependent Id
+        description: Officer Medical Info Id
         required: true
         type: integer
       - name: body
         in: body
-        description: Dependent Data
+        description: Officer Medical Info Data
         required: true
         schema:
-          $ref: '#/definitions/dependent'
+          $ref: '#/definitions/officerMedicalInfo'
       responses:
         200:
           description: 'OK'
@@ -82,12 +82,12 @@ paths:
 
     delete:
       tags:
-      - dependents
-      summary: Delete Dependent By Id
+      - officerMedicalInfo
+      summary: Delete Officer Medical Info By Id
       parameters:
       - name: id
         in: path
-        description: Dependent Id
+        description: Officer Medical Info Id
         required: true
         type: integer
       responses:
@@ -99,27 +99,51 @@ paths:
           description: 'Server Error'
 
 definitions:
-  dependent:
+  officerMedicalInfo:
     type: object
     required:
-      - names
-      - relationshipWithDependents
-      - noOfDependents
-      - contactAddress
+      - fullBodyImage
+      - bloodGroup
+      - genotype
+      - height
+      - weight
+      - size
+      - hairColor
+      - eyeColor
       - officerBioDataId
     properties:
-      names:
+      fullBodyImage:
         type: string
-        description: Names
-      relationshipWithDependents:
+        description: Full body image
+      bloodGroup:
         type: string
-        description: Relationship with Dependents
-      noOfDependents:
-        type: integer
-        description: Number of Dependents
-      contactAddress:
+        description: Blood group
+      genotype:
         type: string
-        description: Contact Address
+        description: Genotype
+      height:
+        type: string
+        description: Height
+      weight:
+        type: string
+        description: Weight
+      size:
+        type: string
+        description: Size
+      hairColor:
+        type: string
+        description: Hair color
+      eyeColor:
+        type: string
+        description: Eye color
+      bodyDefect:
+        type: string
+        description: Body defect
+        nullable: true
+      amputations:
+        type: string
+        description: Amputations
+        nullable: true
       officerBioDataId:
         type: integer
         description: ID of related Officer Bio Data

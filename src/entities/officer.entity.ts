@@ -1,4 +1,3 @@
-import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne } from 'typeorm';
 import { NextOfKinEntity } from './nextOfKin.entity';
 import { SalaryDetailsEntity } from './salaryDetails.entity';
@@ -6,171 +5,144 @@ import { DependentsEntity } from './dependent.entity';
 import { WorkExperienceEntity } from './workexperience.entity';
 import { DisciplinaryHistoryEntity } from './disclipinaryHistory.entity';
 import { EducationalHistoryEntity } from './educationalHistory.entity';
-import { CurrentWorkHistoryEntity } from './currentWorkHistory.entity';
+import { OfficerCurrentPostingEntity } from './currentWorkHistory.entity';
 import { APEREntity } from './aper.entity';
 import { ProfessionalAssociationEntity } from './professionalAssociation.entity';
+import { OfficerMedicalInfoEntity } from './medical.entity';
+import { OfficerPromotionHistoryEntity } from './officerPromotionHistory.entity';
+import { OfficerTraining, OfficerTrainingEntity } from './officerTraining.entity';
 
-export interface IPPISOfficersInfo {
-  refNo: string;
+export interface OfficerBioData {
   id: number;
-  apNo: string;
-  lastname: string;
-  firstname: string;
-  otherNames: string;
-  gender: string;
-  maritalStatus: string;
+  name: string;
+  lastName: string;
+  otherName?: string;
+  email: string;
   phoneNumber: string;
+  nin: string;
   dateOfBirth: Date;
-  lga: string;
-  state: string;
-  dateOfEnlistment: Date;
-  rank: string;
-  salaryStructure: string;
-  gradeLevel: string;
-  level: number;
-  ippis: string;
-  bankName: string;
-  accountNo: string;
-  pfa: string;
-  pfaNumber: string;
-  category: string;
-  createdBy: string;
-  creationDate: Date;
-  modifiedBy: string;
-  modificationDate: Date;
+  sex: string;
+  residentialAddress: string;
+  alternativeAddress?: string;
+  maritalStatus: string;
+  otherMeansOfIdentification?: string;
+  idNumber?: string;
+  ethnicity?: string;
+  nationality: string;
+  stateOfOrigin: string;
+  localGovernmentArea: string;
+  placeOfBirth: string;
+  religion: string;
+  tribe: string;
 }
 
 @Entity()
-export class IPPISOfficersInfoEntity extends BaseEntity implements IPPISOfficersInfo {
+export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  @IsNotEmpty()
-  refNo: string;
+  name: string;
 
   @Column()
-  @IsNotEmpty()
-  apNo: string;
+  lastName: string;
+
+  @Column({ nullable: true })
+  otherName?: string;
 
   @Column()
-  @IsNotEmpty()
-  lastname: string;
+  email: string;
 
   @Column()
-  @IsNotEmpty()
-  firstname: string;
-
-  @Column()
-  @IsNotEmpty()
-  otherNames: string;
-
-  @Column()
-  @IsNotEmpty()
-  gender: string;
-
-  @Column()
-  @IsNotEmpty()
-  maritalStatus: string;
-
-  @Column()
-  @IsNotEmpty()
   phoneNumber: string;
 
   @Column()
-  @IsNotEmpty()
+  nin: string;
+
+  @Column()
   dateOfBirth: Date;
 
   @Column()
-  @IsNotEmpty()
-  lga: string;
+  sex: string;
 
   @Column()
-  @IsNotEmpty()
-  state: string;
+  residentialAddress: string;
+
+  @Column({ nullable: true })
+  alternativeAddress?: string;
 
   @Column()
-  @IsNotEmpty()
-  dateOfEnlistment: Date;
+  maritalStatus: string;
+
+  @Column({ nullable: true })
+  otherMeansOfIdentification?: string;
+
+  @Column({ nullable: true })
+  idNumber?: string;
+
+  @Column({ nullable: true })
+  ethnicity?: string;
 
   @Column()
-  @IsNotEmpty()
-  rank: string;
+  nationality: string;
 
   @Column()
-  @IsNotEmpty()
-  salaryStructure: string;
+  stateOfOrigin: string;
 
   @Column()
-  @IsNotEmpty()
-  gradeLevel: string;
+  localGovernmentArea: string;
 
   @Column()
-  @IsNotEmpty()
-  level: number;
+  placeOfBirth: string;
 
   @Column()
-  @IsNotEmpty()
-  ippis: string;
+  religion: string;
 
   @Column()
-  @IsNotEmpty()
-  bankName: string;
-
-  @Column()
-  @IsNotEmpty()
-  accountNo: string;
-
-  @Column()
-  @IsNotEmpty()
-  pfa: string;
-
-  @Column()
-  @IsNotEmpty()
-  pfaNumber: string;
-
-  @Column()
-  @IsNotEmpty()
-  category: string;
-
-  @Column()
-  @IsNotEmpty()
-  createdBy: string;
+  tribe: string;
 
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 
-  @OneToMany(() => NextOfKinEntity, nextOfKin => nextOfKin.ippisOfficer)
+  @OneToMany(() => NextOfKinEntity, nextOfKin => nextOfKin.officer)
   nextOfKin: NextOfKinEntity[];
 
-  @OneToMany(() => SalaryDetailsEntity, salaryDetails => salaryDetails.ippisOfficer)
+  @OneToMany(() => SalaryDetailsEntity, salaryDetails => salaryDetails.officer)
   salaryDetails: SalaryDetailsEntity[];
 
-  @OneToMany(() => DependentsEntity, dependents => dependents.ippisOfficer)
+  @OneToMany(() => DependentsEntity, dependents => dependents.officer)
   dependents: DependentsEntity[];
 
-  @OneToMany(() => WorkExperienceEntity, workExperience => workExperience.ippisOfficer)
+  @OneToMany(() => WorkExperienceEntity, workExperience => workExperience.officer)
   workExperience: WorkExperienceEntity[];
 
-  @OneToMany(() => DisciplinaryHistoryEntity, disciplinaryHistory => disciplinaryHistory.ippisOfficer)
+  @OneToMany(() => DisciplinaryHistoryEntity, disciplinaryHistory => disciplinaryHistory.officer)
   disciplinaryHistory: DisciplinaryHistoryEntity[];
 
-  @OneToMany(() => EducationalHistoryEntity, educationalHistory => educationalHistory.ippisOfficer)
+  @OneToMany(() => EducationalHistoryEntity, educationalHistory => educationalHistory.officer)
   educationalHistory: EducationalHistoryEntity[];
 
-  @OneToOne(() => CurrentWorkHistoryEntity, currentWorkHistory => currentWorkHistory.ippisOfficer)
-  currentWorkHistory: CurrentWorkHistoryEntity;
+  @OneToOne(() => OfficerCurrentPostingEntity, currentWorkHistory => currentWorkHistory.officer)
+  currentPostings: OfficerCurrentPostingEntity;
 
-  @OneToMany(() => APEREntity, aper => aper.ippisOfficer)
+  @OneToMany(() => APEREntity, aper => aper.officer)
   aper: APEREntity[];
 
-  @OneToMany(() => ProfessionalAssociationEntity, professionalAssociation => professionalAssociation.ippisOfficer)
+  @OneToMany(() => ProfessionalAssociationEntity, professionalAssociation => professionalAssociation.officer)
   professionalAssociation: ProfessionalAssociationEntity[];
+
+  @OneToMany(() => OfficerMedicalInfoEntity, officerMed => officerMed.officer)
+  officerMedical: OfficerMedicalInfoEntity[];
+
+  @OneToMany(() => OfficerMedicalInfoEntity, officerMed => officerMed.officer)
+  welfareInformation: OfficerMedicalInfoEntity[];
+
+  @OneToMany(() => OfficerPromotionHistoryEntity, officerMed => officerMed.officer)
+  promotionHistories: OfficerPromotionHistoryEntity[];
+
+  @OneToMany(() => OfficerTrainingEntity, officerMed => officerMed.officer)
+  trainings: OfficerTrainingEntity[];
 }

@@ -1,96 +1,61 @@
-import { IsString, IsNotEmpty, IsEmail, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsEmail, IsString, IsInt } from 'class-validator';
 
 export class CreateNextOfKinDto {
-  @IsString()
   @IsNotEmpty()
-  public refNo: string;
-
   @IsString()
-  @IsNotEmpty()
-  public employee: string;
+  public name: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public firstName: string;
+  public relationship: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public lastName: string;
+  public address: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public otherNames: string;
+  public phoneNo: string;
 
-  @IsString()
   @IsNotEmpty()
-  public phoneNumber: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public sex: string;
-
   @IsEmail()
   public email: string;
 
-  @IsString()
   @IsNotEmpty()
-  public contactAddress: string;
-
   @IsString()
+  public nin: string;
+
   @IsNotEmpty()
-  public relationship: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public createdBy: string;
-
-  @IsDateString()
-  public creationDate: Date;
-
-  @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
-
-  @IsDateString()
-  public modificationDate: Date;
+  @IsInt()
+  public officerId: number; // Assuming there's a relationship with OfficerBioData
 }
 
 export class UpdateNextOfKinDto {
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public firstName: string;
+  public name?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public lastName: string;
+  public relationship?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public otherNames: string;
+  public address?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public phoneNumber: string;
+  public phoneNo?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  public sex: string;
-
+  @IsOptional()
   @IsEmail()
-  public email: string;
+  public email?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  public contactAddress: string;
+  public nin?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  public relationship: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
-
-  @IsDateString()
-  public modificationDate: Date;
+  @IsOptional()
+  @IsInt()
+  public officerId?: number; // Assuming there's a relationship with OfficerBioData
 }

@@ -1,43 +1,43 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Service } from 'typedi';
 import { HttpException } from '@/exceptions/httpException';
-import { IPPISOfficersInfo, IPPISOfficersInfoEntity } from '@/entities/officer.entity';
+import { OfficerBioData, OfficerBioDataEntity } from '@/entities/officer.entity';
 
 @Service()
 @EntityRepository()
-export class IPPISOfficersInfoService extends Repository<IPPISOfficersInfoEntity> {
-  public async findAllIPPISOfficersInfo(): Promise<IPPISOfficersInfo[]> {
-    const ippisOfficersInfo: IPPISOfficersInfo[] = await IPPISOfficersInfoEntity.find();
-    return ippisOfficersInfo;
+export class OfficerBioDataService extends Repository<OfficerBioDataEntity> {
+  public async findAllOfficerBioData(): Promise<OfficerBioData[]> {
+    const officerBioData: OfficerBioData[] = await OfficerBioDataEntity.find();
+    return officerBioData;
   }
 
-  public async findIPPISOfficersInfoById(ippisOfficersInfoId: number): Promise<IPPISOfficersInfo> {
-    const findIPPISOfficersInfo: IPPISOfficersInfo = await IPPISOfficersInfoEntity.findOne({ where: { id: ippisOfficersInfoId } });
-    if (!findIPPISOfficersInfo) throw new HttpException(409, "IPPIS Officers Info doesn't exist");
+  public async findOfficerBioDataById(OfficerBioDataId: number): Promise<OfficerBioData> {
+    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { id: OfficerBioDataId } });
+    if (!findOfficerBioData) throw new HttpException(409, "IPPIS Officers Info doesn't exist");
 
-    return findIPPISOfficersInfo;
+    return findOfficerBioData;
   }
 
-  public async createIPPISOfficersInfo(ippisOfficersInfoData: IPPISOfficersInfo): Promise<IPPISOfficersInfo> {
-    const createIPPISOfficersInfoData: IPPISOfficersInfo = await IPPISOfficersInfoEntity.create(ippisOfficersInfoData).save();
-    return createIPPISOfficersInfoData;
+  public async createOfficerBioData(OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
+    const createOfficerBioDataData: OfficerBioData = await OfficerBioDataEntity.create(OfficerBioDataData).save();
+    return createOfficerBioDataData;
   }
 
-  public async updateIPPISOfficersInfo(ippisOfficersInfoId: number, ippisOfficersInfoData: IPPISOfficersInfo): Promise<IPPISOfficersInfo> {
-    const findIPPISOfficersInfo: IPPISOfficersInfo = await IPPISOfficersInfoEntity.findOne({ where: { id: ippisOfficersInfoId } });
-    if (!findIPPISOfficersInfo) throw new HttpException(409, "IPPIS Officers Info doesn't exist");
+  public async updateOfficerBioData(OfficerBioDataId: number, OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
+    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { id: OfficerBioDataId } });
+    if (!findOfficerBioData) throw new HttpException(409, "IPPIS Officers Info doesn't exist");
 
-    await IPPISOfficersInfoEntity.update(ippisOfficersInfoId, ippisOfficersInfoData);
+    await OfficerBioDataEntity.update(OfficerBioDataId, OfficerBioDataData);
 
-    const updateIPPISOfficersInfo: IPPISOfficersInfo = await IPPISOfficersInfoEntity.findOne({ where: { id: ippisOfficersInfoId } });
-    return updateIPPISOfficersInfo;
+    const updateOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { id: OfficerBioDataId } });
+    return updateOfficerBioData;
   }
 
-  public async deleteIPPISOfficersInfo(ippisOfficersInfoId: number): Promise<IPPISOfficersInfo> {
-    const findIPPISOfficersInfo: IPPISOfficersInfo = await IPPISOfficersInfoEntity.findOne({ where: { id: ippisOfficersInfoId } });
-    if (!findIPPISOfficersInfo) throw new HttpException(409, "IPPIS Officers Info doesn't exist");
+  public async deleteOfficerBioData(OfficerBioDataId: number): Promise<OfficerBioData> {
+    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { id: OfficerBioDataId } });
+    if (!findOfficerBioData) throw new HttpException(409, "IPPIS Officers Info doesn't exist");
 
-    await IPPISOfficersInfoEntity.delete({ id: ippisOfficersInfoId });
-    return findIPPISOfficersInfo;
+    await OfficerBioDataEntity.delete({ id: OfficerBioDataId });
+    return findOfficerBioData;
   }
 }

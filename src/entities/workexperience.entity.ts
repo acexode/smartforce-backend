@@ -1,22 +1,13 @@
 import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { IPPISOfficersInfoEntity } from './officer.entity';
+import { OfficerBioDataEntity } from './officer.entity';
 
 export interface WorkExperience {
-  refNo: string;
   id: number;
-  employee: string;
   companyName: string;
-  positionHeld: string;
-  responsibilities: string;
   yearOfEntry: number;
   yearOfExit: number;
-  reasonForExit: string;
-  commentOptional: string;
-  createdBy: string;
-  creationDate: Date;
-  modifiedBy: string;
-  modificationDate: Date;
+  employmentLetter: string;
 }
 
 @Entity()
@@ -26,23 +17,11 @@ export class WorkExperienceEntity extends BaseEntity implements WorkExperience {
 
   @Column()
   @IsNotEmpty()
-  refNo: string;
-
-  @Column()
-  @IsNotEmpty()
-  employee: string;
-
-  @Column()
-  @IsNotEmpty()
   companyName: string;
 
   @Column()
   @IsNotEmpty()
-  positionHeld: string;
-
-  @Column()
-  @IsNotEmpty()
-  responsibilities: string;
+  employmentLetter: string;
 
   @Column()
   @IsNotEmpty()
@@ -52,28 +31,12 @@ export class WorkExperienceEntity extends BaseEntity implements WorkExperience {
   @IsNotEmpty()
   yearOfExit: number;
 
-  @Column()
-  @IsNotEmpty()
-  reasonForExit: string;
-
-  @Column()
-  @IsNotEmpty()
-  commentOptional: string;
-
-  @Column()
-  @IsNotEmpty()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 
-  @ManyToOne(() => IPPISOfficersInfoEntity, ippisOfficer => ippisOfficer.workExperience)
-  ippisOfficer: IPPISOfficersInfoEntity;
+  @ManyToOne(() => OfficerBioDataEntity, officer => officer.workExperience)
+  officer: OfficerBioDataEntity;
 }

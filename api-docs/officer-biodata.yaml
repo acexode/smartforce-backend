@@ -1,0 +1,190 @@
+tags:
+- name: officerBioData
+  description: Officer Bio Data API
+
+paths:
+  /officer-bio-data:
+    get:
+      tags:
+      - officerBioData
+      summary: Find All Officers' Bio Data
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - officerBioData
+      summary: Add Officer Bio Data
+      parameters:
+      - name: body
+        in: body
+        description: Officer Bio Data
+        required: true
+        schema:
+          $ref: '#/definitions/officerBioData'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /officer-bio-data/{id}:
+    get:
+      tags:
+      - officerBioData
+      summary: Find Officer Bio Data By Id
+      parameters:
+      - name: id
+        in: path
+        description: Officer Bio Data Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - officerBioData
+      summary: Update Officer Bio Data By Id
+      parameters:
+      - name: id
+        in: path
+        description: Officer Bio Data Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Officer Bio Data
+        required: true
+        schema:
+          $ref: '#/definitions/officerBioData'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - officerBioData
+      summary: Delete Officer Bio Data By Id
+      parameters:
+      - name: id
+        in: path
+        description: Officer Bio Data Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  officerBioData:
+    type: object
+    required:
+      - name
+      - lastName
+      - email
+      - phoneNumber
+      - nin
+      - dateOfBirth
+      - sex
+      - residentialAddress
+      - maritalStatus
+      - nationality
+      - stateOfOrigin
+      - localGovernmentArea
+      - placeOfBirth
+      - religion
+      - tribe
+    properties:
+      name:
+        type: string
+        description: Name
+      lastName:
+        type: string
+        description: Last name
+      otherName:
+        type: string
+        description: Other name
+        nullable: true
+      email:
+        type: string
+        description: Email
+      phoneNumber:
+        type: string
+        description: Phone number
+      nin:
+        type: string
+        description: NIN
+      dateOfBirth:
+        type: string
+        format: date
+        description: Date of Birth
+      sex:
+        type: string
+        description: Sex
+      residentialAddress:
+        type: string
+        description: Residential address
+      alternativeAddress:
+        type: string
+        description: Alternative address
+        nullable: true
+      maritalStatus:
+        type: string
+        description: Marital Status
+      otherMeansOfIdentification:
+        type: string
+        description: Other means of Identification
+        nullable: true
+      idNumber:
+        type: string
+        description: ID number
+        nullable: true
+      ethnicity:
+        type: string
+        description: Ethnicity
+        nullable: true
+      nationality:
+        type: string
+        description: Nationality
+      stateOfOrigin:
+        type: string
+        description: State of origin
+      localGovernmentArea:
+        type: string
+        description: Local government Area
+      placeOfBirth:
+        type: string
+        description: Place of birth
+      religion:
+        type: string
+        description: Religion
+      tribe:
+        type: string
+        description: Tribe
+
+schemes:
+ - https
+ - http

@@ -7,7 +7,7 @@ paths:
     get:
       tags:
       - educationalHistory
-      summary: Find All Educational History
+      summary: Find All Educational Histories
       responses:
         200:
           description: 'OK'
@@ -102,67 +102,33 @@ definitions:
   educationalHistory:
     type: object
     required:
-      - refNo
-      - employee
-      - institutionType
-      - institutionAttended
-      - degreeObtained
-      - courseName
-      - grade
+      - type
+      - institution
+      - degree
       - startDate
       - endDate
-      - comment
-      - createdBy
-      - creationDate
-      - modifiedBy
-      - modificationDate
+      - officerBioDataId
     properties:
-      refNo:
+      type:
         type: string
-        description: Reference Number
-      employee:
+        description: Type
+      institution:
         type: string
-        description: Employee
-      institutionType:
+        description: Institution
+      degree:
         type: string
-        description: Institution Type
-      institutionAttended:
-        type: string
-        description: Institution Attended
-      degreeObtained:
-        type: string
-        description: Degree Obtained
-      courseName:
-        type: string
-        description: Course Name
-      grade:
-        type: string
-        description: Grade
+        description: Degree
       startDate:
         type: string
-        format: date-time
-        description: Start Date
+        format: date
+        description: Start date
       endDate:
         type: string
-        format: date-time
-        description: End Date
-      comment:
-        type: string
-        description: Comment
-      createdBy:
-        type: string
-        description: Created By
-      creationDate:
-        type: string
-        format: date-time
-        description: Creation Date
-      modifiedBy:
-        type: string
-        description: Modified By
-      modificationDate:
-        type: string
-        format: date-time
-        description: Modification Date
+        format: date
+        description: End date
+      officerBioDataId:
+        type: integer
+        description: ID of related Officer Bio Data
 
 schemes:
  - https

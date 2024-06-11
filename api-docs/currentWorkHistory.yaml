@@ -1,13 +1,13 @@
 tags:
-- name: currentWorkHistory
-  description: Current Work History API
+- name: officerCurrentPostings
+  description: Officer Current Postings API
 
 paths:
-  /current-work-history:
+  /officer-current-postings:
     get:
       tags:
-      - currentWorkHistory
-      summary: Find All Current Work History
+      - officerCurrentPostings
+      summary: Find All Officer Current Postings
       responses:
         200:
           description: 'OK'
@@ -16,15 +16,15 @@ paths:
 
     post:
       tags:
-      - currentWorkHistory
-      summary: Add Current Work History
+      - officerCurrentPostings
+      summary: Add Officer Current Posting
       parameters:
       - name: body
         in: body
-        description: Current Work History Data
+        description: Officer Current Posting Data
         required: true
         schema:
-          $ref: '#/definitions/currentWorkHistory'
+          $ref: '#/definitions/officerCurrentPosting'
       responses:
         201:
           description: 'Created'
@@ -35,15 +35,15 @@ paths:
         500:
           description: 'Server Error'
 
-  /current-work-history/{id}:
+  /officer-current-postings/{id}:
     get:
       tags:
-      - currentWorkHistory
-      summary: Find Current Work History By Id
+      - officerCurrentPostings
+      summary: Find Officer Current Posting By Id
       parameters:
       - name: id
         in: path
-        description: Current Work History Id
+        description: Officer Current Posting Id
         required: true
         type: integer
       responses:
@@ -56,20 +56,20 @@ paths:
 
     put:
       tags:
-      - currentWorkHistory
-      summary: Update Current Work History By Id
+      - officerCurrentPostings
+      summary: Update Officer Current Posting By Id
       parameters:
       - name: id
         in: path
-        description: Current Work History Id
+        description: Officer Current Posting Id
         required: true
         type: integer
       - name: body
         in: body
-        description: Current Work History Data
+        description: Officer Current Posting Data
         required: true
         schema:
-          $ref: '#/definitions/currentWorkHistory'
+          $ref: '#/definitions/officerCurrentPosting'
       responses:
         200:
           description: 'OK'
@@ -82,12 +82,12 @@ paths:
 
     delete:
       tags:
-      - currentWorkHistory
-      summary: Delete Current Work History By Id
+      - officerCurrentPostings
+      summary: Delete Officer Current Posting By Id
       parameters:
       - name: id
         in: path
-        description: Current Work History Id
+        description: Officer Current Posting Id
         required: true
         type: integer
       responses:
@@ -99,127 +99,71 @@ paths:
           description: 'Server Error'
 
 definitions:
-  currentWorkHistory:
+  officerCurrentPosting:
     type: object
     required:
-      - refNo
-      - employee
-      - reasonForChange
-      - role
+      - category
       - rank
+      - apForceNo
+      - currentRole
+      - dateOfEnlistment
+      - existingPostStation
+      - department
       - formation
       - stateCommand
-      - specialization
       - areaCommand
-      - divisionalHQ
+      - unit
+      - subunit
+      - divisionHq
       - policeStation
-      - policeOutpost
-      - villageOutpost
-      - supervisor
-      - promotionIntervalInDays
-      - seniorSupervisor
-      - gradeLevel
-      - responsibilities
-      - proposedStartDate
-      - startDate
-      - endDate
-      - status
-      - comment
-      - data
-      - createdBy
-      - creationDate
-      - modifiedBy
-      - modificationDate
+      - officerBioDataId
     properties:
-      refNo:
+      category:
         type: string
-        description: Reference Number
-      employee:
-        type: string
-        description: Employee
-      reasonForChange:
-        type: string
-        description: Reason for Change
-      role:
-        type: string
-        description: Role
+        description: Category
       rank:
         type: string
         description: Rank
+      apForceNo:
+        type: string
+        description: AP/Force No
+      currentRole:
+        type: string
+        description: Current role
+      dateOfEnlistment:
+        type: string
+        format: date
+        description: Date of enlistment
+      existingPostStation:
+        type: string
+        description: Existing post/station
+      department:
+        type: string
+        description: Department
       formation:
         type: string
         description: Formation
       stateCommand:
         type: string
-        description: State Command
-      specialization:
-        type: string
-        description: Specialization
+        description: State command
       areaCommand:
         type: string
-        description: Area Command
-      divisionalHQ:
+        description: Area command
+      unit:
         type: string
-        description: Divisional HQ
+        description: Unit
+      subunit:
+        type: string
+        description: Subunit
+      divisionHq:
+        type: string
+        description: Division HQ
       policeStation:
         type: string
         description: Police Station
-      policeOutpost:
-        type: string
-        description: Police Outpost
-      villageOutpost:
-        type: string
-        description: Village Outpost
-      supervisor:
-        type: string
-        description: Supervisor
-      promotionIntervalInDays:
-        type: number
-        description: Promotion Interval in Days
-      seniorSupervisor:
-        type: string
-        description: Senior Supervisor
-      gradeLevel:
-        type: string
-        description: Grade Level
-      responsibilities:
-        type: string
-        description: Responsibilities
-      proposedStartDate:
-        type: string
-        format: date-time
-        description: Proposed Start Date
-      startDate:
-        type: string
-        format: date-time
-        description: Start Date
-      endDate:
-        type: string
-        format: date-time
-        description: End Date
-      status:
-        type: string
-        description: Status
-      comment:
-        type: string
-        description: Comment
-      data:
-        type: string
-        description: Data
-      createdBy:
-        type: string
-        description: Created By
-      creationDate:
-        type: string
-        format: date-time
-        description: Creation Date
-      modifiedBy:
-        type: string
-        description: Modified By
-      modificationDate:
-        type: string
-        format: date-time
-        description: Modification Date
+      officerBioDataId:
+        type: integer
+        description: ID of related Officer Bio Data
 
 schemes:
  - https

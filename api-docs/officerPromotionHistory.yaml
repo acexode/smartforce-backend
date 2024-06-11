@@ -1,13 +1,13 @@
 tags:
-- name: nextOfKin
-  description: Next of Kin API
+- name: officerPromotionHistory
+  description: Officer Promotion History API
 
 paths:
-  /next-of-kin:
+  /officer-promotion-history:
     get:
       tags:
-      - nextOfKin
-      summary: Find All Next of Kin
+      - officerPromotionHistory
+      summary: Find All Officer Promotion Histories
       responses:
         200:
           description: 'OK'
@@ -16,15 +16,15 @@ paths:
 
     post:
       tags:
-      - nextOfKin
-      summary: Add Next of Kin
+      - officerPromotionHistory
+      summary: Add Officer Promotion History
       parameters:
       - name: body
         in: body
-        description: Next of Kin Data
+        description: Officer Promotion History Data
         required: true
         schema:
-          $ref: '#/definitions/nextOfKin'
+          $ref: '#/definitions/officerPromotionHistory'
       responses:
         201:
           description: 'Created'
@@ -35,15 +35,15 @@ paths:
         500:
           description: 'Server Error'
 
-  /next-of-kin/{id}:
+  /officer-promotion-history/{id}:
     get:
       tags:
-      - nextOfKin
-      summary: Find Next of Kin By Id
+      - officerPromotionHistory
+      summary: Find Officer Promotion History By Id
       parameters:
       - name: id
         in: path
-        description: Next of Kin Id
+        description: Officer Promotion History Id
         required: true
         type: integer
       responses:
@@ -56,20 +56,20 @@ paths:
 
     put:
       tags:
-      - nextOfKin
-      summary: Update Next of Kin By Id
+      - officerPromotionHistory
+      summary: Update Officer Promotion History By Id
       parameters:
       - name: id
         in: path
-        description: Next of Kin Id
+        description: Officer Promotion History Id
         required: true
         type: integer
       - name: body
         in: body
-        description: Next of Kin Data
+        description: Officer Promotion History Data
         required: true
         schema:
-          $ref: '#/definitions/nextOfKin'
+          $ref: '#/definitions/officerPromotionHistory'
       responses:
         200:
           description: 'OK'
@@ -82,12 +82,12 @@ paths:
 
     delete:
       tags:
-      - nextOfKin
-      summary: Delete Next of Kin By Id
+      - officerPromotionHistory
+      summary: Delete Officer Promotion History By Id
       parameters:
       - name: id
         in: path
-        description: Next of Kin Id
+        description: Officer Promotion History Id
         required: true
         type: integer
       responses:
@@ -99,37 +99,30 @@ paths:
           description: 'Server Error'
 
 definitions:
-  nextOfKin:
+  officerPromotionHistory:
     type: object
     required:
-      - name
-      - relationship
-      - address
-      - phoneNumber
-      - email
-      - nin
-
-
-      - modificationDate
+      - rankId
+      - periodOfService
+      - policeFormation
+      - position
+      - officerBioDataId
     properties:
-      Name:
+      rankId:
+        type: integer
+        description: ID of related Rank
+      periodOfService:
         type: string
-        description: Full Name
-      phoneNumber:
+        description: Period of Service
+      policeFormation:
         type: string
-        description: Phone Number
-      address:
+        description: Police Formation
+      position:
         type: string
-        description: Address
-      email:
-        type: string
-        description: Email
-      nin:
-        type: string
-        description: nin
-      relationship:
-        type: string
-        description: Relationship
+        description: Position
+      officerBioDataId:
+        type: integer
+        description: ID of related Officer Bio Data
 
 schemes:
  - https

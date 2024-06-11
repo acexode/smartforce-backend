@@ -1,94 +1,53 @@
-import { IsString, IsNotEmpty, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsString, IsDateString, IsInt } from 'class-validator';
 
 export class CreateEducationalHistoryDto {
-  @IsString()
   @IsNotEmpty()
-  public refNo: string;
-
   @IsString()
-  @IsNotEmpty()
-  public employee: string;
+  public type: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public institutionType: string;
+  public institution: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public institutionAttended: string;
+  public degree: string;
 
-  @IsString()
   @IsNotEmpty()
-  public degreeObtained: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public courseName: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public grade: string;
-
   @IsDateString()
   public startDate: Date;
 
+  @IsNotEmpty()
   @IsDateString()
   public endDate: Date;
 
-  @IsString()
   @IsNotEmpty()
-  public comment: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public createdBy: string;
-
-  @IsDateString()
-  public creationDate: Date;
-
-  @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
-
-  @IsDateString()
-  public modificationDate: Date;
+  @IsInt()
+  public officerId: number; // Assuming there's a relationship with OfficerBioData
 }
 
 export class UpdateEducationalHistoryDto {
-  @IsString()
   @IsNotEmpty()
-  public institutionType: string;
-
   @IsString()
-  @IsNotEmpty()
-  public institutionAttended: string;
+  public type?: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public degreeObtained: string;
+  public institution?: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  public courseName: string;
+  public degree?: string;
 
-  @IsString()
   @IsNotEmpty()
-  public grade: string;
-
   @IsDateString()
-  public startDate: Date;
+  public startDate?: Date;
 
-  @IsDateString()
-  public endDate: Date;
-
-  @IsString()
   @IsNotEmpty()
-  public comment: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public modifiedBy: string;
-
   @IsDateString()
-  public modificationDate: Date;
+  public endDate?: Date;
+
+  @IsNotEmpty()
+  @IsInt()
+  public officerId?: number; // Assuming there's a relationship with OfficerBioData
 }

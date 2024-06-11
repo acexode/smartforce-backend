@@ -2,23 +2,23 @@ import { Router } from 'express';
 
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { IPPISOfficersInfoController } from '@/controllers/officer.controller';
-import { CreateIPPISOfficersInfoDto, UpdateIPPISOfficersInfoDto } from '@/dtos/officer.dto';
+import { OfficerBioDataController } from '@/controllers/officer.controller';
+import { CreateOfficerBioDataDto, UpdateOfficerBioDataDto } from '@/dtos/officer.dto';
 
-export class IPPISOfficersInfoRoute implements Routes {
-  public path = '/ippis-officers-info';
+export class OfficerBioDataRoute implements Routes {
+  public path = '/officer-bio-data';
   public router = Router();
-  public ippisOfficersInfo = new IPPISOfficersInfoController();
+  public OfficerBioData = new OfficerBioDataController();
 
   constructor() {
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.ippisOfficersInfo.getIPPISOfficersInfo);
-    this.router.get(`${this.path}/:id(\\d+)`, this.ippisOfficersInfo.getIPPISOfficersInfoById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreateIPPISOfficersInfoDto), this.ippisOfficersInfo.createIPPISOfficersInfo);
-    this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(UpdateIPPISOfficersInfoDto, true), this.ippisOfficersInfo.updateIPPISOfficersInfo);
-    this.router.delete(`${this.path}/:id(\\d+)`, this.ippisOfficersInfo.deleteIPPISOfficersInfo);
+    this.router.get(`${this.path}`, this.OfficerBioData.getOfficerBioData);
+    this.router.get(`${this.path}/:id(\\d+)`, this.OfficerBioData.getOfficerBioDataById);
+    this.router.post(`${this.path}`, ValidationMiddleware(CreateOfficerBioDataDto), this.OfficerBioData.createOfficerBioData);
+    this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(UpdateOfficerBioDataDto, true), this.OfficerBioData.updateOfficerBioData);
+    this.router.delete(`${this.path}/:id(\\d+)`, this.OfficerBioData.deleteOfficerBioData);
   }
 }

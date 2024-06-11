@@ -1,59 +1,59 @@
-import { CurrentWorkHistory } from '@/entities/currentWorkHistory.entity';
-import { CurrentWorkHistoryService } from '@/services/currrentWorkHistory.service';
 import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
+import { OfficerCurrentPosting } from '@entities/currentWorkHistory.entity';
+import { OfficerCurrentPostingService } from '@services/currrentWorkHistory.service';
 
-export class CurrentWorkHistoryController {
-  public currentWorkHistory = Container.get(CurrentWorkHistoryService);
+export class OfficerCurrentPostingController {
+  public officerCurrentPostingService = Container.get(OfficerCurrentPostingService);
 
-  public getCurrentWorkHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public getCurrentPostings = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const findAllCurrentWorkHistoryData: CurrentWorkHistory[] = await this.currentWorkHistory.findAllCurrentWorkHistory();
-      res.status(200).json({ data: findAllCurrentWorkHistoryData, message: 'findAll' });
+      const findAllCurrentPostingsData: OfficerCurrentPosting[] = await this.officerCurrentPostingService.findAllCurrentPostings();
+      res.status(200).json({ data: findAllCurrentPostingsData, message: 'findAll' });
     } catch (error) {
       next(error);
     }
   };
 
-  public getCurrentWorkHistoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public getCurrentPostingById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const currentWorkHistoryId = Number(req.params.id);
-      const findOneCurrentWorkHistoryData: CurrentWorkHistory = await this.currentWorkHistory.findCurrentWorkHistoryById(currentWorkHistoryId);
-      res.status(200).json({ data: findOneCurrentWorkHistoryData, message: 'findOne' });
+      const currentPostingId = Number(req.params.id);
+      const findOneCurrentPostingData: OfficerCurrentPosting = await this.officerCurrentPostingService.findCurrentPostingById(currentPostingId);
+      res.status(200).json({ data: findOneCurrentPostingData, message: 'findOne' });
     } catch (error) {
       next(error);
     }
   };
 
-  public createCurrentWorkHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public createCurrentPosting = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const currentWorkHistoryData: CurrentWorkHistory = req.body;
-      const createCurrentWorkHistoryData: CurrentWorkHistory = await this.currentWorkHistory.createCurrentWorkHistory(currentWorkHistoryData);
-      res.status(201).json({ data: createCurrentWorkHistoryData, message: 'created' });
+      const currentPostingData: OfficerCurrentPosting = req.body;
+      const createCurrentPostingData: OfficerCurrentPosting = await this.officerCurrentPostingService.createCurrentPosting(currentPostingData);
+      res.status(201).json({ data: createCurrentPostingData, message: 'created' });
     } catch (error) {
       next(error);
     }
   };
 
-  public updateCurrentWorkHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public updateCurrentPosting = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const currentWorkHistoryId = Number(req.params.id);
-      const currentWorkHistoryData: CurrentWorkHistory = req.body;
-      const updateCurrentWorkHistoryData: CurrentWorkHistory = await this.currentWorkHistory.updateCurrentWorkHistory(
-        currentWorkHistoryId,
-        currentWorkHistoryData,
+      const currentPostingId = Number(req.params.id);
+      const currentPostingData: OfficerCurrentPosting = req.body;
+      const updateCurrentPostingData: OfficerCurrentPosting = await this.officerCurrentPostingService.updateCurrentPosting(
+        currentPostingId,
+        currentPostingData,
       );
-      res.status(200).json({ data: updateCurrentWorkHistoryData, message: 'updated' });
+      res.status(200).json({ data: updateCurrentPostingData, message: 'updated' });
     } catch (error) {
       next(error);
     }
   };
 
-  public deleteCurrentWorkHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public deleteCurrentPosting = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const currentWorkHistoryId = Number(req.params.id);
-      const deleteCurrentWorkHistoryData: CurrentWorkHistory = await this.currentWorkHistory.deleteCurrentWorkHistory(currentWorkHistoryId);
-      res.status(200).json({ data: deleteCurrentWorkHistoryData, message: 'deleted' });
+      const currentPostingId = Number(req.params.id);
+      const deleteCurrentPostingData: OfficerCurrentPosting = await this.officerCurrentPostingService.deleteCurrentPosting(currentPostingId);
+      res.status(200).json({ data: deleteCurrentPostingData, message: 'deleted' });
     } catch (error) {
       next(error);
     }

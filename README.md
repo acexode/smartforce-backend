@@ -36,7 +36,7 @@ These instructions will help you set up and run the project on your local machin
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/your-repo.git
+    git clone https://github.com/Abubakar-Abdulwahab/smartforce-backend
     cd your-repo
     ```
 

@@ -25,6 +25,7 @@ import { OfficerMedicalInfoRoute } from './routes/medical.route';
 import { OfficerPromotionHistoryRoute } from './routes/officerPromotionHistory.route';
 import { OfficerTrainingRoute } from './routes/officerTraining.route';
 import { OfficerWelfareInformationRoute } from './routes/welfare.route';
+import { IppisRoute } from './routes/ippis.route';
 
 ValidateEnv();
 
@@ -54,6 +55,7 @@ const app = new App([
   new RankRoute(),
   new StateCommandRoute(),
   new UnitRoute(),
+  new IppisRoute(),
 ]);
 
 app.listen();

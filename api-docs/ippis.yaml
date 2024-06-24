@@ -1,0 +1,192 @@
+tags:
+- name: Ippis
+  description: Ippis API
+
+paths:
+  /ippis:
+    get:
+      tags:
+      - Ippis
+      summary: Find All Ippis
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    post:
+      tags:
+      - Ippis
+      summary: Add Ippis
+      parameters:
+      - name: body
+        in: body
+        description: Ippis Data
+        required: true
+        schema:
+          $ref: '#/definitions/ippis'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  /area-commands/{id}:
+    get:
+      tags:
+      - Ippis
+      summary: Find Ippis By Id
+      parameters:
+      - name: id
+        in: path
+        description: Ippis Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    put:
+      tags:
+      - Ippis
+      summary: Update Ippis By Id
+      parameters:
+      - name: id
+        in: path
+        description: Ippis Id
+        required: true
+        type: integer
+      - name: body
+        in: body
+        description: Ippis Data
+        required: true
+        schema:
+          $ref: '#/definitions/ippis'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    delete:
+      tags:
+      - Ippis
+      summary: Delete Ippis By Id
+      parameters:
+      - name: id
+        in: path
+        description: Ippis Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+definitions:
+  ippis:
+    type: object
+    required:
+      - staffId
+      - rank
+      - apNo
+      - surname
+      - firstName
+      - otherName
+      - dateofBirth
+      - maritalStatus
+      - gender
+      - gradeCategory
+      - grade
+      - step
+      - command
+      - phoneNo
+      - bankName
+      - accountNo
+      - pfaName
+      - pinNo
+      - staffCategory
+      - bvn
+      - employeeStatus
+    properties:
+      staffId:
+        type: string
+        description: Staff Id Number
+      rank:
+        type: string
+        description: Rank
+      apNo:
+        type: string
+        description: AP number
+      surname:
+        type: string
+        description: Surname
+      firstName:
+        type: string
+        description: First Name
+      dateOfBirth:
+        type: string
+        format: date-time
+        description: Date of Birth
+      maritalStatus:
+        type: string
+        description: Marital Status
+      gender:
+        type: string
+        description: Gender
+      gradeCategory:
+        type: string
+        description: Grade Category
+      grade:
+        type: string
+        description: Grade
+      step:
+        type: string
+        format: date-time
+        description: Step
+      command:
+        type: string
+        description: Command
+      phoneNo:
+        type: number
+        description: Phone Number
+      bankName:
+        type: string
+        description: Bank Name
+      accountNo:
+        type: number
+        description: Account Number
+      pfaName:
+        type: string
+        description: PFA Number
+      pinNo:
+        type: string
+        description: Pin Number
+      staffCategory:
+        type: string
+        description: Staff Category
+      bvn:
+        type: number
+        description: BVN
+      employeeStatus:
+        type: string
+        description: Account Number      
+
+schemes:
+ - https
+ - http

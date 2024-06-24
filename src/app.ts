@@ -113,6 +113,7 @@ export class App {
         'api-docs/units.yaml',
         'api-docs/welfare.yaml',
         'api-docs/workExperience.yaml',
+        'api-docs/ippis.yaml'
       ],
     };
 

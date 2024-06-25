@@ -7,9 +7,6 @@ export class DivisionalHeadquartersEntity extends BaseEntity implements Division
   id: number;
 
   @Column()
-  refNo: string;
-
-  @Column()
   name: string;
 
   @Column()
@@ -18,18 +15,9 @@ export class DivisionalHeadquartersEntity extends BaseEntity implements Division
   @Column()
   state: string;
 
-  @Column()
-  country: string;
-
-  @Column()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 }

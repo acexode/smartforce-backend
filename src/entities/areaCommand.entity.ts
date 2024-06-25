@@ -7,35 +7,20 @@ export class AreaCommandEntity extends BaseEntity implements AreaCommand {
   id: number;
 
   @Column()
-  refNo: string;
-
-  @Column()
   name: string;
-
-  @Column()
-  type: string;
 
   @Column()
   unit: string;
 
   @Column()
-  stateCommand: string;
+  state: string;
 
   @Column()
   department: string;
 
-  @Column()
-  country: string;
-
-  @Column()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 }

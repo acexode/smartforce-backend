@@ -7,13 +7,7 @@ export class FormationEntity extends BaseEntity implements Formation {
   id: number;
 
   @Column()
-  refNo: string;
-
-  @Column()
   name: string;
-
-  @Column()
-  type: string;
 
   @Column()
   department: string;
@@ -24,15 +18,9 @@ export class FormationEntity extends BaseEntity implements Formation {
   @Column()
   section: string;
 
-  @Column()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 }

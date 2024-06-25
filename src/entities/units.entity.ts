@@ -7,13 +7,7 @@ export class UnitEntity extends BaseEntity implements Unit {
   id: number;
 
   @Column()
-  refNo: string;
-
-  @Column()
   name: string;
-
-  @Column()
-  type: string;
 
   @Column()
   department: string;
@@ -24,18 +18,9 @@ export class UnitEntity extends BaseEntity implements Unit {
   @Column()
   state: string;
 
-  @Column()
-  parent: string;
-
-  @Column()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 }

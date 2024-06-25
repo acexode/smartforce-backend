@@ -1,16 +1,13 @@
-import { Department } from '@/interfaces/department.interface';
+import { States } from '@/interfaces/statecommand.interface';
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from 'typeorm';
 
 @Entity()
-export class DepartmentEntity extends BaseEntity implements Department {
+export class StateEntity extends BaseEntity implements States {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  departmentName: string;
-
-  @Column()
-  description: string;
+  name: string;
 
   @CreateDateColumn()
   createdAt: Date;

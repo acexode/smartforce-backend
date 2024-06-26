@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class RankRoute implements Routes {
-  public path = '/ranks';
+  public path = '/org-structure/ranks';
   public router = Router();
   public rankController = new RankController();
 

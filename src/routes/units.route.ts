@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class UnitRoute implements Routes {
-  public path = '/units';
+  public path = '/org-structure/units';
   public router = Router();
   public unitController = new UnitController();
 

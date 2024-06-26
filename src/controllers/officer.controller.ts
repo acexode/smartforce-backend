@@ -1,4 +1,5 @@
 import { OfficerBioData } from '@/entities/officer.entity';
+import { RequestWithUser } from '@/interfaces/auth.interface';
 import { OfficerBioDataService } from '@/services/officer.service';
 import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
@@ -25,10 +26,11 @@ export class OfficerBioDataController {
     }
   };
 
-  public createOfficerBioData = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public createOfficerBioData = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
     try {
       const OfficerBioDataData: OfficerBioData = req.body;
-      const createOfficerBioDataData: OfficerBioData = await this.OfficerBioData.createOfficerBioData(OfficerBioDataData);
+      const userId = req.user.id;
+      const createOfficerBioDataData: OfficerBioData = await this.OfficerBioData.createOfficerBioData(OfficerBioDataData, userId);
       res.status(201).json({ data: createOfficerBioDataData, message: 'created' });
     } catch (error) {
       next(error);

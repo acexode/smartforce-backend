@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class OfficerMedicalInfoRoute implements Routes {
-  public path = '/officer-medical';
+  public path = '/officer/officer-medical';
   public router = Router();
   public OfficerMedicalInfoController = new OfficerMedicalInfoController();
 

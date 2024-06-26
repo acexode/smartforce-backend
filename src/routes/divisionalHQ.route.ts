@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class DivisionalHeadquartersRoute implements Routes {
-  public path = '/divisional-headquarters';
+  public path = '/org-structure/divisional-headquarters';
   public router = Router();
   public divisionalHeadquartersController = new DivisionalHeadquartersController();
 

@@ -5,7 +5,7 @@ import { ValidationMiddleware } from '@middlewares/validation.middleware';
 import { CreateSalaryDetailsDto, UpdateSalaryDetailsDto } from '@/dtos/salary.dto';
 
 export class SalaryDetailsRoute implements Routes {
-  public path = '/salary-details';
+  public path = '/officer/salary-details';
   public router = Router();
   public salaryDetails = new SalaryDetailsController();
 

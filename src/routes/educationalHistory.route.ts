@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class EducationalHistoryRoute implements Routes {
-  public path = '/educational-history';
+  public path = '/officer/educational-history';
   public router = Router();
   public educationalHistory = new EducationalHistoryController();
 

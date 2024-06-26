@@ -5,7 +5,7 @@ import { ValidationMiddleware } from '@middlewares/validation.middleware';
 import { CreateDisciplinaryHistoryDto, UpdateDisciplinaryHistoryDto } from '@/dtos/discliplinaryHistory.dto';
 
 export class DisciplinaryHistoryRoute implements Routes {
-  public path = '/disciplinary-history';
+  public path = '/officer/disciplinary-history';
   public router = Router();
   public disciplinaryHistory = new DisciplinaryHistoryController();
 

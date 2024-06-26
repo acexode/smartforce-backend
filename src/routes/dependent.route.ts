@@ -5,7 +5,7 @@ import { DependentsController } from '@/controllers/dependent.controller';
 import { CreateDependentsDto, UpdateDependentsDto } from '@/dtos/dependent.dto';
 
 export class DependentsRoute implements Routes {
-  public path = '/dependents';
+  public path = '/officer/dependents';
   public router = Router();
   public dependents = new DependentsController();
 

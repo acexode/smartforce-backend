@@ -7,44 +7,20 @@ export class StateCommandEntity extends BaseEntity implements StateCommand {
   id: number;
 
   @Column()
-  refNo: string;
-
-  @Column()
   name: string;
 
   @Column()
   department: string;
 
   @Column()
-  location: string;
-
-  @Column()
-  phone: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  geoCode: string;
-
-  @Column()
-  type: string;
-
-  @Column()
-  parent: string;
+  state: string;
 
   @Column()
   section: string;
 
-  @Column()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 }

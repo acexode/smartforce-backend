@@ -7,26 +7,11 @@ export class RankEntity extends BaseEntity implements Rank {
   id: number;
 
   @Column()
-  refNo: string;
-
-  @Column()
   name: string;
 
-  @Column()
-  type: string;
-
-  @Column()
-  parent: string;
-
-  @Column()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 }

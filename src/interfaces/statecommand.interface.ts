@@ -1,17 +1,11 @@
 export interface StateCommand {
   id: number;
-  refNo: string;
   name: string;
   department: string;
-  location: string;
-  phone: string;
-  email: string;
-  geoCode: string;
-  type: string;
-  parent: string;
+  state: string;
   section: string;
-  createdBy: string;
-  creationDate: Date;
-  modifiedBy: string;
-  modificationDate: Date;
+}
+export interface States {
+  id?: number;
+  name: string;
 }

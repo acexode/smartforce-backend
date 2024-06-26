@@ -7,9 +7,6 @@ export class PoliceStationEntity extends BaseEntity implements PoliceStation {
   id: number;
 
   @Column()
-  refNo: string;
-
-  @Column()
   name: string;
 
   @Column()
@@ -21,18 +18,9 @@ export class PoliceStationEntity extends BaseEntity implements PoliceStation {
   @Column()
   state: string;
 
-  @Column()
-  country: string;
-
-  @Column()
-  createdBy: string;
-
   @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  modifiedBy: string;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  modificationDate: Date;
+  updatedAt: Date;
 }

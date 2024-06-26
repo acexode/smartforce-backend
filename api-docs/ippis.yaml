@@ -163,13 +163,13 @@ definitions:
         type: string
         description: Command
       phoneNo:
-        type: number
+        type: string
         description: Phone Number
       bankName:
         type: string
         description: Bank Name
       accountNo:
-        type: number
+        type: string
         description: Account Number
       pfaName:
         type: string
@@ -181,7 +181,7 @@ definitions:
         type: string
         description: Staff Category
       bvn:
-        type: number
+        type: string
         description: BVN
       employeeStatus:
         type: string

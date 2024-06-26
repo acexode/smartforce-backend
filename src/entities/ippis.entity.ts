@@ -9,63 +9,57 @@ export class IppisEntity extends BaseEntity implements Ippis {
   @Column()
   staffId: string;
 
-  @Column()
+  @Column({ nullable: true })
   rank: string;
 
-  @Column()
+  @Column({ nullable: true })
   apNo: string;
 
   @Column()
-  surname: string;
+  fullName: string;
 
-  @Column()
-  firstName: string;
-
-  @Column()
-  otherName: string;
-
-  @Column()
+  @Column({ nullable: true })
   dateOfBirth: Date;
 
-  @Column()
+  @Column({ nullable: true })
   maritalStatus: string;
 
-  @Column()
+  @Column({ nullable: true })
   gender: string;
 
-  @Column()
+  @Column({ nullable: true })
   gradeCategory: string;
 
-  @Column()
+  @Column({ nullable: true })
   grade: string;
 
-  @Column()
+  @Column({ nullable: true })
   step: number;
 
-  @Column()
+  @Column({ nullable: true })
   command: string;
 
-  @Column()
-  phoneNo: number;
+  @Column({ nullable: true })
+  phoneNo: string;
 
-  @Column()
+  @Column({ nullable: true })
   bankName: string;
 
-  @Column()
-  accountNo: number;
+  @Column({ nullable: true })
+  accountNo: string;
 
-  @Column()
+  @Column({ nullable: true })
   pfaName: string;
 
-  @Column()
+  @Column({ nullable: true })
   pinNo: string;
 
-  @Column()
+  @Column({ nullable: true })
   staffCategory: string;
 
-  @Column()
-  bvn: number;
+  @Column({ nullable: true })
+  bvn: string;
 
-  @Column()
+  @Column({ nullable: true })
   employeeStatus: string;
 }

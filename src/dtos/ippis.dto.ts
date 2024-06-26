@@ -1,136 +1,129 @@
-import { IsNotEmpty, IsString, IsNumber, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsDateString, IsNumberString, IsOptional } from 'class-validator';
 
 export class CreateIppisDto {
     @IsNotEmpty()
     @IsString()
     staffId: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     rank: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     apNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    surname: string;
-
-    @IsNotEmpty()
-    @IsString()
-    firstName: string;
-
-    @IsString()
-    otherName: string;
-
-    @IsNotEmpty()
+    fullName: string;
+    
+    @IsOptional()
     @IsDateString()
     dateOfBirth: Date;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     maritalStatus: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     gender: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     gradeCategory: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     grade: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
     step: number;
 
-    @IsNotEmpty()
-    @IsNumber()
+    @IsOptional()
+    @IsString()
     command: string;
 
-    @IsNotEmpty()
-    @IsNumber()
-    phoneNo: number;
+    @IsOptional()
+    @IsString()
+    phoneNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     bankName: string;
 
-    @IsNotEmpty()
-    @IsNumber()
-    accountNo: number;
+    @IsOptional()
+    @IsString()
+    accountNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     pfaName: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     pinNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     staffCategory: string;
 
-    @IsNotEmpty()
-    @IsNumber()
-    bvn: number;
+    @IsOptional()
+    @IsString()
+    bvn: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     employeeStatus: string;
 }
 
 export class UpdateIppisDto {
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     rank: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     surname: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     maritalStatus: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     grade: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
     step: number;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
     command: string;
 
-    @IsNotEmpty()
-    @IsNumber()
-    phoneNo: number;
+    @IsOptional()
+    @IsString()
+    phoneNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     bankName: string;
 
-    @IsNotEmpty()
-    @IsNumber()
-    accountNo: number;
+    @IsOptional()
+    @IsString()
+    accountNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     pfaName: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     pinNo: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     employeeStatus: string;
 }

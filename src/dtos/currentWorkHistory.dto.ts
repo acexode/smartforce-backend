@@ -59,7 +59,7 @@ export class CreateOfficerCurrentPostingDto {
 
   @IsNotEmpty()
   @IsInt()
-  public officerBioDataId: number; // Assuming there's a relationship with OfficerBioData
+  public officerId: number; // Assuming there's a relationship with OfficerBioData
 }
 
 export class UpdateOfficerCurrentPostingDto {
@@ -121,5 +121,5 @@ export class UpdateOfficerCurrentPostingDto {
 
   @IsNotEmpty()
   @IsInt()
-  public officerBioDataId?: number; // Assuming there's a relationship with OfficerBioData
+  public officerId?: number; // Assuming there's a relationship with OfficerBioData
 }

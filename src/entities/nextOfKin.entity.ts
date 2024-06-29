@@ -1,26 +1,19 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface NextOfKin {
-  refNo: string;
   id: number;
-  employee: string;
-  firstName: string;
-  lastName: string;
-  otherNames: string;
-  phoneNumber: string;
-  sex: string;
+  name: string;
+  nin: string;
+  phoneNo: string;
+  address: string;
   email: string;
-  contactAddress: string;
   relationship: string;
-  createdBy: string;
-  creationDate: Date;
-  modifiedBy: string;
-  modificationDate: Date;
+  officerId: number;
 }
 
 @Entity()
-export class NextOfKinEntity extends BaseEntity {
+export class NextOfKinEntity extends BaseEntity implements NextOfKin {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -49,5 +42,9 @@ export class NextOfKinEntity extends BaseEntity {
   updatedAt: Date;
 
   @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.nextOfKin)
+  @JoinColumn({ name: 'officerId' })
   officer: OfficerBioDataEntity;
+
+  @Column()
+  officerId: number;
 }

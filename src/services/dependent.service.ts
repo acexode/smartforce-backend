@@ -12,24 +12,24 @@ export class DependentsService extends Repository<DependentsEntity> {
   }
 
   public async findDependentsById(dependentsId: number): Promise<Dependents> {
-    const findDependents: Dependents = await DependentsEntity.findOne({ where: { id: dependentsId } });
+    const findDependents: Dependents = await DependentsEntity.findOne({ where: { officerId: dependentsId } });
     if (!findDependents) throw new HttpException(409, "Dependents doesn't exist");
 
     return findDependents;
   }
 
   public async createDependents(dependentsData: Dependents): Promise<Dependents> {
-    const createDependentsData: Dependents = await DependentsEntity.create(dependentsData).save();
+    const createDependentsData: Dependents = await DependentsEntity.create({ ...dependentsData, officer: { id: dependentsData.officerId } }).save();
     return createDependentsData;
   }
 
   public async updateDependents(dependentsId: number, dependentsData: Dependents): Promise<Dependents> {
-    const findDependents: Dependents = await DependentsEntity.findOne({ where: { id: dependentsId } });
+    const findDependents: Dependents = await DependentsEntity.findOne({ where: { officerId: dependentsId } });
     if (!findDependents) throw new HttpException(409, "Dependents doesn't exist");
 
-    await DependentsEntity.update(dependentsId, dependentsData);
+    await DependentsEntity.update({ officer: { id: dependentsId } }, dependentsData);
 
-    const updateDependents: Dependents = await DependentsEntity.findOne({ where: { id: dependentsId } });
+    const updateDependents: Dependents = await DependentsEntity.findOne({ where: { officerId: dependentsId } });
     return updateDependents;
   }
 

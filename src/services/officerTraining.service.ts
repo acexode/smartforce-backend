@@ -12,24 +12,27 @@ export class OfficerTrainingService extends Repository<OfficerTrainingEntity> {
   }
 
   public async findTrainingById(trainingId: number): Promise<OfficerTraining> {
-    const findTraining: OfficerTraining = await OfficerTrainingEntity.findOne({ where: { id: trainingId } });
+    const findTraining: OfficerTraining = await OfficerTrainingEntity.findOne({ where: { officerId: { id: trainingId } } });
     if (!findTraining) throw new HttpException(409, "Training doesn't exist");
 
     return findTraining;
   }
 
   public async createTraining(trainingData: OfficerTraining): Promise<OfficerTraining> {
-    const createTrainingData: OfficerTraining = await OfficerTrainingEntity.create(trainingData).save();
+    const createTrainingData: OfficerTraining = await OfficerTrainingEntity.create({
+      ...trainingData,
+      officer: { id: trainingData.officerId },
+    }).save();
     return createTrainingData;
   }
 
   public async updateTraining(trainingId: number, trainingData: OfficerTraining): Promise<OfficerTraining> {
-    const findTraining: OfficerTraining = await OfficerTrainingEntity.findOne({ where: { id: trainingId } });
+    const findTraining: OfficerTraining = await OfficerTrainingEntity.findOne({ where: { officerId: { id: trainingId } } });
     if (!findTraining) throw new HttpException(409, "Training doesn't exist");
 
-    await OfficerTrainingEntity.update(trainingId, trainingData);
+    await OfficerTrainingEntity.update({ officer: { id: trainingId } }, trainingData);
 
-    const updateTraining: OfficerTraining = await OfficerTrainingEntity.findOne({ where: { id: trainingId } });
+    const updateTraining: OfficerTraining = await OfficerTrainingEntity.findOne({ where: { officerId: { id: trainingId } } });
     return updateTraining;
   }
 

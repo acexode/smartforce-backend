@@ -5,7 +5,7 @@ export interface User {
   nin: number;
   firstName: string;
   lastName: string;
-  phone: number;
+  phone: string;
   otherName?: string;
   password: string;
 }

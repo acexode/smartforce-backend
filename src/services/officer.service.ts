@@ -18,8 +18,8 @@ export class OfficerBioDataService extends Repository<OfficerBioDataEntity> {
     return findOfficerBioData;
   }
 
-  public async createOfficerBioData(OfficerBioDataData: OfficerBioData, userId: number): Promise<OfficerBioData> {
-    const createOfficerBioDataData: OfficerBioData = await OfficerBioDataEntity.create({ ...OfficerBioDataData, user: { id: userId } }).save();
+  public async createOfficerBioData(OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
+    const createOfficerBioDataData: OfficerBioData = await OfficerBioDataEntity.create({ ...OfficerBioDataData }).save();
     return createOfficerBioDataData;
   }
 

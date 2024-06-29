@@ -13,24 +13,27 @@ export class WorkExperienceService extends Repository<WorkExperienceEntity> {
   }
 
   public async findWorkExperienceById(workExperienceId: number): Promise<WorkExperience> {
-    const findWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { id: workExperienceId } });
+    const findWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { officerId: workExperienceId } });
     if (!findWorkExperience) throw new HttpException(409, "Work experience doesn't exist");
 
     return findWorkExperience;
   }
 
   public async createWorkExperience(workExperienceData: WorkExperience): Promise<WorkExperience> {
-    const createWorkExperienceData: WorkExperience = await WorkExperienceEntity.create(workExperienceData).save();
+    const createWorkExperienceData: WorkExperience = await WorkExperienceEntity.create({
+      ...workExperienceData,
+      officer: { id: workExperienceData.officerId },
+    }).save();
     return createWorkExperienceData;
   }
 
   public async updateWorkExperience(workExperienceId: number, workExperienceData: WorkExperience): Promise<WorkExperience> {
-    const findWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { id: workExperienceId } });
+    const findWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { officerId: workExperienceId } });
     if (!findWorkExperience) throw new HttpException(409, "Work experience doesn't exist");
 
-    await WorkExperienceEntity.update(workExperienceId, workExperienceData);
+    await WorkExperienceEntity.update({ officer: { id: workExperienceId } }, workExperienceData);
 
-    const updateWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { id: workExperienceId } });
+    const updateWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { officerId: workExperienceId } });
     return updateWorkExperience;
   }
 

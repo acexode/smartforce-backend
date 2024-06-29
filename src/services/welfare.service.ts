@@ -12,14 +12,19 @@ export class OfficerWelfareInformationService extends Repository<OfficerWelfareI
   }
 
   public async findWelfareInformationById(welfareInformationId: number): Promise<OfficerWelfareInformation> {
-    const findWelfareInformation: OfficerWelfareInformation = await OfficerWelfareInformationEntity.findOne({ where: { id: welfareInformationId } });
+    const findWelfareInformation: OfficerWelfareInformation = await OfficerWelfareInformationEntity.findOne({
+      where: { officerId: welfareInformationId },
+    });
     if (!findWelfareInformation) throw new HttpException(409, "Welfare Information doesn't exist");
 
     return findWelfareInformation;
   }
 
   public async createWelfareInformation(welfareInformationData: OfficerWelfareInformation): Promise<OfficerWelfareInformation> {
-    const createWelfareInformationData: OfficerWelfareInformation = await OfficerWelfareInformationEntity.create(welfareInformationData).save();
+    const createWelfareInformationData: OfficerWelfareInformation = await OfficerWelfareInformationEntity.create({
+      ...welfareInformationData,
+      officer: { id: welfareInformationData.officerId },
+    }).save();
     return createWelfareInformationData;
   }
 
@@ -27,13 +32,15 @@ export class OfficerWelfareInformationService extends Repository<OfficerWelfareI
     welfareInformationId: number,
     welfareInformationData: OfficerWelfareInformation,
   ): Promise<OfficerWelfareInformation> {
-    const findWelfareInformation: OfficerWelfareInformation = await OfficerWelfareInformationEntity.findOne({ where: { id: welfareInformationId } });
+    const findWelfareInformation: OfficerWelfareInformation = await OfficerWelfareInformationEntity.findOne({
+      where: { officerId: welfareInformationId },
+    });
     if (!findWelfareInformation) throw new HttpException(409, "Welfare Information doesn't exist");
 
-    await OfficerWelfareInformationEntity.update(welfareInformationId, welfareInformationData);
+    await OfficerWelfareInformationEntity.update({ officer: { id: welfareInformationId } }, welfareInformationData);
 
     const updateWelfareInformation: OfficerWelfareInformation = await OfficerWelfareInformationEntity.findOne({
-      where: { id: welfareInformationId },
+      where: { officer: welfareInformationId },
     });
     return updateWelfareInformation;
   }

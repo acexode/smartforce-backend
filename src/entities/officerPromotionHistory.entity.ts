@@ -8,7 +8,7 @@ export interface OfficerPromotionHistory {
   periodOfService: string;
   policeFormation: string;
   position: string;
-  officer: any; // Assuming there's a relationship with OfficerBioData
+  officerId: number; // Assuming there's a relationship with OfficerBioData
 }
 
 @Entity()
@@ -16,9 +16,8 @@ export class OfficerPromotionHistoryEntity extends BaseEntity implements Officer
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => RankEntity)
-  @JoinColumn({ name: 'rankId' })
-  rankId: RankEntity;
+  @Column()
+  rankId: string;
 
   @Column()
   periodOfService: string;
@@ -30,5 +29,9 @@ export class OfficerPromotionHistoryEntity extends BaseEntity implements Officer
   position: string;
 
   @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.promotionHistories)
+  @JoinColumn({ name: 'officerId' })
   officer: OfficerBioDataEntity;
+
+  @Column()
+  officerId: number;
 }

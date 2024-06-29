@@ -1,4 +1,4 @@
-import { IsEmail, IsString, IsNotEmpty, MinLength, MaxLength, IsOptional } from 'class-validator';
+import { IsEmail, IsString, IsNotEmpty, MinLength, MaxLength, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateUserDto {
   @IsEmail()
@@ -6,15 +6,19 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  public ippis: string;
+  public ippisNo: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  public nin: string;
+  public nin: number;
 
   @IsString()
   @IsNotEmpty()
   public firstName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public phone: string;
 
   @IsString()
   @IsNotEmpty()
@@ -32,6 +36,16 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto {
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(9)
+  @MaxLength(32)
+  public password: string;
+}
+export class LoginUserDto {
+  @IsEmail()
+  public email: string;
+
   @IsString()
   @IsNotEmpty()
   @MinLength(9)

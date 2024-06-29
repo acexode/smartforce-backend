@@ -12,24 +12,33 @@ export class OfficerPromotionHistoryService extends Repository<OfficerPromotionH
   }
 
   public async findPromotionHistoryById(promotionHistoryId: number): Promise<OfficerPromotionHistory> {
-    const findPromotionHistory: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.findOne({ where: { id: promotionHistoryId } });
+    const findPromotionHistory: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.findOne({
+      where: { officer: { id: promotionHistoryId } },
+    });
     if (!findPromotionHistory) throw new HttpException(409, "Promotion History doesn't exist");
 
     return findPromotionHistory;
   }
 
   public async createPromotionHistory(promotionHistoryData: OfficerPromotionHistory): Promise<OfficerPromotionHistory> {
-    const createPromotionHistoryData: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.create(promotionHistoryData).save();
+    const createPromotionHistoryData: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.create({
+      ...promotionHistoryData,
+      officer: { id: promotionHistoryData.officerId },
+    }).save();
     return createPromotionHistoryData;
   }
 
   public async updatePromotionHistory(promotionHistoryId: number, promotionHistoryData: OfficerPromotionHistory): Promise<OfficerPromotionHistory> {
-    const findPromotionHistory: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.findOne({ where: { id: promotionHistoryId } });
+    const findPromotionHistory: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.findOne({
+      where: { officer: { id: promotionHistoryId } },
+    });
     if (!findPromotionHistory) throw new HttpException(409, "Promotion History doesn't exist");
 
-    await OfficerPromotionHistoryEntity.update(promotionHistoryId, promotionHistoryData);
+    await OfficerPromotionHistoryEntity.update({ officer: { id: promotionHistoryId } }, promotionHistoryData);
 
-    const updatePromotionHistory: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.findOne({ where: { id: promotionHistoryId } });
+    const updatePromotionHistory: OfficerPromotionHistory = await OfficerPromotionHistoryEntity.findOne({
+      where: { officer: { id: promotionHistoryId } },
+    });
     return updatePromotionHistory;
   }
 

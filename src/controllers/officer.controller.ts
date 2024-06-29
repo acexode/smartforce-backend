@@ -19,6 +19,7 @@ export class OfficerBioDataController {
   public getOfficerBioDataById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const OfficerBioDataId = Number(req.params.id);
+      console.log(OfficerBioDataId, 'ID');
       const findOneOfficerBioDataData: OfficerBioData = await this.OfficerBioData.findOfficerBioDataById(OfficerBioDataId);
       res.status(200).json({ data: findOneOfficerBioDataData, message: 'findOne' });
     } catch (error) {
@@ -29,8 +30,7 @@ export class OfficerBioDataController {
   public createOfficerBioData = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
     try {
       const OfficerBioDataData: OfficerBioData = req.body;
-      const userId = req.user.id;
-      const createOfficerBioDataData: OfficerBioData = await this.OfficerBioData.createOfficerBioData(OfficerBioDataData, userId);
+      const createOfficerBioDataData: OfficerBioData = await this.OfficerBioData.createOfficerBioData(OfficerBioDataData);
       res.status(201).json({ data: createOfficerBioDataData, message: 'created' });
     } catch (error) {
       next(error);

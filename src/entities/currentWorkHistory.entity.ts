@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface OfficerCurrentPosting {
@@ -17,7 +17,7 @@ export interface OfficerCurrentPosting {
   subunit: string;
   divisionHq: string;
   policeStation: string;
-  officer: any; // Assuming there's a relationship with OfficerBioData
+  officerId: any; // Assuming there's a relationship with OfficerBioData
 }
 
 @Entity()
@@ -74,5 +74,9 @@ export class OfficerCurrentPostingEntity extends BaseEntity {
   updatedAt: Date;
 
   @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.currentPostings)
+  @JoinColumn({ name: 'officerId' })
   officer: OfficerBioDataEntity;
+
+  @Column()
+  officerId: number;
 }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity'; // adjust the import according to your file structure
 
 export interface OfficerMedicalInfo {
@@ -13,7 +13,7 @@ export interface OfficerMedicalInfo {
   eyeColor: string;
   bodyDefect?: string;
   amputations?: string;
-  //   officerBioDataId: number;
+  officerId: number;
 }
 
 @Entity()
@@ -52,5 +52,9 @@ export class OfficerMedicalInfoEntity extends BaseEntity {
   amputations?: string;
 
   @ManyToOne(() => OfficerBioDataEntity, officer => officer.officerMedical)
+  @JoinColumn({ name: 'officerId' })
   officer: OfficerBioDataEntity;
+
+  @Column()
+  officerId: number;
 }

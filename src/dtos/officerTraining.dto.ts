@@ -15,7 +15,7 @@ export class CreateOfficerTrainingDto {
 
   @IsNotEmpty()
   @IsInt()
-  public officerBioDataId: number; // Relationship with OfficerBioData
+  public officerId: number; // Relationship with OfficerBioData
 }
 
 export class UpdateOfficerTrainingDto {
@@ -33,5 +33,5 @@ export class UpdateOfficerTrainingDto {
 
   @IsOptional()
   @IsInt()
-  public officerBioDataId?: number; // Relationship with OfficerBioData
+  public officerId?: number; // Relationship with OfficerBioData
 }

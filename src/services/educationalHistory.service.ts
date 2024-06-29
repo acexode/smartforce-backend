@@ -12,24 +12,27 @@ export class EducationalHistoryService extends Repository<EducationalHistoryEnti
   }
 
   public async findEducationalHistoryById(educationalHistoryId: number): Promise<EducationalHistory> {
-    const findEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { id: educationalHistoryId } });
+    const findEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { officerId: educationalHistoryId } });
     if (!findEducationalHistory) throw new HttpException(409, "Educational history doesn't exist");
 
     return findEducationalHistory;
   }
 
   public async createEducationalHistory(educationalHistoryData: EducationalHistory): Promise<EducationalHistory> {
-    const createEducationalHistoryData: EducationalHistory = await EducationalHistoryEntity.create(educationalHistoryData).save();
+    const createEducationalHistoryData: EducationalHistory = await EducationalHistoryEntity.create({
+      ...educationalHistoryData,
+      officer: { id: educationalHistoryData.officerId },
+    }).save();
     return createEducationalHistoryData;
   }
 
   public async updateEducationalHistory(educationalHistoryId: number, educationalHistoryData: EducationalHistory): Promise<EducationalHistory> {
-    const findEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { id: educationalHistoryId } });
+    const findEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { officerId: educationalHistoryId } });
     if (!findEducationalHistory) throw new HttpException(409, "Educational history doesn't exist");
 
-    await EducationalHistoryEntity.update(educationalHistoryId, educationalHistoryData);
+    await EducationalHistoryEntity.update({ officer: { id: educationalHistoryId } }, educationalHistoryData);
 
-    const updateEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { id: educationalHistoryId } });
+    const updateEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { officerId: educationalHistoryId } });
     return updateEducationalHistory;
   }
 

@@ -3,7 +3,11 @@ import { IsString, IsNotEmpty, IsDateString, IsOptional, IsEmail } from 'class-v
 export class CreateOfficerBioDataDto {
   @IsNotEmpty()
   @IsString()
-  public name: string;
+  public ippisNo: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public firstName: string;
 
   @IsNotEmpty()
   @IsString()
@@ -26,66 +30,58 @@ export class CreateOfficerBioDataDto {
   public nin: string;
 
   @IsNotEmpty()
-  @IsDateString()
-  public dateOfBirth: Date;
-
-  @IsNotEmpty()
   @IsString()
-  public sex: string;
+  public password: string;
 
-  @IsNotEmpty()
-  @IsString()
-  public residentialAddress: string;
+  // @IsNotEmpty()
+  // @IsDateString()
+  // public dateOfBirth: Date;
 
-  @IsOptional()
-  @IsString()
-  public alternativeAddress?: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public sex: string;
 
-  @IsNotEmpty()
-  @IsString()
-  public maritalStatus: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public residentialAddress: string;
 
-  @IsOptional()
-  @IsString()
-  public otherMeansOfIdentification?: string;
+  // @IsOptional()
+  // @IsString()
+  // public alternativeAddress?: string;
 
-  @IsOptional()
-  @IsString()
-  public idNumber?: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public maritalStatus: string;
 
-  @IsOptional()
-  @IsString()
-  public ethnicity?: string;
+  // @IsOptional()
+  // @IsString()
+  // public ethnicity?: string;
 
-  @IsNotEmpty()
-  @IsString()
-  public nationality: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public stateOfOrigin: string;
 
-  @IsNotEmpty()
-  @IsString()
-  public stateOfOrigin: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public localGovernmentArea: string;
 
-  @IsNotEmpty()
-  @IsString()
-  public localGovernmentArea: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public placeOfBirth: string;
 
-  @IsNotEmpty()
-  @IsString()
-  public placeOfBirth: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public religion: string;
 
-  @IsNotEmpty()
-  @IsString()
-  public religion: string;
-
-  @IsNotEmpty()
-  @IsString()
-  public tribe: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // public tribe: string;
 }
 
 export class UpdateOfficerBioDataDto {
   @IsOptional()
   @IsString()
-  public name?: string;
+  public firstName?: string;
 
   @IsOptional()
   @IsString()
@@ -129,19 +125,7 @@ export class UpdateOfficerBioDataDto {
 
   @IsOptional()
   @IsString()
-  public otherMeansOfIdentification?: string;
-
-  @IsOptional()
-  @IsString()
-  public idNumber?: string;
-
-  @IsOptional()
-  @IsString()
   public ethnicity?: string;
-
-  @IsOptional()
-  @IsString()
-  public nationality?: string;
 
   @IsOptional()
   @IsString()

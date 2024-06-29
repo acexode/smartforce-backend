@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity'; // Adjust the import according to your file structure
 
 export interface OfficerTraining {
@@ -6,7 +6,7 @@ export interface OfficerTraining {
   nameOfTraining: string;
   dateOfCompletion: Date;
   certificate: string;
-  officer: any; // Assuming there's a relationship with OfficerBioData
+  officerId: number; // Assuming there's a relationship with OfficerBioData
 }
 @Entity()
 export class OfficerTrainingEntity extends BaseEntity implements OfficerTraining {
@@ -23,5 +23,9 @@ export class OfficerTrainingEntity extends BaseEntity implements OfficerTraining
   certificate: string;
 
   @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.trainings)
+  @JoinColumn({ name: 'officerId' })
   officer: OfficerBioDataEntity;
+
+  @Column()
+  officerId: number;
 }

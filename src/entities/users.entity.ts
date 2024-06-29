@@ -17,13 +17,13 @@ export class UserEntity extends BaseEntity implements User {
   @Unique(['ippisNo'])
   ippisNo: string;
 
-  @Column()
+  @Column({ type: 'bigint' })
   @Unique(['nin'])
   nin: number;
 
   @Column()
-  @Unique(['nin'])
-  phone: number;
+  @Unique(['phone'])
+  phone: string;
 
   @Column()
   firstName: string;
@@ -46,6 +46,6 @@ export class UserEntity extends BaseEntity implements User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.user)
-  officerBioData: OfficerBioDataEntity;
+  // @OneToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.user)
+  // officerBioData: OfficerBioDataEntity;
 }

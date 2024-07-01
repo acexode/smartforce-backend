@@ -2,6 +2,9 @@ import Container from 'typedi';
 import { DepartmentService } from './services/department.service';
 import { FormationService } from './services/formation.service';
 import { RankService } from './services/ranks.service';
+import { IppisService } from './services/ippis.service';
+import  IppisSeeds from './output.json';
+
 
 const departmentSeeds = [
   'FORCE SECRETARY',
@@ -648,6 +651,7 @@ const formationSeeds = [
 const departmentService = Container.get(DepartmentService);
 const formatioonService = Container.get(FormationService);
 const rankService = Container.get(RankService);
+const ippisService = Container.get(IppisService);
 
 export const seedDepartment = () => {
   departmentSeeds.forEach(async e => {
@@ -672,5 +676,34 @@ export const seedFormation = async () => {
     };
     const f = await formatioonService.createFormation(item);
     console.log(f);
+  });
+};
+
+export const seedIppis = async () => {
+  IppisSeeds.forEach( async e => {
+    const item :any = {
+      staffId: e.staffId,
+      fullName: e.fullName,
+      rank: e.rank,
+      apNo: e.apNo,
+      dateOfBirth: e.dateOfBirth,
+      maritalStatus: e.maritalStatus,
+      gender: e.gender,
+      gradeCategory: e.gradeCategory,
+      grade: e.grade,
+      step: e.step,
+      command: e.command,
+      phoneNo: e.phoneNo,
+      bankName: e.bankName,
+      accountNo: e.accountNo,
+      pfaName: e.pfaName,
+      pinNo: e.pinNo,
+      staffCategory: e.staffCategory,
+      bvn: e.bvn,
+      employeeStatus: e.employeeStatus,
+     
+    };
+    // const f = await ippisService.createIppis(item);
+    console.log(item);
   });
 };

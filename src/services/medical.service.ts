@@ -12,24 +12,27 @@ export class OfficerMedicalInfoService extends Repository<OfficerMedicalInfoEnti
   }
 
   public async findAttributeById(attributeId: number): Promise<OfficerMedicalInfo> {
-    const findAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { id: attributeId } });
+    const findAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { officerId: { id: attributeId } } });
     if (!findAttribute) throw new HttpException(409, "Attribute doesn't exist");
 
     return findAttribute;
   }
 
   public async createAttribute(attributeData: OfficerMedicalInfo): Promise<OfficerMedicalInfo> {
-    const createAttributeData: OfficerMedicalInfo = await OfficerMedicalInfoEntity.create(attributeData).save();
+    const createAttributeData: OfficerMedicalInfo = await OfficerMedicalInfoEntity.create({
+      ...attributeData,
+      officer: { id: attributeData.officerId },
+    }).save();
     return createAttributeData;
   }
 
   public async updateAttribute(attributeId: number, attributeData: OfficerMedicalInfo): Promise<OfficerMedicalInfo> {
-    const findAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { id: attributeId } });
+    const findAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { officerId: { id: attributeId } } });
     if (!findAttribute) throw new HttpException(409, "Attribute doesn't exist");
 
-    await OfficerMedicalInfoEntity.update(attributeId, attributeData);
+    await OfficerMedicalInfoEntity.update({ officer: { id: attributeId } }, attributeData);
 
-    const updateAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { id: attributeId } });
+    const updateAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { officerId: { id: attributeId } } });
     return updateAttribute;
   }
 

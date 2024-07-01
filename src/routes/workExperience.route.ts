@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class WorkExperienceRoute implements Routes {
-  public path = '/work-experience';
+  public path = '/officer/work-experience';
   public router = Router();
   public workExperience = new WorkExperienceController();
 

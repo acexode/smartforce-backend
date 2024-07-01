@@ -3,11 +3,9 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, U
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface DisciplinaryHistory {
-  refNo: string;
   id: number;
   employee: string;
   date: Date;
-  type: string;
   category: string;
   subcategory: string;
   charges: string;
@@ -20,15 +18,7 @@ export interface DisciplinaryHistory {
   behavioralExpectations: string;
   generalRemarks: string;
   comment: string;
-  status: string;
-  store: string;
   supervisor: string;
-  reference: string;
-  referenceTable: string;
-  createdBy: string;
-  creationDate: Date;
-  modifiedBy: string;
-  modificationDate: Date;
 }
 
 @Entity()
@@ -38,19 +28,11 @@ export class DisciplinaryHistoryEntity extends BaseEntity implements Disciplinar
 
   @Column()
   @IsNotEmpty()
-  refNo: string;
-
-  @Column()
-  @IsNotEmpty()
   employee: string;
 
   @Column()
   @IsNotEmpty()
   date: Date;
-
-  @Column()
-  @IsNotEmpty()
-  type: string;
 
   @Column()
   @IsNotEmpty()
@@ -102,37 +84,7 @@ export class DisciplinaryHistoryEntity extends BaseEntity implements Disciplinar
 
   @Column()
   @IsNotEmpty()
-  status: string;
-
-  @Column()
-  @IsNotEmpty()
-  store: string;
-
-  @Column()
-  @IsNotEmpty()
   supervisor: string;
-
-  @Column()
-  @IsNotEmpty()
-  reference: string;
-
-  @Column()
-  @IsNotEmpty()
-  referenceTable: string;
-
-  @Column()
-  @IsNotEmpty()
-  createdBy: string;
-
-  @CreateDateColumn()
-  creationDate: Date;
-
-  @Column()
-  @IsNotEmpty()
-  modifiedBy: string;
-
-  @UpdateDateColumn()
-  modificationDate: Date;
 
   @ManyToOne(() => OfficerBioDataEntity, officer => officer.disciplinaryHistory)
   officer: OfficerBioDataEntity;

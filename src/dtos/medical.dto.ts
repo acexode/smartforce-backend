@@ -43,7 +43,7 @@ export class CreateOfficerMedicalInfoDto {
 
   @IsNotEmpty()
   @IsInt()
-  public officerBioDataId: number;
+  public officerId: number;
 }
 
 export class UpdateOfficerMedicalInfoDto {
@@ -89,5 +89,5 @@ export class UpdateOfficerMedicalInfoDto {
 
   @IsOptional()
   @IsInt()
-  public officerBioDataId?: number;
+  public officerId?: number;
 }

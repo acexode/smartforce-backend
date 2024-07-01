@@ -1,4 +1,15 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+  Unique,
+} from 'typeorm';
 import { NextOfKinEntity } from './nextOfKin.entity';
 import { SalaryDetailsEntity } from './salaryDetails.entity';
 import { DependentsEntity } from './dependent.entity';
@@ -11,24 +22,23 @@ import { ProfessionalAssociationEntity } from './professionalAssociation.entity'
 import { OfficerMedicalInfoEntity } from './medical.entity';
 import { OfficerPromotionHistoryEntity } from './officerPromotionHistory.entity';
 import { OfficerTraining, OfficerTrainingEntity } from './officerTraining.entity';
+import { UserEntity } from './users.entity';
 
 export interface OfficerBioData {
   id: number;
-  name: string;
+  firstName: string;
   lastName: string;
   otherName?: string;
   email: string;
   phoneNumber: string;
   nin: string;
+  password: string;
   dateOfBirth: Date;
   sex: string;
   residentialAddress: string;
   alternativeAddress?: string;
   maritalStatus: string;
-  otherMeansOfIdentification?: string;
-  idNumber?: string;
   ethnicity?: string;
-  nationality: string;
   stateOfOrigin: string;
   localGovernmentArea: string;
   placeOfBirth: string;
@@ -42,7 +52,11 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   id: number;
 
   @Column()
-  name: string;
+  @Unique(['ippisNo'])
+  ippisNo: string;
+
+  @Column()
+  firstName: string;
 
   @Column()
   lastName: string;
@@ -51,54 +65,51 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   otherName?: string;
 
   @Column()
+  @Unique(['email'])
   email: string;
 
   @Column()
+  @Unique(['phoneNumber'])
   phoneNumber: string;
 
   @Column()
+  @Unique(['nin'])
   nin: string;
 
   @Column()
+  password: string;
+
+  @Column({ nullable: true })
   dateOfBirth: Date;
 
-  @Column()
+  @Column({ nullable: true })
   sex: string;
 
-  @Column()
+  @Column({ nullable: true })
   residentialAddress: string;
 
   @Column({ nullable: true })
   alternativeAddress?: string;
 
-  @Column()
+  @Column({ nullable: true })
   maritalStatus: string;
-
-  @Column({ nullable: true })
-  otherMeansOfIdentification?: string;
-
-  @Column({ nullable: true })
-  idNumber?: string;
 
   @Column({ nullable: true })
   ethnicity?: string;
 
-  @Column()
-  nationality: string;
-
-  @Column()
+  @Column({ nullable: true })
   stateOfOrigin: string;
 
-  @Column()
+  @Column({ nullable: true })
   localGovernmentArea: string;
 
-  @Column()
+  @Column({ nullable: true })
   placeOfBirth: string;
 
-  @Column()
+  @Column({ nullable: true })
   religion: string;
 
-  @Column()
+  @Column({ nullable: true })
   tribe: string;
 
   @CreateDateColumn()
@@ -106,6 +117,10 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  // @OneToOne(() => UserEntity, user => user.officerBioData)
+  // @JoinColumn()
+  // user: UserEntity;
 
   @OneToMany(() => NextOfKinEntity, nextOfKin => nextOfKin.officer)
   nextOfKin: NextOfKinEntity[];

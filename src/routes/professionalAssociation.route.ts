@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class ProfessionalAssociationRoute implements Routes {
-  public path = '/professional-association';
+  public path = '/officer/professional-association';
   public router = Router();
   public professionalAssociation = new ProfessionalAssociationController();
 

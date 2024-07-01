@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class PoliceStationRoute implements Routes {
-  public path = '/police-stations';
+  public path = '/org-structure/police-stations';
   public router = Router();
   public policeStationController = new PoliceStationController();
 

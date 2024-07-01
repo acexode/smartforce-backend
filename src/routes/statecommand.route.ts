@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class StateCommandRoute implements Routes {
-  public path = '/state-commands';
+  public path = '/org-structure/state-commands';
   public router = Router();
   public stateCommandController = new StateCommandController();
 

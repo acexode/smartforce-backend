@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface ProfessionalAssociation {
@@ -7,6 +7,7 @@ export interface ProfessionalAssociation {
   institution: string;
   membershipId: string;
   certificate?: string;
+  officerId: number;
 }
 
 @Entity()
@@ -33,5 +34,9 @@ export class ProfessionalAssociationEntity extends BaseEntity implements Profess
   updatedAt: Date;
 
   @ManyToOne(() => OfficerBioDataEntity, officer => officer.professionalAssociation)
+  @JoinColumn({ name: 'officerId' })
   officer: OfficerBioDataEntity;
+
+  @Column()
+  officerId: number;
 }

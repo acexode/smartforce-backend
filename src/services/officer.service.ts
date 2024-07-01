@@ -19,7 +19,7 @@ export class OfficerBioDataService extends Repository<OfficerBioDataEntity> {
   }
 
   public async createOfficerBioData(OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
-    const createOfficerBioDataData: OfficerBioData = await OfficerBioDataEntity.create(OfficerBioDataData).save();
+    const createOfficerBioDataData: OfficerBioData = await OfficerBioDataEntity.create({ ...OfficerBioDataData }).save();
     return createOfficerBioDataData;
   }
 

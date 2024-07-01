@@ -13,7 +13,7 @@ export class ProfessionalAssociationService extends Repository<ProfessionalAssoc
 
   public async findProfessionalAssociationById(professionalAssociationId: number): Promise<ProfessionalAssociation> {
     const findProfessionalAssociation: ProfessionalAssociation = await ProfessionalAssociationEntity.findOne({
-      where: { id: professionalAssociationId },
+      where: { officer: { id: professionalAssociationId } },
     });
     if (!findProfessionalAssociation) throw new HttpException(409, "Professional association doesn't exist");
 
@@ -21,7 +21,10 @@ export class ProfessionalAssociationService extends Repository<ProfessionalAssoc
   }
 
   public async createProfessionalAssociation(professionalAssociationData: ProfessionalAssociation): Promise<ProfessionalAssociation> {
-    const createProfessionalAssociationData: ProfessionalAssociation = await ProfessionalAssociationEntity.create(professionalAssociationData).save();
+    const createProfessionalAssociationData: ProfessionalAssociation = await ProfessionalAssociationEntity.create({
+      ...professionalAssociationData,
+      officer: { id: professionalAssociationData.officerId },
+    }).save();
     return createProfessionalAssociationData;
   }
 
@@ -30,14 +33,14 @@ export class ProfessionalAssociationService extends Repository<ProfessionalAssoc
     professionalAssociationData: ProfessionalAssociation,
   ): Promise<ProfessionalAssociation> {
     const findProfessionalAssociation: ProfessionalAssociation = await ProfessionalAssociationEntity.findOne({
-      where: { id: professionalAssociationId },
+      where: { officer: { id: professionalAssociationId } },
     });
     if (!findProfessionalAssociation) throw new HttpException(409, "Professional association doesn't exist");
 
     await ProfessionalAssociationEntity.update(professionalAssociationId, professionalAssociationData);
 
     const updateProfessionalAssociation: ProfessionalAssociation = await ProfessionalAssociationEntity.findOne({
-      where: { id: professionalAssociationId },
+      where: { officer: { id: professionalAssociationId } },
     });
     return updateProfessionalAssociation;
   }

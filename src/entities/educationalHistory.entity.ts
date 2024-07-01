@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface EducationalHistory {
@@ -9,7 +9,7 @@ export interface EducationalHistory {
   degree: string;
   startDate: Date;
   endDate: Date;
-  officer: any;
+  officerId: number;
 }
 
 @Entity()
@@ -39,5 +39,9 @@ export class EducationalHistoryEntity extends BaseEntity implements EducationalH
   updatedAt: Date;
 
   @ManyToOne(() => OfficerBioDataEntity, officer => officer.educationalHistory)
+  @JoinColumn({ name: 'officerId' })
   officer: OfficerBioDataEntity;
+
+  @Column()
+  officerId: number;
 }

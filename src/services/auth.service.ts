@@ -3,13 +3,12 @@ import { sign } from 'jsonwebtoken';
 import { Service } from 'typedi';
 import { EntityRepository, Repository } from 'typeorm';
 import { SECRET_KEY } from '@config';
-import { UserEntity } from '@entities/users.entity';
 import { HttpException } from '@/exceptions/httpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
-import { User } from '@interfaces/users.interface';
+import { OfficerBioData, OfficerBioDataEntity } from '@/entities/officer.entity';
 
-const createToken = (user: User): TokenData => {
-  const dataStoredInToken: DataStoredInToken = { id: user.id };
+const createToken = (OfficerBioData: OfficerBioData): TokenData => {
+  const dataStoredInToken: DataStoredInToken = { id: OfficerBioData.id };
   const secretKey: string = SECRET_KEY;
   const expiresIn: number = 60 * 60;
 
@@ -22,35 +21,35 @@ const createCookie = (tokenData: TokenData): string => {
 
 @Service()
 @EntityRepository()
-export class AuthService extends Repository<UserEntity> {
-  public async signup(userData: User): Promise<User> {
-    console.log(userData);
-    const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
-    if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
+export class AuthService extends Repository<OfficerBioDataEntity> {
+  public async signup(OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
+    console.log(OfficerBioDataData);
+    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
+    if (findOfficerBioData) throw new HttpException(409, `This email ${OfficerBioDataData.email} already exists`);
 
-    const hashedPassword = await hash(userData.password, 10);
-    const createUserData: User = await UserEntity.create({ ...userData, password: hashedPassword }).save();
-    return createUserData;
+    const hashedPassword = await hash(OfficerBioDataData.password, 10);
+    const createOfficerBioDataData: OfficerBioData = await OfficerBioDataEntity.create({ ...OfficerBioDataData, password: hashedPassword }).save();
+    return createOfficerBioDataData;
   }
 
-  public async login(userData: User): Promise<{ cookie: string; findUser: User; token: any }> {
-    const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
-    if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
+  public async login(OfficerBioDataData: OfficerBioData): Promise<{ cookie: string; findOfficerBioData: OfficerBioData; token: any }> {
+    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
+    if (!findOfficerBioData) throw new HttpException(409, `This email ${OfficerBioDataData.email} was not found`);
 
-    const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
+    const isPasswordMatching: boolean = await compare(OfficerBioDataData.password, findOfficerBioData.password);
     if (!isPasswordMatching) throw new HttpException(409, 'Password not matching');
 
-    const token = createToken(findUser);
+    const token = createToken(findOfficerBioData);
     const cookie = createCookie(token);
     console.log(token, cookie);
 
-    return { cookie, findUser, token };
+    return { cookie, findOfficerBioData, token };
   }
 
-  public async logout(userData: User): Promise<User> {
-    const findUser: User = await UserEntity.findOne({ where: { email: userData.email, password: userData.password } });
-    if (!findUser) throw new HttpException(409, "User doesn't exist");
+  public async logout(OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
+    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
+    if (!findOfficerBioData) throw new HttpException(409, "OfficerBioData doesn't exist");
 
-    return findUser;
+    return findOfficerBioData;
   }
 }

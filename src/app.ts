@@ -13,14 +13,11 @@ import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
-import Container from 'typedi';
-import { PoliceOutpostService } from './services/policeOutpost.service';
 
 export class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
-  public theService = Container.get(PoliceOutpostService);
 
   constructor(routes: Routes[]) {
     this.app = express();
@@ -64,7 +61,7 @@ export class App {
 
   private initializeRoutes(routes: Routes[]) {
     routes.forEach(route => {
-      this.app.use('/', route.router);
+      this.app.use('/api', route.router);
     });
   }
 

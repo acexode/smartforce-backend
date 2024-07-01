@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class APERRoute implements Routes {
-  public path = '/aper';
+  public path = '/officer/aper';
   public router = Router();
   public aper = new APERController();
 

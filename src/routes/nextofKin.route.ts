@@ -5,7 +5,7 @@ import { ValidationMiddleware } from '@middlewares/validation.middleware';
 import { NextOfKinController } from '@/controllers/nextofKin.controller';
 
 export class NextOfKinRoute implements Routes {
-  public path = '/next-of-kin';
+  public path = '/officer/next-of-kin';
   public router = Router();
   public nextOfKin = new NextOfKinController();
 

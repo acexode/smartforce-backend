@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class FormationRoute implements Routes {
-  public path = '/formations';
+  public path = '/org-structure/formations';
   public router = Router();
   public formationController = new FormationController();
 

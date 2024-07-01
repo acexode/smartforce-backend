@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 export class AreaCommandRoute implements Routes {
-  public path = '/area-commands';
+  public path = '/org-structure/area-commands';
   public router = Router();
   public areaCommandController = new AreaCommandController();
 

@@ -12,24 +12,27 @@ export class OfficerCurrentPostingService extends Repository<OfficerCurrentPosti
   }
 
   public async findCurrentPostingById(currentPostingId: number): Promise<OfficerCurrentPosting> {
-    const findCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { id: currentPostingId } });
+    const findCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { officerId: currentPostingId } });
     if (!findCurrentPosting) throw new HttpException(409, "Current Posting doesn't exist");
 
     return findCurrentPosting;
   }
 
   public async createCurrentPosting(currentPostingData: OfficerCurrentPosting): Promise<OfficerCurrentPosting> {
-    const createCurrentPostingData: OfficerCurrentPosting = await OfficerCurrentPostingEntity.create(currentPostingData).save();
+    const createCurrentPostingData: OfficerCurrentPosting = await OfficerCurrentPostingEntity.create({
+      ...currentPostingData,
+      officer: { id: currentPostingData.officerId },
+    }).save();
     return createCurrentPostingData;
   }
 
   public async updateCurrentPosting(currentPostingId: number, currentPostingData: OfficerCurrentPosting): Promise<OfficerCurrentPosting> {
-    const findCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { id: currentPostingId } });
+    const findCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { officerId: currentPostingId } });
     if (!findCurrentPosting) throw new HttpException(409, "Current Posting doesn't exist");
 
-    await OfficerCurrentPostingEntity.update(currentPostingId, currentPostingData);
+    await OfficerCurrentPostingEntity.update({ officer: { id: currentPostingId } }, currentPostingData);
 
-    const updateCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { id: currentPostingId } });
+    const updateCurrentPosting: OfficerCurrentPosting = await OfficerCurrentPostingEntity.findOne({ where: { officerId: currentPostingId } });
     return updateCurrentPosting;
   }
 

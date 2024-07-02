@@ -3,6 +3,8 @@ import { ProfessionalAssociationController } from '@controllers/professionalAsso
 import { CreateProfessionalAssociationDto, UpdateProfessionalAssociationDto } from '@dtos/professionalAssociation.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
+import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { Roles } from '@/enums/role.enum';
 
 export class ProfessionalAssociationRoute implements Routes {
   public path = '/officer/professional-association';
@@ -14,18 +16,20 @@ export class ProfessionalAssociationRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.professionalAssociation.getProfessionalAssociation);
-    this.router.get(`${this.path}/:id(\\d+)`, this.professionalAssociation.getProfessionalAssociationById);
+    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.professionalAssociation.getProfessionalAssociation);
+    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer]), this.professionalAssociation.getProfessionalAssociationById);
     this.router.post(
       `${this.path}`,
+      AuthoriseRole([Roles.Admin,Roles.dataEntry]),
       ValidationMiddleware(CreateProfessionalAssociationDto),
       this.professionalAssociation.createProfessionalAssociation,
     );
     this.router.put(
       `${this.path}/:id(\\d+)`,
+      AuthoriseRole([Roles.Admin,Roles.dataEntry]),
       ValidationMiddleware(UpdateProfessionalAssociationDto, true),
       this.professionalAssociation.updateProfessionalAssociation,
     );
-    this.router.delete(`${this.path}/:id(\\d+)`, this.professionalAssociation.deleteProfessionalAssociation);
+    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.professionalAssociation.deleteProfessionalAssociation);
   }
 }

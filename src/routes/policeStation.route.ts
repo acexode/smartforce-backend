@@ -3,6 +3,8 @@ import { PoliceStationController } from '@controllers/policeStation.controller';
 import { CreatePoliceStationDto, UpdatePoliceStationDto } from '@dtos/policeStation.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
+import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { Roles } from '@/enums/role.enum';
 
 export class PoliceStationRoute implements Routes {
   public path = '/org-structure/police-stations';
@@ -14,10 +16,10 @@ export class PoliceStationRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.policeStationController.getPoliceStations);
-    this.router.get(`${this.path}/:id(\\d+)`, this.policeStationController.getPoliceStationById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreatePoliceStationDto), this.policeStationController.createPoliceStation);
-    this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(UpdatePoliceStationDto, true), this.policeStationController.updatePoliceStation);
-    this.router.delete(`${this.path}/:id(\\d+)`, this.policeStationController.deletePoliceStation);
+    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.policeStationController.getPoliceStations);
+    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer]), this.policeStationController.getPoliceStationById);
+    this.router.post(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), ValidationMiddleware(CreatePoliceStationDto), this.policeStationController.createPoliceStation);
+    this.router.put(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), ValidationMiddleware(UpdatePoliceStationDto, true), this.policeStationController.updatePoliceStation);
+    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.policeStationController.deletePoliceStation);
   }
 }

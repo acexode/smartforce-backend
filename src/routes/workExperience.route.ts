@@ -3,6 +3,8 @@ import { WorkExperienceController } from '@controllers/workExperience.controller
 import { CreateWorkExperienceDto, UpdateWorkExperienceDto } from '@/dtos/workexperience.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
+import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { Roles } from '@/enums/role.enum';
 
 export class WorkExperienceRoute implements Routes {
   public path = '/officer/work-experience';
@@ -14,10 +16,10 @@ export class WorkExperienceRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.workExperience.getWorkExperience);
-    this.router.get(`${this.path}/:id(\\d+)`, this.workExperience.getWorkExperienceById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreateWorkExperienceDto), this.workExperience.createWorkExperience);
-    this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(UpdateWorkExperienceDto, true), this.workExperience.updateWorkExperience);
-    this.router.delete(`${this.path}/:id(\\d+)`, this.workExperience.deleteWorkExperience);
+    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.workExperience.getWorkExperience);
+    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer]), this.workExperience.getWorkExperienceById);
+    this.router.post(`${this.path}`, AuthoriseRole([Roles.Admin,Roles.dataEntry]),ValidationMiddleware(CreateWorkExperienceDto), this.workExperience.createWorkExperience);
+    this.router.put(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), ValidationMiddleware(UpdateWorkExperienceDto, true), this.workExperience.updateWorkExperience);
+    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.workExperience.deleteWorkExperience);
   }
 }

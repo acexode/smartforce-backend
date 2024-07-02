@@ -3,6 +3,8 @@ import { DisciplinaryHistoryController } from '@controllers/disciplinaryHistory.
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 import { CreateDisciplinaryHistoryDto, UpdateDisciplinaryHistoryDto } from '@/dtos/discliplinaryHistory.dto';
+import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { Roles } from '@/enums/role.enum';
 
 export class DisciplinaryHistoryRoute implements Routes {
   public path = '/officer/disciplinary-history';
@@ -14,14 +16,15 @@ export class DisciplinaryHistoryRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.disciplinaryHistory.getDisciplinaryHistory);
-    this.router.get(`${this.path}/:id(\\d+)`, this.disciplinaryHistory.getDisciplinaryHistoryById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreateDisciplinaryHistoryDto), this.disciplinaryHistory.createDisciplinaryHistory);
+    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.disciplinaryHistory.getDisciplinaryHistory);
+    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer]), this.disciplinaryHistory.getDisciplinaryHistoryById);
+    this.router.post(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), ValidationMiddleware(CreateDisciplinaryHistoryDto), this.disciplinaryHistory.createDisciplinaryHistory);
     this.router.put(
       `${this.path}/:id(\\d+)`,
+      AuthoriseRole([Roles.Admin,Roles.dataEntry]),
       ValidationMiddleware(UpdateDisciplinaryHistoryDto, true),
       this.disciplinaryHistory.updateDisciplinaryHistory,
     );
-    this.router.delete(`${this.path}/:id(\\d+)`, this.disciplinaryHistory.deleteDisciplinaryHistory);
+    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.disciplinaryHistory.deleteDisciplinaryHistory);
   }
 }

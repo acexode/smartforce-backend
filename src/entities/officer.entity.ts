@@ -23,6 +23,8 @@ import { OfficerMedicalInfoEntity } from './medical.entity';
 import { OfficerPromotionHistoryEntity } from './officerPromotionHistory.entity';
 import { OfficerTraining, OfficerTrainingEntity } from './officerTraining.entity';
 import { UserEntity } from './users.entity';
+import { Roles } from '@/enums/role.enum';
+
 
 export interface OfficerBioData {
   id: number;
@@ -44,6 +46,7 @@ export interface OfficerBioData {
   placeOfBirth: string;
   religion: string;
   tribe: string;
+  role: Roles;
 }
 
 @Entity()
@@ -117,6 +120,13 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column({
+    type: 'enum',
+    enum: Roles,
+    default: Roles.Officer
+  })
+    role: Roles;
 
   // @OneToOne(() => UserEntity, user => user.officerBioData)
   // @JoinColumn()

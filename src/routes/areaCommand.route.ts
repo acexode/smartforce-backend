@@ -3,7 +3,7 @@ import { AreaCommandController } from '@controllers/areaCommand.controller';
 import { CreateAreaCommandDto, UpdateAreaCommandDto } from '@dtos/areaCommand.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { AuthMiddleware, AuthoriseRole } from '@/middlewares/auth.middleware';
 import { Roles } from '@/enums/role.enum';
 
 export class AreaCommandRoute implements Routes {
@@ -16,10 +16,10 @@ export class AreaCommandRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin]), this.areaCommandController.getAreaCommands);
-    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.areaCommandController.getAreaCommandById);
-    this.router.post(`${this.path}`,AuthoriseRole([Roles.Admin]), ValidationMiddleware(CreateAreaCommandDto), this.areaCommandController.createAreaCommand);
-    this.router.put(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), ValidationMiddleware(UpdateAreaCommandDto, true), this.areaCommandController.updateAreaCommand);
-    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.areaCommandController.deleteAreaCommand);
+    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.areaCommandController.getAreaCommands);
+    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.areaCommandController.getAreaCommandById);
+    this.router.post(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], ValidationMiddleware(CreateAreaCommandDto), this.areaCommandController.createAreaCommand);
+    this.router.put(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], ValidationMiddleware(UpdateAreaCommandDto, true), this.areaCommandController.updateAreaCommand);
+    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.areaCommandController.deleteAreaCommand);
   }
 }

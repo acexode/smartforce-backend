@@ -3,7 +3,7 @@ import { DivisionalHeadquartersController } from '@controllers/divisionalHQ.cont
 import { CreateDivisionalHeadquartersDto, UpdateDivisionalHeadquartersDto } from '@dtos/divisionalHQ.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { AuthMiddleware, AuthoriseRole } from '@/middlewares/auth.middleware';
 import { Roles } from '@/enums/role.enum';
 
 export class DivisionalHeadquartersRoute implements Routes {
@@ -16,17 +16,17 @@ export class DivisionalHeadquartersRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin]), this.divisionalHeadquartersController.getDivisionalHeadquarters);
-    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.divisionalHeadquartersController.getDivisionalHeadquartersById);
+    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.divisionalHeadquartersController.getDivisionalHeadquarters);
+    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.divisionalHeadquartersController.getDivisionalHeadquartersById);
     this.router.post(
       `${this.path}`,
-      AuthoriseRole([Roles.Admin]),
+      [AuthMiddleware,AuthoriseRole([Roles.Admin])],
       ValidationMiddleware(CreateDivisionalHeadquartersDto),
       this.divisionalHeadquartersController.createDivisionalHeadquarters,
     );
     this.router.put(
       `${this.path}/:id(\\d+)`,
-      AuthoriseRole([Roles.Admin]),
+      [AuthMiddleware,AuthoriseRole([Roles.Admin])],
       ValidationMiddleware(UpdateDivisionalHeadquartersDto, true),
       this.divisionalHeadquartersController.updateDivisionalHeadquarters,
     );

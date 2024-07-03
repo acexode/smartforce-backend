@@ -3,7 +3,7 @@ import { OfficerPromotionHistoryController } from '@controllers/officerPromotion
 import { CreateOfficerPromotionHistoryDto, UpdateOfficerPromotionHistoryDto } from '@dtos/officerPromotionHistory.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { AuthMiddleware, AuthoriseRole } from '@/middlewares/auth.middleware';
 import { Roles } from '@/enums/role.enum';
 
 export class OfficerPromotionHistoryRoute implements Routes {
@@ -16,8 +16,8 @@ export class OfficerPromotionHistoryRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.officerPromotionHistoryController.getPromotionHistories);
-    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer]), this.officerPromotionHistoryController.getPromotionHistoryById);
+    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.officerPromotionHistoryController.getPromotionHistories);
+    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])], this.officerPromotionHistoryController.getPromotionHistoryById);
     this.router.post(
       `${this.path}`,
       AuthoriseRole([Roles.Admin,Roles.dataEntry]),
@@ -30,6 +30,6 @@ export class OfficerPromotionHistoryRoute implements Routes {
       ValidationMiddleware(UpdateOfficerPromotionHistoryDto, true),
       this.officerPromotionHistoryController.updatePromotionHistory,
     );
-    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.officerPromotionHistoryController.deletePromotionHistory);
+    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.officerPromotionHistoryController.deletePromotionHistory);
   }
 }

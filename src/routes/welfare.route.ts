@@ -4,7 +4,7 @@ import { CreateOfficerWelfareInformationDto, UpdateOfficerWelfareInformationDto 
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 import { Roles } from '@/enums/role.enum';
-import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { AuthMiddleware, AuthoriseRole } from '@/middlewares/auth.middleware';
 
 export class OfficerWelfareInformationRoute implements Routes {
   public path = '/officer/officer-welfare-information';
@@ -16,8 +16,8 @@ export class OfficerWelfareInformationRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.officerWelfareInformationController.getWelfareInformation);
-    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer]), this.officerWelfareInformationController.getWelfareInformationById);
+    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.officerWelfareInformationController.getWelfareInformation);
+    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])], this.officerWelfareInformationController.getWelfareInformationById);
     this.router.post(
       `${this.path}`,
       AuthoriseRole([Roles.Admin,Roles.dataEntry]),
@@ -30,6 +30,6 @@ export class OfficerWelfareInformationRoute implements Routes {
       ValidationMiddleware(UpdateOfficerWelfareInformationDto, true),
       this.officerWelfareInformationController.updateWelfareInformation,
     );
-    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.officerWelfareInformationController.deleteWelfareInformation);
+    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.officerWelfareInformationController.deleteWelfareInformation);
   }
 }

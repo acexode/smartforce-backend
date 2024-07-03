@@ -3,7 +3,7 @@ import { OfficerTrainingController } from '@controllers/officerTraining.controll
 import { CreateOfficerTrainingDto, UpdateOfficerTrainingDto } from '@dtos/officerTraining.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
-import { AuthoriseRole } from '@/middlewares/auth.middleware';
+import { AuthMiddleware, AuthoriseRole } from '@/middlewares/auth.middleware';
 import { Roles } from '@/enums/role.enum';
 
 export class OfficerTrainingRoute implements Routes {
@@ -16,10 +16,10 @@ export class OfficerTrainingRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.officerTrainingController.getTrainings);
-    this.router.get(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer]), this.officerTrainingController.getTrainingById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreateOfficerTrainingDto),AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.officerTrainingController.createTraining);
-    this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(UpdateOfficerTrainingDto, true),AuthoriseRole([Roles.Admin,Roles.dataEntry]), this.officerTrainingController.updateTraining);
-    this.router.delete(`${this.path}/:id(\\d+)`,AuthoriseRole([Roles.Admin]), this.officerTrainingController.deleteTraining);
+    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.officerTrainingController.getTrainings);
+    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])], this.officerTrainingController.getTrainingById);
+    this.router.post(`${this.path}`, ValidationMiddleware(CreateOfficerTrainingDto),[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.officerTrainingController.createTraining);
+    this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(UpdateOfficerTrainingDto, true),[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.officerTrainingController.updateTraining);
+    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.officerTrainingController.deleteTraining);
   }
 }

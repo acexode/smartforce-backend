@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
 import request from 'supertest';
-import { createConnection, getConnection, Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 import { App } from '@/app';
-import { dbConnection } from '@database';
 import { CreateUserDto } from '@dtos/users.dto';
 import { UserEntity } from '@entities/users.entity';
 import { AuthRoute } from '@routes/auth.route';
@@ -19,8 +18,14 @@ describe('Testing Auth', () => {
   describe('[POST] /signup', () => {
     it('response should have the Create userData', async () => {
       const userData: CreateUserDto = {
+        firstName: 'testemail',
+        lastName: 'testemail',
+        otherName: 'testemail',
         email: 'test@email.com',
+        phone: 'q1w2e3r4!',
         password: 'q1w2e3r4!',
+        nin: 309192282828,
+        ippisNo: 'q1w2e3r4!',
       };
 
       const authRoute = new AuthRoute();
@@ -34,13 +39,13 @@ describe('Testing Auth', () => {
       });
 
       const app = new App([authRoute]);
-      return request(app.getServer()).post(`${authRoute.path}signup`).send(userData).expect(201);
+      return request(app.getServer()).post(`${authRoute}signup`).send(userData).expect(201);
     });
   });
 
   describe('[POST] /login', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
-      const userData: CreateUserDto = {
+      const userData: any = {
         email: 'test@email.com',
         password: 'q1w2e3r4!',
       };
@@ -56,7 +61,7 @@ describe('Testing Auth', () => {
 
       const app = new App([authRoute]);
       return request(app.getServer())
-        .post(`${authRoute.path}login`)
+        .post(`${authRoute}login`)
         .send(userData)
         .expect('Set-Cookie', /^Authorization=.+/);
     });

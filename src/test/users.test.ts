@@ -19,8 +19,14 @@ describe('Testing Users', () => {
   describe('[POST] /users', () => {
     it('response Create user', async () => {
       const userData: CreateUserDto = {
+        firstName: 'testemail',
+        lastName: 'testemail',
+        otherName: 'testemail',
         email: 'test@email.com',
+        phone: 'q1w2e3r4!',
         password: 'q1w2e3r4!',
+        nin: 309192282828,
+        ippisNo: 'q1w2e3r4!',
       };
 
       const usersRoute = new UserRoute();
@@ -87,7 +93,7 @@ describe('Testing Users', () => {
   describe('[PUT] /users/:id', () => {
     it('response Update user', async () => {
       const userId = 1;
-      const userData: CreateUserDto = {
+      const userData: any = {
         email: 'test@email.com',
         password: '1q2w3e4r!',
       };

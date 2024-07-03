@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 import { Ippis } from '@interfaces/ippis.interface';
 
 @Entity()
@@ -7,6 +7,7 @@ export class IppisEntity extends BaseEntity implements Ippis {
   id: number;
 
   @Column()
+  @Unique(['staffId'])
   staffId: string;
 
   @Column({ nullable: true })
@@ -62,4 +63,10 @@ export class IppisEntity extends BaseEntity implements Ippis {
 
   @Column({ nullable: true })
   employeeStatus: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

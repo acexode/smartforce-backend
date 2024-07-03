@@ -13,7 +13,7 @@ import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
-
+// import { seedIppis } from './seeds';
 
 export class App {
   public app: express.Application;
@@ -47,6 +47,8 @@ export class App {
 
   private async connectToDatabase() {
     await dbConnection();
+    console.log('hello');
+    // seedIppis();
   }
 
   private initializeMiddlewares() {
@@ -114,7 +116,7 @@ export class App {
         'api-docs/units.yaml',
         'api-docs/welfare.yaml',
         'api-docs/workExperience.yaml',
-        'api-docs/ippis.yaml'
+        'api-docs/ippis.yaml',
       ],
     };
 

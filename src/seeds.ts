@@ -1,10 +1,9 @@
+// import ippisData from './ippis-data.json';
 import Container from 'typedi';
 import { DepartmentService } from './services/department.service';
 import { FormationService } from './services/formation.service';
 import { RankService } from './services/ranks.service';
 import { IppisService } from './services/ippis.service';
-import  IppisSeeds from './output.json';
-
 
 const departmentSeeds = [
   'FORCE SECRETARY',
@@ -680,30 +679,34 @@ export const seedFormation = async () => {
 };
 
 export const seedIppis = async () => {
-  IppisSeeds.forEach( async e => {
-    const item :any = {
-      staffId: e.staffId,
-      fullName: e.fullName,
-      rank: e.rank,
-      apNo: e.apNo,
-      dateOfBirth: e.dateOfBirth,
-      maritalStatus: e.maritalStatus,
-      gender: e.gender,
-      gradeCategory: e.gradeCategory,
-      grade: e.grade,
-      step: e.step,
-      command: e.command,
-      phoneNo: e.phoneNo,
-      bankName: e.bankName,
-      accountNo: e.accountNo,
-      pfaName: e.pfaName,
-      pinNo: e.pinNo,
-      staffCategory: e.staffCategory,
-      bvn: e.bvn,
-      employeeStatus: e.employeeStatus,
-     
-    };
-    // const f = await ippisService.createIppis(item);
-    console.log(item);
-  });
+  console.log('runnin ippis seed');
+  // ippisData.forEach(async e => {
+  //   const item: any = {
+  //     staffId: e.staffId,
+  //     fullName: e.firstName + ' ' + e.surname + ' ' + e.otherName,
+  //     rank: e.rank,
+  //     apNo: e.apNo,
+  //     dateOfBirth: e.dateOfBirth,
+  //     maritalStatus: e.maritalStatus,
+  //     gender: e.gender,
+  //     gradeCategory: e.gradeCategory,
+  //     grade: e.grade,
+  //     step: e.step,
+  //     command: e.command,
+  //     phoneNo: e.phoneNo,
+  //     bankName: e.bankName,
+  //     accountNo: e.accountNo,
+  //     pfaName: e.pfaName,
+  //     pinNo: e.pinNo,
+  //     staffCategory: e.staffCategory,
+  //     bvn: e.bvn,
+  //     employeeStatus: e.employeeStatus,
+  //   };
+  // const f = await ippisService.createIppis(item);
+  // console.log(f);
+  // try {
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  //});
 };

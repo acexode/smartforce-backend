@@ -1,28 +1,16 @@
-import {
-  BaseEntity,
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany,
-  OneToOne,
-  JoinColumn,
-  Unique,
-} from 'typeorm';
-import { NextOfKinEntity } from './nextOfKin.entity';
-import { SalaryDetailsEntity } from './salaryDetails.entity';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, Unique } from 'typeorm';
+import { APEREntity } from './aper.entity';
+import { OfficerCurrentPostingEntity } from './currentWorkHistory.entity';
 import { DependentsEntity } from './dependent.entity';
-import { WorkExperienceEntity } from './workexperience.entity';
 import { DisciplinaryHistoryEntity } from './disclipinaryHistory.entity';
 import { EducationalHistoryEntity } from './educationalHistory.entity';
-import { OfficerCurrentPostingEntity } from './currentWorkHistory.entity';
-import { APEREntity } from './aper.entity';
-import { ProfessionalAssociationEntity } from './professionalAssociation.entity';
 import { OfficerMedicalInfoEntity } from './medical.entity';
+import { NextOfKinEntity } from './nextOfKin.entity';
 import { OfficerPromotionHistoryEntity } from './officerPromotionHistory.entity';
-import { OfficerTraining, OfficerTrainingEntity } from './officerTraining.entity';
-import { UserEntity } from './users.entity';
+import { OfficerTrainingEntity } from './officerTraining.entity';
+import { ProfessionalAssociationEntity } from './professionalAssociation.entity';
+import { SalaryDetailsEntity } from './salaryDetails.entity';
+import { WorkExperienceEntity } from './workexperience.entity';
 
 export interface OfficerBioData {
   id: number;

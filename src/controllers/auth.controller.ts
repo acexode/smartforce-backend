@@ -1,7 +1,7 @@
+import { OfficerBioData } from './../entities/officer.entity';
 import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
 import { RequestWithUser } from '@interfaces/auth.interface';
-import { User } from '@interfaces/users.interface';
 import { AuthService } from '@services/auth.service';
 
 export class AuthController {
@@ -9,8 +9,8 @@ export class AuthController {
 
   public signUp = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const userData: User = req.body;
-      const signUpUserData: User = await this.auth.signup(userData);
+      const userData: OfficerBioData = req.body;
+      const signUpUserData: OfficerBioData = await this.auth.signup(userData);
 
       res.status(201).json({ data: signUpUserData, message: 'signup' });
     } catch (error) {
@@ -20,11 +20,11 @@ export class AuthController {
 
   public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const userData: User = req.body;
-      const { cookie, findUser, token } = await this.auth.login(userData);
+      const userData: OfficerBioData = req.body;
+      const { cookie, officer, token } = await this.auth.login(userData);
 
       res.setHeader('Set-Cookie', [cookie]);
-      res.status(200).json({ data: findUser, message: 'login', token });
+      res.status(200).json({ data: officer, message: 'login', token });
     } catch (error) {
       next(error);
     }
@@ -32,8 +32,8 @@ export class AuthController {
 
   public logOut = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const userData: User = req.user;
-      const logOutUserData: User = await this.auth.logout(userData);
+      const userData: OfficerBioData = req.user;
+      const logOutUserData: OfficerBioData = await this.auth.logout(userData);
 
       res.setHeader('Set-Cookie', ['Authorization=; Max-age=0']);
       res.status(200).json({ data: logOutUserData, message: 'logout' });

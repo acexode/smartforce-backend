@@ -32,24 +32,24 @@ export class AuthService extends Repository<OfficerBioDataEntity> {
     return createOfficerBioDataData;
   }
 
-  public async login(OfficerBioDataData: OfficerBioData): Promise<{ cookie: string; findOfficerBioData: OfficerBioData; token: any }> {
-    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
-    if (!findOfficerBioData) throw new HttpException(409, `This email ${OfficerBioDataData.email} was not found`);
+  public async login(OfficerBioDataData: OfficerBioData): Promise<{ cookie: string; officer: OfficerBioData; token: any }> {
+    const officer: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
+    if (!officer) throw new HttpException(409, `This email ${OfficerBioDataData.email} was not found`);
 
-    const isPasswordMatching: boolean = await compare(OfficerBioDataData.password, findOfficerBioData.password);
+    const isPasswordMatching: boolean = await compare(OfficerBioDataData.password, officer.password);
     if (!isPasswordMatching) throw new HttpException(409, 'Password not matching');
 
-    const token = createToken(findOfficerBioData);
+    const token = createToken(officer);
     const cookie = createCookie(token);
     console.log(token, cookie);
 
-    return { cookie, findOfficerBioData, token };
+    return { cookie, officer, token };
   }
 
   public async logout(OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
-    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
-    if (!findOfficerBioData) throw new HttpException(409, "OfficerBioData doesn't exist");
+    const officer: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
+    if (!officer) throw new HttpException(409, "Officer doesn't exist");
 
-    return findOfficerBioData;
+    return officer;
   }
 }

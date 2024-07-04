@@ -1,5 +1,4 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, Unique } from 'typeorm';
-import { APEREntity } from './aper.entity';
 import { OfficerCurrentPostingEntity } from './currentWorkHistory.entity';
 import { DependentsEntity } from './dependent.entity';
 import { DisciplinaryHistoryEntity } from './disclipinaryHistory.entity';
@@ -140,9 +139,6 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
 
   @OneToOne(() => OfficerCurrentPostingEntity, currentWorkHistory => currentWorkHistory.officer)
   currentPostings: OfficerCurrentPostingEntity;
-
-  @OneToMany(() => APEREntity, aper => aper.officer)
-  aper: APEREntity[];
 
   @OneToMany(() => ProfessionalAssociationEntity, professionalAssociation => professionalAssociation.officer)
   professionalAssociation: ProfessionalAssociationEntity[];

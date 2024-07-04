@@ -1,7 +1,5 @@
 // import ippisData from './ippis-data.json';
 import Container from 'typedi';
-import { DepartmentService } from './services/department.service';
-import { FormationService } from './services/formation.service';
 import { RankService } from './services/ranks.service';
 import { IppisService } from './services/ippis.service';
 
@@ -647,34 +645,16 @@ const formationSeeds = [
   },
 ];
 
-const departmentService = Container.get(DepartmentService);
-const formatioonService = Container.get(FormationService);
+
+
 const rankService = Container.get(RankService);
 const ippisService = Container.get(IppisService);
 
-export const seedDepartment = () => {
-  departmentSeeds.forEach(async e => {
-    const d = await departmentService.createDepartment({ departmentName: e, description: '' });
-    console.log(d);
-  });
-};
+
 export const seedRanks = () => {
   rankSeeds.forEach(async e => {
     const r = await rankService.createRank({ name: e });
     console.log(r);
-  });
-};
-
-export const seedFormation = async () => {
-  formationSeeds.forEach(async e => {
-    const item = {
-      name: e.name,
-      department: e.department,
-      section: '',
-      zone: '',
-    };
-    const f = await formatioonService.createFormation(item);
-    console.log(f);
   });
 };
 

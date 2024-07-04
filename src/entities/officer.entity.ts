@@ -12,7 +12,6 @@ import { SalaryDetailsEntity } from './salaryDetails.entity';
 import { WorkExperienceEntity } from './workexperience.entity';
 import { Roles } from '@/enums/role.enum';
 
-
 export interface OfficerBioData {
   id: number;
   firstName: string;
@@ -111,9 +110,9 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   @Column({
     type: 'enum',
     enum: Roles,
-    default: Roles.Officer
+    default: Roles.Officer,
   })
-    role: Roles;
+  role: Roles;
 
   // @OneToOne(() => UserEntity, user => user.officerBioData)
   // @JoinColumn()

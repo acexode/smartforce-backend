@@ -1,23 +1,23 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 export interface Command {
-    Id: number;
-    Name: string;
-    Code: string;
-    CommandCategory_Id: number;
-    State_Id: number;
-    LGA_Id: number;
-    AddedBy_Id: number;
-    LastUpdatedBy_Id: number;
-    IsActive: number;
-    CreatedAtUtc: Date;
-    UpdatedAtUtc: Date;
-    Address: string;
-    CommandType_Id: number;
-    ParentCode: number;
-    ZonalCommand_Id: number;
-  }
+  Id: number;
+  Name: string;
+  Code: string;
+  CommandCategory_Id: number;
+  State_Id: number;
+  LGA_Id: number;
+  AddedBy_Id: number;
+  LastUpdatedBy_Id: number;
+  IsActive: number;
+  CreatedAtUtc: Date;
+  UpdatedAtUtc: Date;
+  Address: string;
+  CommandType_Id: number;
+  ParentCode: number;
+  ZonalCommand_Id: number;
+}
 
-  @Entity()
+@Entity()
 export class CommandEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   Id: number;
@@ -63,5 +63,4 @@ export class CommandEntity extends BaseEntity {
 
   @Column()
   ZonalCommand_Id: number;
-
 }

@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface Dependents {
@@ -36,7 +36,7 @@ export class DependentsEntity extends BaseEntity implements Dependents {
 
   @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.dependents)
   @JoinColumn({ name: 'officerId' })
-  officer: OfficerBioDataEntity;
+  officer: Relation<OfficerBioDataEntity>;
 
   @Column()
   officerId: number;

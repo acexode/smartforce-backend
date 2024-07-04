@@ -1,4 +1,15 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, Unique } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+  OneToOne,
+  Unique,
+  Relation,
+} from 'typeorm';
 import { APEREntity } from './aper.entity';
 import { OfficerCurrentPostingEntity } from './currentWorkHistory.entity';
 import { DependentsEntity } from './dependent.entity';
@@ -9,7 +20,6 @@ import { NextOfKinEntity } from './nextOfKin.entity';
 import { OfficerPromotionHistoryEntity } from './officerPromotionHistory.entity';
 import { OfficerTrainingEntity } from './officerTraining.entity';
 import { ProfessionalAssociationEntity } from './professionalAssociation.entity';
-import { SalaryDetailsEntity } from './salaryDetails.entity';
 import { WorkExperienceEntity } from './workexperience.entity';
 
 export interface OfficerBioData {
@@ -111,41 +121,38 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   // user: UserEntity;
 
   @OneToMany(() => NextOfKinEntity, nextOfKin => nextOfKin.officer)
-  nextOfKin: NextOfKinEntity[];
-
-  @OneToMany(() => SalaryDetailsEntity, salaryDetails => salaryDetails.officer)
-  salaryDetails: SalaryDetailsEntity[];
+  nextOfKin: Relation<NextOfKinEntity>[];
 
   @OneToMany(() => DependentsEntity, dependents => dependents.officer)
-  dependents: DependentsEntity[];
+  dependents: Relation<DependentsEntity>[];
 
   @OneToMany(() => WorkExperienceEntity, workExperience => workExperience.officer)
-  workExperience: WorkExperienceEntity[];
+  workExperience: Relation<WorkExperienceEntity>[];
 
   @OneToMany(() => DisciplinaryHistoryEntity, disciplinaryHistory => disciplinaryHistory.officer)
-  disciplinaryHistory: DisciplinaryHistoryEntity[];
+  disciplinaryHistory: Relation<DisciplinaryHistoryEntity>[];
 
   @OneToMany(() => EducationalHistoryEntity, educationalHistory => educationalHistory.officer)
-  educationalHistory: EducationalHistoryEntity[];
+  educationalHistory: Relation<EducationalHistoryEntity>[];
 
   @OneToOne(() => OfficerCurrentPostingEntity, currentWorkHistory => currentWorkHistory.officer)
-  currentPostings: OfficerCurrentPostingEntity;
+  currentPostings: Relation<OfficerCurrentPostingEntity>;
 
   @OneToMany(() => APEREntity, aper => aper.officer)
-  aper: APEREntity[];
+  aper: Relation<APEREntity>[];
 
   @OneToMany(() => ProfessionalAssociationEntity, professionalAssociation => professionalAssociation.officer)
-  professionalAssociation: ProfessionalAssociationEntity[];
+  professionalAssociation: Relation<ProfessionalAssociationEntity>[];
 
   @OneToMany(() => OfficerMedicalInfoEntity, officerMed => officerMed.officer)
-  officerMedical: OfficerMedicalInfoEntity[];
+  officerMedical: Relation<OfficerMedicalInfoEntity>[];
 
   @OneToMany(() => OfficerMedicalInfoEntity, officerMed => officerMed.officer)
-  welfareInformation: OfficerMedicalInfoEntity[];
+  welfareInformation: Relation<OfficerMedicalInfoEntity>[];
 
   @OneToMany(() => OfficerPromotionHistoryEntity, officerMed => officerMed.officer)
-  promotionHistories: OfficerPromotionHistoryEntity[];
+  promotionHistories: Relation<OfficerPromotionHistoryEntity>[];
 
   @OneToMany(() => OfficerTrainingEntity, officerMed => officerMed.officer)
-  trainings: OfficerTrainingEntity[];
+  trainings: Relation<OfficerTrainingEntity>[];
 }

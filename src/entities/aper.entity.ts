@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, Relation } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface APER {
@@ -155,5 +155,5 @@ export class APEREntity extends BaseEntity implements APER {
   modificationDate: Date;
 
   @ManyToOne(() => OfficerBioDataEntity, officer => officer.aper)
-  officer: OfficerBioDataEntity;
+  officer: Relation<OfficerBioDataEntity>;
 }

@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, Relation } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface DisciplinaryHistory {
@@ -87,5 +87,5 @@ export class DisciplinaryHistoryEntity extends BaseEntity implements Disciplinar
   supervisor: string;
 
   @ManyToOne(() => OfficerBioDataEntity, officer => officer.disciplinaryHistory)
-  officer: OfficerBioDataEntity;
+  officer: Relation<OfficerBioDataEntity>;
 }

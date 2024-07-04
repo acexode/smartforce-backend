@@ -7,6 +7,10 @@ import { CommandCategory } from '@entities/commandCategory.entity';
 @Service()
 @EntityRepository()
 export class CommandCategoryService extends Repository<CommandCategoryEntity> {
+  public async findAllFormation(): Promise<CommandCategory[]> {
+    const commandCategory: CommandCategory[] = await CommandCategoryEntity.find({ where: { ParentCommandCategory_Id: null } });
+    return commandCategory;
+  }
   public async findAllCommandCategory(): Promise<CommandCategory[]> {
     const commandCategory: CommandCategory[] = await CommandCategoryEntity.find();
     return commandCategory;

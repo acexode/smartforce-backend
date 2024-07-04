@@ -1,12 +1,8 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 export interface CommandCategory {
-  Id: number;
+  Id?: number;
   Name: string;
-  CreatedAtUtc: Date;
-  UpdatedAtUtc: Date;
   CategoryLevel: number;
-  LeftIndex: string;
-  RightIndex: string;
   ParentCommandCategory_Id: number;
 }
 
@@ -18,21 +14,15 @@ export class CommandCategoryEntity extends BaseEntity {
   @Column()
   Name: string;
 
-  @CreateDateColumn()
-  CreatedAtUtc: Date;
-
-  @UpdateDateColumn()
-  UpdatedAtUtc: Date;
-
   @Column()
   CategoryLevel: number;
 
-  @Column()
-  LeftIndex: string;
-
-  @Column()
-  RightIndex: string;
-
-  @Column()
+  @Column({ nullable: true })
   ParentCommandCategory_Id: number;
+
+  @CreateDateColumn()
+  CreatedAt: Date;
+
+  @UpdateDateColumn()
+  UpdatedAt: Date;
 }

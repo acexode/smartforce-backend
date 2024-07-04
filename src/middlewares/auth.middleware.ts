@@ -23,7 +23,7 @@ export const AuthMiddleware = async (req: RequestWithUser, res: Response, next: 
 
     if (Authorization) {
       const { id } = (await verify(Authorization, SECRET_KEY)) as DataStoredInToken;
-      const findUser = await OfficerBioDataEntity.findOne(id, { select: ['id', 'email', 'password'] });
+      const findUser = await OfficerBioDataEntity.findOne(id, { select: ['id', 'email', 'password', 'role'] });
 
       if (findUser) {
         req.user = findUser;
@@ -39,15 +39,15 @@ export const AuthMiddleware = async (req: RequestWithUser, res: Response, next: 
   }
 };
 
-export const AuthoriseRole = (Roles: Roles[]) =>{
-  return  (req: RequestWithUser, res: Response, next: NextFunction) => {
+export const AuthoriseRole = (Roles: Roles[]) => {
+  return (req: RequestWithUser, res: Response, next: NextFunction) => {
+    console.log(req.user);
     try {
-      if(Roles.includes(req.user.role)){
-        next()
-      }else{
+      if (Roles.includes(req.user.role)) {
+        next();
+      } else {
         next(new HttpException(403, 'UnAuthorised'));
       }
-      
     } catch (error) {
       next(new HttpException(401, 'Wrong authentication token'));
     }

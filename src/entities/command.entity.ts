@@ -1,16 +1,12 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 export interface Command {
-  Id: number;
+  Id?: number;
   Name: string;
   Code: string;
   CommandCategory_Id: number;
   State_Id: number;
   LGA_Id: number;
-  AddedBy_Id: number;
-  LastUpdatedBy_Id: number;
   IsActive: number;
-  CreatedAtUtc: Date;
-  UpdatedAtUtc: Date;
   Address: string;
   CommandType_Id: number;
   ParentCode: number;
@@ -38,19 +34,7 @@ export class CommandEntity extends BaseEntity {
   LGA_Id: number;
 
   @Column()
-  AddedBy_Id: number;
-
-  @Column()
-  LastUpdatedBy_Id: number;
-
-  @Column()
   IsActive: number;
-
-  @CreateDateColumn()
-  CreatedAtUtc: Date;
-
-  @UpdateDateColumn()
-  UpdatedAtUtc: Date;
 
   @Column()
   Address: string;
@@ -61,6 +45,12 @@ export class CommandEntity extends BaseEntity {
   @Column()
   ParentCode: number;
 
-  @Column()
+  @Column({ nullable: true })
   ZonalCommand_Id: number;
+
+  @CreateDateColumn()
+  CreatedAt: Date;
+
+  @UpdateDateColumn()
+  UpdatedAt: Date;
 }

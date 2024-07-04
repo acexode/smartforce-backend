@@ -13,6 +13,7 @@ import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import { seedCommand, seedCommandCategory } from './seeds';
 // import { seedIppis } from './seeds';
 
 export class App {
@@ -48,7 +49,7 @@ export class App {
   private async connectToDatabase() {
     await dbConnection();
     console.log('hello');
-    // seedIppis();
+    // seedCommandCategory();
   }
 
   private initializeMiddlewares() {

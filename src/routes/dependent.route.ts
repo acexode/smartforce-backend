@@ -16,10 +16,24 @@ export class DependentsRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.dependents.getDependents);
-    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])], this.dependents.getDependentsById);
-    this.router.post(`${this.path}`, ValidationMiddleware(CreateDependentsDto),[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.dependents.createDependents);
-    this.router.put(`${this.path}/:id(\\d+)`, ValidationMiddleware(UpdateDependentsDto, true),[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.dependents.updateDependents);
-    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.dependents.deleteDependents);
+    this.router.get(`${this.path}`, [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])], this.dependents.getDependents);
+    this.router.get(
+      `${this.path}/:id(\\d+)`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry, Roles.Officer])],
+      this.dependents.getDependentsById,
+    );
+    this.router.post(
+      `${this.path}`,
+      ValidationMiddleware(CreateDependentsDto),
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
+      this.dependents.createDependents,
+    );
+    this.router.put(
+      `${this.path}/:id(\\d+)`,
+      ValidationMiddleware(UpdateDependentsDto, true),
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
+      this.dependents.updateDependents,
+    );
+    this.router.delete(`${this.path}/:id(\\d+)`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.dependents.deleteDependents);
   }
 }

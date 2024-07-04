@@ -7,6 +7,26 @@ import { Command } from '@entities/command.entity';
 @Service()
 @EntityRepository()
 export class CommandService extends Repository<CommandEntity> {
+  public async findFHQDepartments(): Promise<Command[]> {
+    const command: Command[] = await CommandEntity.find({ where: { CommandCategory_Id: 1 } });
+    return command;
+  }
+  public async findZonalCommand(): Promise<Command[]> {
+    const command: Command[] = await CommandEntity.find({ where: { CommandCategory_Id: 2 } });
+    return command;
+  }
+  public async findStateCommands(): Promise<Command[]> {
+    const command: Command[] = await CommandEntity.find({ where: { CommandCategory_Id: 3 } });
+    return command;
+  }
+  public async findAreaCommands(): Promise<Command[]> {
+    const command: Command[] = await CommandEntity.find({ where: { CommandCategory_Id: 4 } });
+    return command;
+  }
+  public async findDivisionCommands(): Promise<Command[]> {
+    const command: Command[] = await CommandEntity.find({ where: { CommandCategory_Id: 5 } });
+    return command;
+  }
   public async findAllCommand(): Promise<Command[]> {
     const command: Command[] = await CommandEntity.find();
     return command;

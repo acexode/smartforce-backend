@@ -6,6 +6,46 @@ import { CommandService } from '@services/command.service';
 export class CommandController {
   public commandService = Container.get(CommandService);
 
+  public getFHQDepartments = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCommandData: Command[] = await this.commandService.findFHQDepartments();
+      res.status(200).json({ data: findAllCommandData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+  public getZonalCommand = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCommandData: Command[] = await this.commandService.findZonalCommand();
+      res.status(200).json({ data: findAllCommandData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+  public getStateCommands = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCommandData: Command[] = await this.commandService.findStateCommands();
+      res.status(200).json({ data: findAllCommandData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+  public getAreaCommands = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCommandData: Command[] = await this.commandService.findAreaCommands();
+      res.status(200).json({ data: findAllCommandData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+  public getDivisionalCommands = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCommandData: Command[] = await this.commandService.findDivisionCommands();
+      res.status(200).json({ data: findAllCommandData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
   public getCommands = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const findAllCommandData: Command[] = await this.commandService.findAllCommand();

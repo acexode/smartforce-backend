@@ -6,6 +6,14 @@ import { CommandCategoryService } from '@services/commandCategory.service';
 export class CommandCategoryController {
   public commandCategoryService = Container.get(CommandCategoryService);
 
+  public getAllFormation = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCommandCategoryData: CommandCategory[] = await this.commandCategoryService.findAllFormation();
+      res.status(200).json({ data: findAllCommandCategoryData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
   public getCommandCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const findAllCommandCategoryData: CommandCategory[] = await this.commandCategoryService.findAllCommandCategory();
@@ -39,7 +47,10 @@ export class CommandCategoryController {
     try {
       const commandCategoryId = Number(req.params.id);
       const commandCategoryData: CommandCategory = req.body;
-      const updateCommandCategoryData: CommandCategory = await this.commandCategoryService.updateCommandCategory(commandCategoryId, commandCategoryData);
+      const updateCommandCategoryData: CommandCategory = await this.commandCategoryService.updateCommandCategory(
+        commandCategoryId,
+        commandCategoryData,
+      );
       res.status(200).json({ data: updateCommandCategoryData, message: 'updated' });
     } catch (error) {
       next(error);

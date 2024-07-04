@@ -1,92 +1,92 @@
 [
- {
-   "Id": 1,
-   "Name": "Force Headquarters",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 1,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": null
- },
- {
-   "Id": 2,
-   "Name": "Zonal Command",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 2,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": null
- },
- {
-   "Id": 3,
-   "Name": "State Command",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 3,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": null
- },
- {
-   "Id": 4,
-   "Name": "Area Command",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 4,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": "3"
- },
- {
-   "Id": 5,
-   "Name": "Divisional Command",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 5,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": "3"
- },
- {
-   "Id": 6,
-   "Name": "FQH Departments",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 6,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": "1"
- },
- {
-   "Id": 7,
-   "Name": "FHQ Sections",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 7,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": "6"
- },
- {
-   "Id": 8,
-   "Name": "FQH Sub-Sections",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 8,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": "7"
- },
- {
-   "Id": 9,
-   "Name": "Zone Departments",
-   "CreatedAtUtc": "2020-04-20 17:15:46.000",
-   "UpdatedAtUtc": "2020-04-20 17:15:46.000",
-   "CategoryLevel": 9,
-   "LeftIndex": null,
-   "RightIndex": null,
-   "ParentCommandCategory_Id": "2"
- }
+  {
+    "Id": 1,
+    "Name": "Force Headquarters",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 1,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": null
+  },
+  {
+    "Id": 2,
+    "Name": "Zonal Command",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 2,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": null
+  },
+  {
+    "Id": 3,
+    "Name": "State Command",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 3,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": null
+  },
+  {
+    "Id": 4,
+    "Name": "Area Command",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 4,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": "3"
+  },
+  {
+    "Id": 5,
+    "Name": "Divisional Command",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 5,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": "3"
+  },
+  {
+    "Id": 6,
+    "Name": "FQH Departments",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 6,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": "1"
+  },
+  {
+    "Id": 7,
+    "Name": "FHQ Sections",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 7,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": "6"
+  },
+  {
+    "Id": 8,
+    "Name": "FQH Sub-Sections",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 8,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": "7"
+  },
+  {
+    "Id": 9,
+    "Name": "Zone Departments",
+    "CreatedAtUtc": "2020-04-20 17:15:46.000",
+    "UpdatedAtUtc": "2020-04-20 17:15:46.000",
+    "CategoryLevel": 9,
+    "LeftIndex": null,
+    "RightIndex": null,
+    "ParentCommandCategory_Id": "2"
+  }
 ]

@@ -10,7 +10,7 @@ import {
   Unique,
   Relation,
 } from 'typeorm';
-import { APEREntity } from './aper.entity';
+
 import { OfficerCurrentPostingEntity } from './currentWorkHistory.entity';
 import { DependentsEntity } from './dependent.entity';
 import { DisciplinaryHistoryEntity } from './disclipinaryHistory.entity';
@@ -21,6 +21,7 @@ import { OfficerPromotionHistoryEntity } from './officerPromotionHistory.entity'
 import { OfficerTrainingEntity } from './officerTraining.entity';
 import { ProfessionalAssociationEntity } from './professionalAssociation.entity';
 import { WorkExperienceEntity } from './workexperience.entity';
+import { Roles } from '@/enums/role.enum';
 
 export interface OfficerBioData {
   id: number;
@@ -42,6 +43,7 @@ export interface OfficerBioData {
   placeOfBirth: string;
   religion: string;
   tribe: string;
+  role: Roles;
 }
 
 @Entity()
@@ -116,6 +118,13 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @Column({
+    type: 'enum',
+    enum: Roles,
+    default: Roles.Officer,
+  })
+  role: Roles;
+
   // @OneToOne(() => UserEntity, user => user.officerBioData)
   // @JoinColumn()
   // user: UserEntity;
@@ -137,9 +146,6 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
 
   @OneToOne(() => OfficerCurrentPostingEntity, currentWorkHistory => currentWorkHistory.officer)
   currentPostings: Relation<OfficerCurrentPostingEntity>;
-
-  @OneToMany(() => APEREntity, aper => aper.officer)
-  aper: Relation<APEREntity>[];
 
   @OneToMany(() => ProfessionalAssociationEntity, professionalAssociation => professionalAssociation.officer)
   professionalAssociation: Relation<ProfessionalAssociationEntity>[];

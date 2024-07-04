@@ -5,6 +5,7 @@ import { UserEntity } from '@entities/users.entity';
 import { HttpException } from '@/exceptions/httpException';
 import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
 import { OfficerBioDataEntity } from '@/entities/officer.entity';
+import { Roles } from '@/enums/role.enum';
 
 const getAuthorization = req => {
   const cookie = req.cookies['Authorization'];
@@ -36,4 +37,19 @@ export const AuthMiddleware = async (req: RequestWithUser, res: Response, next: 
   } catch (error) {
     next(new HttpException(401, 'Wrong authentication token'));
   }
+};
+
+export const AuthoriseRole = (Roles: Roles[]) =>{
+  return  (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      if(Roles.includes(req.user.role)){
+        next()
+      }else{
+        next(new HttpException(403, 'UnAuthorised'));
+      }
+      
+    } catch (error) {
+      next(new HttpException(401, 'Wrong authentication token'));
+    }
+  };
 };

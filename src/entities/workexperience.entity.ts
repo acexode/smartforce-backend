@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface WorkExperience {
@@ -40,7 +40,7 @@ export class WorkExperienceEntity extends BaseEntity implements WorkExperience {
 
   @ManyToOne(() => OfficerBioDataEntity, officer => officer.workExperience)
   @JoinColumn({ name: 'officerId' })
-  officer: OfficerBioDataEntity;
+  officer: Relation<OfficerBioDataEntity>;
 
   @Column()
   officerId: number;

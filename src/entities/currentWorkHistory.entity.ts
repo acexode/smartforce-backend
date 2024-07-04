@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToOne, Relation } from 'typeorm';
 import { OfficerBioDataEntity } from './officer.entity';
 
 export interface OfficerCurrentPosting {
@@ -75,7 +75,7 @@ export class OfficerCurrentPostingEntity extends BaseEntity {
 
   @ManyToOne(() => OfficerBioDataEntity, officerBioData => officerBioData.currentPostings)
   @JoinColumn({ name: 'officerId' })
-  officer: OfficerBioDataEntity;
+  officer: Relation<OfficerBioDataEntity>;
 
   @Column()
   officerId: number;

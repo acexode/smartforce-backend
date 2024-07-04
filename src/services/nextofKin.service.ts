@@ -11,9 +11,9 @@ export class NextOfKinService extends Repository<NextOfKinEntity> {
     return nextOfKin;
   }
 
-  public async findNextOfKinById(nextOfKinId: number): Promise<NextOfKin> {
+  public async findNextOfKinById(nextOfKinId: number): Promise<NextOfKin[]> {
     console.log(nextOfKinId);
-    const findNextOfKin: NextOfKin = await NextOfKinEntity.findOne({ where: { officerId: nextOfKinId } });
+    const findNextOfKin: NextOfKin[] = await NextOfKinEntity.find({ where: { officerId: nextOfKinId } });
     if (!findNextOfKin) throw new HttpException(409, "Next of Kin doesn't exist");
 
     return findNextOfKin;

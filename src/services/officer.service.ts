@@ -12,7 +12,11 @@ export class OfficerBioDataService extends Repository<OfficerBioDataEntity> {
   }
 
   public async findOfficerBioDataById(OfficerBioDataId: number): Promise<OfficerBioData> {
-    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { id: OfficerBioDataId } });
+    console.log(OfficerBioDataId, 'OfficerBioDataId');
+    const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({
+      where: { id: OfficerBioDataId },
+      relations: ['nextOfKin', 'dependents', 'workExperience', 'educationalHistory', 'currentPostings', 'officerMedical'],
+    });
     if (!findOfficerBioData) throw new HttpException(409, "IPPIS Officers Info doesn't exist");
 
     return findOfficerBioData;

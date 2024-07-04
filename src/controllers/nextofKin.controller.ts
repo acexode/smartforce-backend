@@ -18,7 +18,7 @@ export class NextOfKinController {
   public getNextOfKinById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const nextOfKinId = Number(req.params.id);
-      const findOneNextOfKinData: NextOfKin = await this.nextOfKin.findNextOfKinById(nextOfKinId);
+      const findOneNextOfKinData: NextOfKin[] = await this.nextOfKin.findNextOfKinById(nextOfKinId);
       res.status(200).json({ data: findOneNextOfKinData, message: 'findOne' });
     } catch (error) {
       next(error);

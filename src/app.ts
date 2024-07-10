@@ -49,7 +49,7 @@ export class App {
   private async connectToDatabase() {
     await dbConnection();
     console.log('hello');
-    seedCommand();
+    // seedCommand();
   }
 
   private initializeMiddlewares() {

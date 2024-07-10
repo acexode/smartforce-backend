@@ -12,7 +12,7 @@ export class OfficerMedicalInfoService extends Repository<OfficerMedicalInfoEnti
   }
 
   public async findAttributeById(attributeId: number): Promise<OfficerMedicalInfo> {
-    const findAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { officerId: { id: attributeId } } });
+    const findAttribute: OfficerMedicalInfo = await OfficerMedicalInfoEntity.findOne({ where: { officerId:attributeId } });
     if (!findAttribute) throw new HttpException(409, "Attribute doesn't exist");
 
     return findAttribute;

@@ -13,6 +13,7 @@ export class CommandRoute implements Routes {
   public statepath = '/org-structure/state-commands';
   public areapath = '/org-structure/area-commands';
   public divisionpath = '/org-structure/divisional-commands';
+  public genericPath = '/org-structure/generic';
   public router = Router();
   public commandController = new CommandController();
 
@@ -21,6 +22,7 @@ export class CommandRoute implements Routes {
   }
 
   private initializeRoutes() {
+    this.router.post(`${this.genericPath}`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.commandController.getAllGeneric);
     this.router.get(`${this.fhqpath}`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.commandController.getFHQDepartments);
     this.router.get(`${this.zonalpath}`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.commandController.getZonalCommand);
     this.router.get(`${this.statepath}`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.commandController.getStateCommands);

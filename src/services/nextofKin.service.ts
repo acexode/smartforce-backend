@@ -6,9 +6,9 @@ import { HttpException } from '@/exceptions/httpException';
 @Service()
 @EntityRepository()
 export class NextOfKinService extends Repository<NextOfKinEntity> {
-  public async findAllNextOfKin(): Promise<NextOfKin[]> {
-    const nextOfKin: NextOfKin[] = await NextOfKinEntity.find();
-    return nextOfKin;
+  public async findAllNextOfKin(officerId: number): Promise<NextOfKin[]> {
+    const nextOfKins: NextOfKin[] = await NextOfKinEntity.find({ where: { officerId } });
+    return nextOfKins;
   }
 
   public async findNextOfKinById(nextOfKinId: number): Promise<NextOfKin[]> {
@@ -19,20 +19,47 @@ export class NextOfKinService extends Repository<NextOfKinEntity> {
     return findNextOfKin;
   }
 
-  public async createNextOfKin(nextOfKinData: NextOfKin): Promise<NextOfKin> {
+  public async createNextOfKin(nextOfKinData: NextOfKin[]): Promise<NextOfKin[]> {
     console.log(nextOfKinData);
-    const createNextOfKinData: NextOfKin = await NextOfKinEntity.create({ ...nextOfKinData, officer: { id: nextOfKinData.officerId } }).save();
-    return createNextOfKinData;
+    const createdNextOfKins: NextOfKin[] = [];
+
+    for (const nextOfKin of nextOfKinData) {
+      const createNextOfKinData: NextOfKin = await NextOfKinEntity.create({ ...nextOfKin, officer: { id: nextOfKin.officerId } }).save();
+      createdNextOfKins.push(createNextOfKinData);
+    }
+
+    return createdNextOfKins;
   }
 
-  public async updateNextOfKin(nextOfKinId: number, nextOfKinData: NextOfKin): Promise<NextOfKin> {
-    const findNextOfKin: NextOfKin = await NextOfKinEntity.findOne({ where: { officerId: nextOfKinId } });
-    if (!findNextOfKin) throw new HttpException(409, "Next of Kin doesn't exist");
+  public async updateNextOfKin(officerId: number, nextOfKinData: NextOfKin[]): Promise<NextOfKin[]> {
+    const existingNextOfKins = await NextOfKinEntity.find({ where: { officerId } });
+    const updatedNextOfKins: NextOfKin[] = [];
 
-    await NextOfKinEntity.update({ officer: { id: nextOfKinId } }, nextOfKinData);
+    for (const nextOfKin of nextOfKinData) {
+      if (nextOfKin.id) {
+        // Existing Next of Kin
+        const existingNextOfKin = existingNextOfKins.find(n => n.id === nextOfKin.id);
+        if (existingNextOfKin) {
+          await NextOfKinEntity.update(nextOfKin.id, nextOfKin);
+          updatedNextOfKins.push(await NextOfKinEntity.findOne(nextOfKin.id));
+        }
+      } else {
+        // New Next of Kin
+        const newNextOfKin = NextOfKinEntity.create({ ...nextOfKin, officerId });
+        await newNextOfKin.save();
+        updatedNextOfKins.push(newNextOfKin);
+      }
+    }
 
-    const updateNextOfKin: NextOfKin = await NextOfKinEntity.findOne({ where: { officerId: nextOfKinId } });
-    return updateNextOfKin;
+    // Optionally delete missing next of kin records
+    const newIds = nextOfKinData.map(n => n.id).filter(id => id);
+    for (const existingNextOfKin of existingNextOfKins) {
+      if (!newIds.includes(existingNextOfKin.id)) {
+        await NextOfKinEntity.delete(existingNextOfKin.id);
+      }
+    }
+
+    return updatedNextOfKins;
   }
 
   public async deleteNextOfKin(nextOfKinId: number): Promise<NextOfKin> {

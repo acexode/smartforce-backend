@@ -18,7 +18,7 @@ export class DependentsController {
   public getDependentsById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const dependentsId = Number(req.params.id);
-      const findOneDependentsData: Dependents = await this.dependents.findDependentsById(dependentsId);
+      const findOneDependentsData: Dependents[] = await this.dependents.findDependentsById(dependentsId);
       res.status(200).json({ data: findOneDependentsData, message: 'findOne' });
     } catch (error) {
       next(error);

@@ -16,10 +16,24 @@ export class NextOfKinRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])],  this.nextOfKin.getNextOfKin);
-    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])],  this.nextOfKin.getNextOfKinById);
-    this.router.post(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])],  ValidationMiddleware(CreateNextOfKinDto), this.nextOfKin.createNextOfKin);
-    this.router.put(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])],  ValidationMiddleware(UpdateNextOfKinDto, true), this.nextOfKin.updateNextOfKin);
-    this.router.delete(`${this.path}/:id(\\d+)`, [AuthMiddleware,AuthoriseRole([Roles.Admin])], this.nextOfKin.deleteNextOfKin);
+    this.router.get(`${this.path}`, [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])], this.nextOfKin.getNextOfKin);
+    this.router.get(
+      `${this.path}/:id(\\d+)`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry, Roles.Officer])],
+      this.nextOfKin.getNextOfKinById,
+    );
+    this.router.post(
+      `${this.path}`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
+      ValidationMiddleware(CreateNextOfKinDto),
+      this.nextOfKin.createNextOfKin,
+    );
+    this.router.put(
+      `${this.path}/:id(\\d+)`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
+      ValidationMiddleware(UpdateNextOfKinDto, true),
+      this.nextOfKin.updateNextOfKin,
+    );
+    this.router.delete(`${this.path}/:id(\\d+)`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.nextOfKin.deleteNextOfKin);
   }
 }

@@ -6,6 +6,16 @@ import { CommandService } from '@services/command.service';
 export class CommandController {
   public commandService = Container.get(CommandService);
 
+  public getAllGeneric = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const body = req.body;
+      const findAllCommandCategoryData: Command[] = await this.commandService.findGeneric(body);
+      res.status(200).json({ data: findAllCommandCategoryData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public getFHQDepartments = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const findAllCommandData: Command[] = await this.commandService.findFHQDepartments();

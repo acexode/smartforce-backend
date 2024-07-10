@@ -35,7 +35,7 @@ export class AuthService extends Repository<OfficerBioDataEntity> {
   public async login(OfficerBioDataData: OfficerBioData): Promise<{ cookie: string; officer: OfficerBioData; token: any }> {
     const officer: OfficerBioData = await OfficerBioDataEntity.findOne({
       where: { email: OfficerBioDataData.email },
-      select: ['id', 'email', 'password', 'firstName', 'lastName', 'otherName'],
+      select: ['id', 'email', 'password', 'firstName', 'lastName', 'otherName', 'role'],
     });
     if (!officer) throw new HttpException(409, `This email ${OfficerBioDataData.email} was not found`);
 

@@ -7,6 +7,12 @@ import { Command } from '@entities/command.entity';
 @Service()
 @EntityRepository()
 export class CommandService extends Repository<CommandEntity> {
+  public async findGeneric(query: any): Promise<Command[]> {
+    console.log(query);
+    const commandCategory: Command[] = await CommandEntity.find({ where: query });
+    console.log(commandCategory);
+    return commandCategory;
+  }
   public async findFHQDepartments(): Promise<Command[]> {
     const command: Command[] = await CommandEntity.find({ where: { CommandCategory_Id: 1 } });
     return command;

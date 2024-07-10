@@ -40,7 +40,7 @@ export const seedCommand = () => {
       IsActive: e.IsActive,
       Address: e.Address,
       CommandType_Id: e.CommandType_Id,
-      ParentCode: e.ParentCode ? parseInt(e.ParentCode) : null,
+      ParentCode: e.ParentCode,
       ZonalCommand_Id: e.ZonalCommand_Id ? parseInt(e.ZonalCommand_Id) : null,
     });
     console.log(r);

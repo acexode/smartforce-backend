@@ -22,6 +22,7 @@ import { OfficerTrainingEntity } from './officerTraining.entity';
 import { ProfessionalAssociationEntity } from './professionalAssociation.entity';
 import { WorkExperienceEntity } from './workexperience.entity';
 import { Roles } from '@/enums/role.enum';
+import { OfficerWelfareInformation, OfficerWelfareInformationEntity } from './welfare.entity';
 
 export interface OfficerBioData {
   id: number;
@@ -150,11 +151,11 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   @OneToMany(() => ProfessionalAssociationEntity, professionalAssociation => professionalAssociation.officer)
   professionalAssociation: Relation<ProfessionalAssociationEntity>[];
 
-  @OneToMany(() => OfficerMedicalInfoEntity, officerMed => officerMed.officer)
+  @OneToOne(() => OfficerMedicalInfoEntity, officerMed => officerMed.officer)
   officerMedical: Relation<OfficerMedicalInfoEntity>[];
 
-  @OneToMany(() => OfficerMedicalInfoEntity, officerMed => officerMed.officer)
-  welfareInformation: Relation<OfficerMedicalInfoEntity>[];
+  @OneToOne(() => OfficerWelfareInformationEntity, officerMed => officerMed.officer)
+  welfareInformation: Relation<OfficerWelfareInformation>[];
 
   @OneToMany(() => OfficerPromotionHistoryEntity, officerMed => officerMed.officer)
   promotionHistories: Relation<OfficerPromotionHistoryEntity>[];

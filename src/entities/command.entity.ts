@@ -9,7 +9,7 @@ export interface Command {
   IsActive: number;
   Address: string;
   CommandType_Id: number;
-  ParentCode: number;
+  ParentCode: string;
   ZonalCommand_Id: number;
 }
 
@@ -43,7 +43,7 @@ export class CommandEntity extends BaseEntity {
   CommandType_Id: number;
 
   @Column()
-  ParentCode: number;
+  ParentCode: string;
 
   @Column({ nullable: true })
   ZonalCommand_Id: number;

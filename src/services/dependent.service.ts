@@ -11,8 +11,8 @@ export class DependentsService extends Repository<DependentsEntity> {
     return dependents;
   }
 
-  public async findDependentsById(dependentsId: number): Promise<Dependents> {
-    const findDependents: Dependents = await DependentsEntity.findOne({ where: { officerId: dependentsId } });
+  public async findDependentsById(dependentsId: number): Promise<Dependents[]> {
+    const findDependents: Dependents[] = await DependentsEntity.find({ where: { officerId: dependentsId } });
     if (!findDependents) throw new HttpException(409, "Dependents doesn't exist");
 
     return findDependents;

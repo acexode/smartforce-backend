@@ -6,13 +6,13 @@ import { HttpException } from '@/exceptions/httpException';
 @Service()
 @EntityRepository()
 export class OfficerTrainingService extends Repository<OfficerTrainingEntity> {
-  public async findAllTrainings(): Promise<OfficerTraining[]> {
-    const trainings: OfficerTraining[] = await OfficerTrainingEntity.find();
+  public async findAllTrainings(trainingId: number): Promise<OfficerTraining[]> {
+    const trainings: OfficerTraining[] = await OfficerTrainingEntity.find({ where: { officerId: { id: trainingId } } });
     return trainings;
   }
 
-  public async findTrainingById(trainingId: number): Promise<OfficerTraining> {
-    const findTraining: OfficerTraining = await OfficerTrainingEntity.findOne({ where: { officerId: { id: trainingId } } });
+  public async findTrainingById(trainingId: number): Promise<OfficerTraining[]> {
+    const findTraining: OfficerTraining[] = await OfficerTrainingEntity.find({ where: { officerId: { id: trainingId } } });
     if (!findTraining) throw new HttpException(409, "Training doesn't exist");
 
     return findTraining;

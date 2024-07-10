@@ -2,13 +2,15 @@ import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
 import { OfficerTraining } from '@entities/officerTraining.entity';
 import { OfficerTrainingService } from '@services/officerTraining.service';
+import { RequestWithUser } from '@/interfaces/auth.interface';
 
 export class OfficerTrainingController {
   public officerTrainingService = Container.get(OfficerTrainingService);
 
-  public getTrainings = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public getTrainings = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const findAllTrainingsData: OfficerTraining[] = await this.officerTrainingService.findAllTrainings();
+      const user = req.user;
+      const findAllTrainingsData: OfficerTraining[] = await this.officerTrainingService.findAllTrainings(user.id);
       res.status(200).json({ data: findAllTrainingsData, message: 'findAll' });
     } catch (error) {
       next(error);
@@ -18,7 +20,7 @@ export class OfficerTrainingController {
   public getTrainingById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const trainingId = Number(req.params.id);
-      const findOneTrainingData: OfficerTraining = await this.officerTrainingService.findTrainingById(trainingId);
+      const findOneTrainingData: OfficerTraining[] = await this.officerTrainingService.findTrainingById(trainingId);
       res.status(200).json({ data: findOneTrainingData, message: 'findOne' });
     } catch (error) {
       next(error);

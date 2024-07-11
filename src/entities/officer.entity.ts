@@ -26,12 +26,14 @@ import { OfficerWelfareInformation, OfficerWelfareInformationEntity } from './we
 
 export interface OfficerBioData {
   id: number;
+  ippisNo: string;
+  accountNo: number;
+  nin: string;
   firstName: string;
   lastName: string;
   otherName?: string;
   email: string;
   phoneNumber: string;
-  nin: string;
   password: string;
   dateOfBirth: Date;
   sex: string;
@@ -56,6 +58,10 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
   @Column()
   @Unique(['ippisNo'])
   ippisNo: string;
+
+  @Column({ nullable: false })
+  @Unique(['accountNo'])
+  accountNo: number;
 
   @Column()
   firstName: string;

@@ -8,6 +8,10 @@ export class CreateUserDto {
   @IsNotEmpty()
   public ippisNo: string;
 
+  @IsString()
+  @IsNotEmpty()
+  public accountNo: string;
+
   @IsNumber()
   @IsNotEmpty()
   public nin: number;
@@ -18,7 +22,7 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  public phone: string;
+  public phoneNumber: string;
 
   @IsString()
   @IsNotEmpty()

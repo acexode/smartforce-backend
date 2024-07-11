@@ -6,6 +6,7 @@ const konnect_token = 'wJ7QoMz2IOqJMl00Fp0_AFZr9S3ldUo8NCqXGrACZi4=';
 const SenderMask = 'Smartforce';
 
 async function sendSMS(phone, text) {
+  console.log(phone);
   const url = `https://konnect.dotgo.com/api/v1/Accounts/${account_id}/Messages`;
   const payload = {
     id: 'Smartforce-' + generateUUID(),

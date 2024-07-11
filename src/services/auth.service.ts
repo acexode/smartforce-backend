@@ -6,9 +6,11 @@ import { SECRET_KEY } from '@config';
 import { HttpException } from '@/exceptions/httpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
 import { OfficerBioData, OfficerBioDataEntity } from '@/entities/officer.entity';
-import { createOTPMessage, generateOTP } from '@/utils/utils';
+import { createOTPMessage, formatPhoneNumber, generateOTP, removeQuotes } from '@/utils/utils';
 import { sendMail } from '@/utils/sendEmail';
 import sendSMS from '@/utils/sendSMS';
+import { IppisEntity } from '@/entities/ippis.entity';
+import { Ippis } from '@/interfaces/ippis.interface';
 
 const createToken = (OfficerBioData: OfficerBioData): TokenData => {
   const dataStoredInToken: DataStoredInToken = { id: OfficerBioData.id };
@@ -30,6 +32,11 @@ export class AuthService extends Repository<OfficerBioDataEntity> {
   //   await sendMail(email, subject, text);
   // }
   public async signup(OfficerBioDataData: OfficerBioData): Promise<OfficerBioData> {
+    const ippisRecord: Ippis = await IppisEntity.findOne({ where: { staffId: OfficerBioDataData.ippisNo } });
+    if (!ippisRecord) throw new HttpException(404, `No Record Found For IPPIS ${OfficerBioDataData.ippisNo} `);
+    if (removeQuotes(ippisRecord.accountNo) !== OfficerBioDataData.accountNo.toString()) {
+      throw new HttpException(400, `The account number provided doesnt match IPPIS Records`);
+    }
     const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({ where: { email: OfficerBioDataData.email } });
     if (findOfficerBioData) throw new HttpException(409, `This email ${OfficerBioDataData.email} already exists`);
 
@@ -43,7 +50,7 @@ export class AuthService extends Repository<OfficerBioDataEntity> {
     }).save();
     if (createOfficerBioDataData) {
       // this.sendOTPEmail(OfficerBioDataData.email, text);
-      sendSMS(OfficerBioDataData.phoneNumber, text);
+      sendSMS(formatPhoneNumber(OfficerBioDataData.phoneNumber), text);
     }
     return createOfficerBioDataData;
   }
@@ -51,7 +58,7 @@ export class AuthService extends Repository<OfficerBioDataEntity> {
   public async login(OfficerBioDataData: OfficerBioData): Promise<{ cookie: string; officer: OfficerBioData; token: any }> {
     const officer: OfficerBioData = await OfficerBioDataEntity.findOne({
       where: { email: OfficerBioDataData.email },
-      select: ['id', 'email', 'password', 'firstName', 'lastName', 'otherName', 'role'],
+      select: ['id', 'email', 'password', 'firstName', 'lastName', 'otherName', 'role', 'phoneNumber'],
     });
     if (!officer) throw new HttpException(409, `This email ${OfficerBioDataData.email} was not found`);
 
@@ -62,8 +69,9 @@ export class AuthService extends Repository<OfficerBioDataEntity> {
     const token = createToken(officer);
     const updated = await OfficerBioDataEntity.update(officer.id, { otp });
     if (updated) {
+      console.log(officer);
       // this.sendOTPEmail(OfficerBioDataData.email, text);
-      sendSMS(OfficerBioDataData.phoneNumber, text);
+      sendSMS(formatPhoneNumber(officer.phoneNumber), text);
     }
     const cookie = createCookie(token);
     console.log(token, cookie);

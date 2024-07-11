@@ -21,10 +21,10 @@ export class AuthController {
   public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const userData: OfficerBioData = req.body;
-      const { cookie, officer, token } = await this.auth.login(userData);
+      const { cookie, officer } = await this.auth.login(userData);
 
       res.setHeader('Set-Cookie', [cookie]);
-      res.status(200).json({ data: officer, message: 'login', token });
+      res.status(200).json({ data: officer, message: 'login' });
     } catch (error) {
       next(error);
     }
@@ -33,9 +33,9 @@ export class AuthController {
   public verifyOTP = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { email, otp } = req.body;
-      const token = await this.auth.verifyOTP(email, otp);
+      const { officer, token } = await this.auth.verifyOTP(email, otp);
 
-      res.status(200).json({ token, message: 'OTP verified' });
+      res.status(200).json({ data: officer, token, message: 'OTP verified' });
     } catch (error) {
       next(error);
     }

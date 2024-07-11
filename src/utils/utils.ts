@@ -11,3 +11,15 @@ export const generateOTP = () => {
 export const createOTPMessage = (otp: string): string => {
   return `Your One-Time Password (OTP) for login is: ${otp}. Please do not share this password with anyone.`;
 };
+
+export const formatPhoneNumber = (phoneNumber: string): string => {
+  console.log(phoneNumber);
+  if (phoneNumber.startsWith('0')) {
+    return '+234' + phoneNumber.substring(1);
+  }
+  return phoneNumber;
+};
+
+export const removeQuotes = (inputString: string): string => {
+  return inputString.replace(/'/g, '');
+};

@@ -18,7 +18,7 @@ export class WorkExperienceController {
   public getWorkExperienceById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const workExperienceId = Number(req.params.id);
-      const findOneWorkExperienceData: WorkExperience = await this.workExperience.findWorkExperienceById(workExperienceId);
+      const findOneWorkExperienceData: WorkExperience[] = await this.workExperience.findWorkExperienceById(workExperienceId);
       res.status(200).json({ data: findOneWorkExperienceData, message: 'findOne' });
     } catch (error) {
       next(error);
@@ -27,8 +27,8 @@ export class WorkExperienceController {
 
   public createWorkExperience = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const workExperienceData: WorkExperience = req.body;
-      const createWorkExperienceData: WorkExperience = await this.workExperience.createWorkExperience(workExperienceData);
+      const workExperienceData: WorkExperience[] = req.body;
+      const createWorkExperienceData: WorkExperience[] = await this.workExperience.createWorkExperience(workExperienceData);
       res.status(201).json({ data: createWorkExperienceData, message: 'created' });
     } catch (error) {
       next(error);
@@ -38,8 +38,13 @@ export class WorkExperienceController {
   public updateWorkExperience = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const workExperienceId = Number(req.params.id);
-      const workExperienceData: WorkExperience = req.body;
-      const updateWorkExperienceData: WorkExperience = await this.workExperience.updateWorkExperience(workExperienceId, workExperienceData);
+      console.log('ID ');
+      const workExperienceData: any = req.body;
+      console.log(workExperienceData.workExperiences);
+      const updateWorkExperienceData: WorkExperience[] = await this.workExperience.updateWorkExperience(
+        workExperienceId,
+        workExperienceData.workExperiences,
+      );
       res.status(200).json({ data: updateWorkExperienceData, message: 'updated' });
     } catch (error) {
       next(error);

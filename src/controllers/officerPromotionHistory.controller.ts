@@ -18,7 +18,7 @@ export class OfficerPromotionHistoryController {
   public getPromotionHistoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const promotionHistoryId = Number(req.params.id);
-      const findOnePromotionHistoryData: OfficerPromotionHistory = await this.officerPromotionHistoryService.findPromotionHistoryById(
+      const findOnePromotionHistoryData: OfficerPromotionHistory[] = await this.officerPromotionHistoryService.findPromotionHistoryById(
         promotionHistoryId,
       );
       res.status(200).json({ data: findOnePromotionHistoryData, message: 'findOne' });
@@ -29,8 +29,8 @@ export class OfficerPromotionHistoryController {
 
   public createPromotionHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const promotionHistoryData: OfficerPromotionHistory = req.body;
-      const createPromotionHistoryData: OfficerPromotionHistory = await this.officerPromotionHistoryService.createPromotionHistory(
+      const promotionHistoryData: OfficerPromotionHistory[] = req.body;
+      const createPromotionHistoryData: OfficerPromotionHistory[] = await this.officerPromotionHistoryService.createPromotionHistory(
         promotionHistoryData,
       );
       res.status(201).json({ data: createPromotionHistoryData, message: 'created' });
@@ -42,8 +42,8 @@ export class OfficerPromotionHistoryController {
   public updatePromotionHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const promotionHistoryId = Number(req.params.id);
-      const promotionHistoryData: OfficerPromotionHistory = req.body;
-      const updatePromotionHistoryData: OfficerPromotionHistory = await this.officerPromotionHistoryService.updatePromotionHistory(
+      const promotionHistoryData: OfficerPromotionHistory[] = req.body;
+      const updatePromotionHistoryData: OfficerPromotionHistory[] = await this.officerPromotionHistoryService.updatePromotionHistory(
         promotionHistoryId,
         promotionHistoryData,
       );

@@ -19,7 +19,7 @@ export class EducationalHistoryController {
   public getEducationalHistoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const educationalHistoryId = Number(req.params.id);
-      const findOneEducationalHistoryData: EducationalHistory = await this.educationalHistory.findEducationalHistoryById(educationalHistoryId);
+      const findOneEducationalHistoryData: EducationalHistory[] = await this.educationalHistory.findEducationalHistoryById(educationalHistoryId);
       res.status(200).json({ data: findOneEducationalHistoryData, message: 'findOne' });
     } catch (error) {
       next(error);
@@ -28,8 +28,8 @@ export class EducationalHistoryController {
 
   public createEducationalHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const educationalHistoryData: EducationalHistory = req.body;
-      const createEducationalHistoryData: EducationalHistory = await this.educationalHistory.createEducationalHistory(educationalHistoryData);
+      const educationalHistoryData: EducationalHistory[] = req.body;
+      const createEducationalHistoryData: EducationalHistory[] = await this.educationalHistory.createEducationalHistory(educationalHistoryData);
       res.status(201).json({ data: createEducationalHistoryData, message: 'created' });
     } catch (error) {
       next(error);
@@ -39,8 +39,8 @@ export class EducationalHistoryController {
   public updateEducationalHistory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const educationalHistoryId = Number(req.params.id);
-      const educationalHistoryData: EducationalHistory = req.body;
-      const updateEducationalHistoryData: EducationalHistory = await this.educationalHistory.updateEducationalHistory(
+      const educationalHistoryData: EducationalHistory[] = req.body;
+      const updateEducationalHistoryData: EducationalHistory[] = await this.educationalHistory.updateEducationalHistory(
         educationalHistoryId,
         educationalHistoryData,
       );

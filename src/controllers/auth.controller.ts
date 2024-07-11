@@ -30,6 +30,17 @@ export class AuthController {
     }
   };
 
+  public verifyOTP = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { email, otp } = req.body;
+      const token = await this.auth.verifyOTP(email, otp);
+
+      res.status(200).json({ token, message: 'OTP verified' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public logOut = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
     try {
       const userData: OfficerBioData = req.user;

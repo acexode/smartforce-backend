@@ -29,8 +29,8 @@ export class OfficerTrainingController {
 
   public createTraining = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const trainingData: OfficerTraining = req.body;
-      const createTrainingData: OfficerTraining = await this.officerTrainingService.createTraining(trainingData);
+      const trainingData: OfficerTraining[] = req.body;
+      const createTrainingData: OfficerTraining[] = await this.officerTrainingService.createTraining(trainingData);
       res.status(201).json({ data: createTrainingData, message: 'created' });
     } catch (error) {
       next(error);
@@ -40,8 +40,8 @@ export class OfficerTrainingController {
   public updateTraining = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const trainingId = Number(req.params.id);
-      const trainingData: OfficerTraining = req.body;
-      const updateTrainingData: OfficerTraining = await this.officerTrainingService.updateTraining(trainingId, trainingData);
+      const trainingData: OfficerTraining[] = req.body;
+      const updateTrainingData: OfficerTraining[] = await this.officerTrainingService.updateTraining(trainingId, trainingData);
       res.status(200).json({ data: updateTrainingData, message: 'updated' });
     } catch (error) {
       next(error);

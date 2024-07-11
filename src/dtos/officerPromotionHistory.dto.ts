@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString, IsInt } from 'class-validator';
 export class CreateOfficerPromotionHistoryDto {
   @IsNotEmpty()
   @IsInt()
-  public rankId: number;
+  public rank: string;
 
   @IsNotEmpty()
   @IsString()
@@ -25,7 +25,7 @@ export class CreateOfficerPromotionHistoryDto {
 export class UpdateOfficerPromotionHistoryDto {
   @IsNotEmpty()
   @IsInt()
-  public rankId?: number;
+  public rank?: string;
 
   @IsNotEmpty()
   @IsString()

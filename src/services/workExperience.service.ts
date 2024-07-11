@@ -12,29 +12,53 @@ export class WorkExperienceService extends Repository<WorkExperienceEntity> {
     return workExperience;
   }
 
-  public async findWorkExperienceById(workExperienceId: number): Promise<WorkExperience> {
-    const findWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { officerId: workExperienceId } });
+  public async findWorkExperienceById(officerId: number): Promise<WorkExperience[]> {
+    const findWorkExperience: WorkExperience[] = await WorkExperienceEntity.find({ where: { officerId: officerId } });
     if (!findWorkExperience) throw new HttpException(409, "Work experience doesn't exist");
 
     return findWorkExperience;
   }
 
-  public async createWorkExperience(workExperienceData: WorkExperience): Promise<WorkExperience> {
-    const createWorkExperienceData: WorkExperience = await WorkExperienceEntity.create({
-      ...workExperienceData,
-      officer: { id: workExperienceData.officerId },
-    }).save();
-    return createWorkExperienceData;
+  public async createWorkExperience(workExperienceData: WorkExperience[]): Promise<WorkExperience[]> {
+    const createdData: WorkExperience[] = [];
+
+    for (const tData of workExperienceData) {
+      const newData: WorkExperience = await WorkExperienceEntity.create({ ...tData, officer: { id: tData.officerId } }).save();
+      createdData.push(newData);
+    }
+    return createdData;
   }
 
-  public async updateWorkExperience(workExperienceId: number, workExperienceData: WorkExperience): Promise<WorkExperience> {
-    const findWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { officerId: workExperienceId } });
-    if (!findWorkExperience) throw new HttpException(409, "Work experience doesn't exist");
+  public async updateWorkExperience(officerId: number, workExperienceData: WorkExperience[]): Promise<WorkExperience[]> {
+    const existingWorkExperiences = await WorkExperienceEntity.find({ where: { officerId } });
+    console.log(workExperienceData[0]);
+    const updatedWorkExperience: WorkExperience[] = [];
+    for (const data of workExperienceData) {
+      if (data.id) {
+        // Existing Training
+        const existingWorkExperience = existingWorkExperiences.find(n => n.id === data.id);
+        if (existingWorkExperience) {
+          await WorkExperienceEntity.update(data.id, data);
+          updatedWorkExperience.push(await WorkExperienceEntity.findOne(data.id));
+        }
+      } else {
+        // New Training
+        const newData = WorkExperienceEntity.create({ ...data, officerId });
+        await newData.save();
+        updatedWorkExperience.push(newData);
+      }
+    }
 
-    await WorkExperienceEntity.update({ officer: { id: workExperienceId } }, workExperienceData);
+    // Optionally delete work experience records
+    console.log('final stage');
+    const newIds = workExperienceData.map(n => n.id).filter(id => id);
+    for (const existingWorkExperience of existingWorkExperiences) {
+      if (!newIds.includes(existingWorkExperience.id)) {
+        await WorkExperienceEntity.delete(existingWorkExperience.id);
+      }
+    }
 
-    const updateWorkExperience: WorkExperience = await WorkExperienceEntity.findOne({ where: { officerId: workExperienceId } });
-    return updateWorkExperience;
+    return updatedWorkExperience;
   }
 
   public async deleteWorkExperience(workExperienceId: number): Promise<WorkExperience> {

@@ -4,7 +4,7 @@ import { RankEntity } from './ranks.entity'; // Adjust the import according to y
 
 export interface OfficerPromotionHistory {
   id: number;
-  rankId: any; // Foreign key from RankEntity
+  rank: any; // Foreign key from RankEntity
   periodOfService: string;
   policeFormation: string;
   position: string;
@@ -17,7 +17,7 @@ export class OfficerPromotionHistoryEntity extends BaseEntity implements Officer
   id: number;
 
   @Column()
-  rankId: string;
+  rank: string;
 
   @Column()
   periodOfService: string;

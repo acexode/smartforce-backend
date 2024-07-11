@@ -44,6 +44,7 @@ export interface OfficerBioData {
   placeOfBirth: string;
   religion: string;
   tribe: string;
+  otp: string;
   role: Roles;
 }
 
@@ -79,6 +80,9 @@ export class OfficerBioDataEntity extends BaseEntity implements OfficerBioData {
 
   @Column()
   password: string;
+
+  @Column({ nullable: true })
+  otp: string;
 
   @Column({ nullable: true })
   dateOfBirth: Date;

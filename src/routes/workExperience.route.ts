@@ -16,10 +16,24 @@ export class WorkExperienceRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.workExperience.getWorkExperience);
-    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])], this.workExperience.getWorkExperienceById);
-    this.router.post(`${this.path}`, AuthoriseRole([Roles.Admin,Roles.dataEntry]),ValidationMiddleware(CreateWorkExperienceDto), this.workExperience.createWorkExperience);
-    this.router.put(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], ValidationMiddleware(UpdateWorkExperienceDto, true), this.workExperience.updateWorkExperience);
-    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.workExperience.deleteWorkExperience);
+    this.router.get(`${this.path}`, [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])], this.workExperience.getWorkExperience);
+    this.router.get(
+      `${this.path}/:id(\\d+)`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry, Roles.Officer])],
+      this.workExperience.getWorkExperienceById,
+    );
+    this.router.post(
+      `${this.path}`,
+      AuthoriseRole([Roles.Admin, Roles.dataEntry]),
+      ValidationMiddleware(CreateWorkExperienceDto),
+      this.workExperience.createWorkExperience,
+    );
+    this.router.put(
+      `${this.path}/:id(\\d+)`,
+      ValidationMiddleware(UpdateWorkExperienceDto, true),
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
+      this.workExperience.updateWorkExperience,
+    );
+    this.router.delete(`${this.path}/:id(\\d+)`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.workExperience.deleteWorkExperience);
   }
 }

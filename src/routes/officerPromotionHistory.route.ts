@@ -16,20 +16,32 @@ export class OfficerPromotionHistoryRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])], this.officerPromotionHistoryController.getPromotionHistories);
-    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])], this.officerPromotionHistoryController.getPromotionHistoryById);
+    this.router.get(
+      `${this.path}`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
+      this.officerPromotionHistoryController.getPromotionHistories,
+    );
+    this.router.get(
+      `${this.path}/:id(\\d+)`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry, Roles.Officer])],
+      this.officerPromotionHistoryController.getPromotionHistoryById,
+    );
     this.router.post(
       `${this.path}`,
-      AuthoriseRole([Roles.Admin,Roles.dataEntry]),
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
       ValidationMiddleware(CreateOfficerPromotionHistoryDto),
       this.officerPromotionHistoryController.createPromotionHistory,
     );
     this.router.put(
       `${this.path}/:id(\\d+)`,
-      AuthoriseRole([Roles.Admin,Roles.dataEntry]),
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
       ValidationMiddleware(UpdateOfficerPromotionHistoryDto, true),
       this.officerPromotionHistoryController.updatePromotionHistory,
     );
-    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.officerPromotionHistoryController.deletePromotionHistory);
+    this.router.delete(
+      `${this.path}/:id(\\d+)`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin])],
+      this.officerPromotionHistoryController.deletePromotionHistory,
+    );
   }
 }

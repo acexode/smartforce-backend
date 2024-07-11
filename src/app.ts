@@ -14,6 +14,9 @@ import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 import { seedCommand, seedCommandCategory } from './seeds';
+import { generateOTP } from './utils/utils';
+import sendSMS from './utils/sendSMS';
+import { sendMail } from './utils/sendEmail';
 // import { seedIppis } from './seeds';
 
 export class App {
@@ -21,6 +24,10 @@ export class App {
   public env: string;
   public port: string | number;
 
+  private async sendOTPEmail(email: string, text) {
+    const subject = 'SmartForce OTP Code';
+    await sendMail(email, subject, text);
+  }
   constructor(routes: Routes[]) {
     this.app = express();
     this.env = NODE_ENV || 'development';
@@ -34,6 +41,9 @@ export class App {
   }
 
   public listen() {
+    // const otp = generateOTP();
+    // sendSMS('+2347066565263', otp);
+    // this.sendOTPEmail('abudawud92@gmail.com', otp);
     this.app.listen(this.port, () => {
       logger.info(`=================================`);
       logger.info(`======= ENV: ${this.env} =======`);

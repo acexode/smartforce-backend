@@ -16,15 +16,24 @@ export class EducationalHistoryRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])],  this.educationalHistory.getEducationalHistory);
-    this.router.get(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry,Roles.Officer])],  this.educationalHistory.getEducationalHistoryById);
-    this.router.post(`${this.path}`,[AuthMiddleware,AuthoriseRole([Roles.Admin,Roles.dataEntry])],  ValidationMiddleware(CreateEducationalHistoryDto), this.educationalHistory.createEducationalHistory);
+    this.router.get(`${this.path}`, [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])], this.educationalHistory.getEducationalHistory);
+    this.router.get(
+      `${this.path}/:id(\\d+)`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry, Roles.Officer])],
+      this.educationalHistory.getEducationalHistoryById,
+    );
+    this.router.post(
+      `${this.path}`,
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
+      ValidationMiddleware(CreateEducationalHistoryDto),
+      this.educationalHistory.createEducationalHistory,
+    );
     this.router.put(
       `${this.path}/:id(\\d+)`,
-      AuthoriseRole([Roles.Admin,Roles.dataEntry]), 
+      [AuthMiddleware, AuthoriseRole([Roles.Admin, Roles.dataEntry])],
       ValidationMiddleware(UpdateEducationalHistoryDto, true),
       this.educationalHistory.updateEducationalHistory,
     );
-    this.router.delete(`${this.path}/:id(\\d+)`,[AuthMiddleware,AuthoriseRole([Roles.Admin])], this.educationalHistory.deleteEducationalHistory);
+    this.router.delete(`${this.path}/:id(\\d+)`, [AuthMiddleware, AuthoriseRole([Roles.Admin])], this.educationalHistory.deleteEducationalHistory);
   }
 }

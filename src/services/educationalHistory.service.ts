@@ -11,29 +11,51 @@ export class EducationalHistoryService extends Repository<EducationalHistoryEnti
     return educationalHistory;
   }
 
-  public async findEducationalHistoryById(educationalHistoryId: number): Promise<EducationalHistory> {
-    const findEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { officerId: educationalHistoryId } });
+  public async findEducationalHistoryById(officerId: number): Promise<EducationalHistory[]> {
+    const findEducationalHistory: EducationalHistory[] = await EducationalHistoryEntity.find({ where: { officerId: officerId } });
     if (!findEducationalHistory) throw new HttpException(409, "Educational history doesn't exist");
 
     return findEducationalHistory;
   }
 
-  public async createEducationalHistory(educationalHistoryData: EducationalHistory): Promise<EducationalHistory> {
-    const createEducationalHistoryData: EducationalHistory = await EducationalHistoryEntity.create({
-      ...educationalHistoryData,
-      officer: { id: educationalHistoryData.officerId },
-    }).save();
-    return createEducationalHistoryData;
+  public async createEducationalHistory(educationalHistoryData: EducationalHistory[]): Promise<EducationalHistory[]> {
+    const createdData: EducationalHistory[] = [];
+
+    for (const tData of educationalHistoryData) {
+      const newData: EducationalHistory = await EducationalHistoryEntity.create({ ...tData, officer: { id: tData.officerId } }).save();
+      createdData.push(newData);
+    }
+    return createdData;
   }
 
-  public async updateEducationalHistory(educationalHistoryId: number, educationalHistoryData: EducationalHistory): Promise<EducationalHistory> {
-    const findEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { officerId: educationalHistoryId } });
-    if (!findEducationalHistory) throw new HttpException(409, "Educational history doesn't exist");
+  public async updateEducationalHistory(officerId: number, educationalHistoryData: EducationalHistory[]): Promise<EducationalHistory[]> {
+    const existingTrainings = await EducationalHistoryEntity.find({ where: { officerId } });
+    const updatedNTrainings: EducationalHistory[] = [];
+    for (const data of educationalHistoryData) {
+      if (data.id) {
+        // Existing Training
+        const existingTraining = existingTrainings.find(n => n.id === data.id);
+        if (existingTraining) {
+          await EducationalHistoryEntity.update(data.id, data);
+          updatedNTrainings.push(await EducationalHistoryEntity.findOne(data.id));
+        }
+      } else {
+        // New Training
+        const newData = EducationalHistoryEntity.create({ ...data, officerId });
+        await newData.save();
+        updatedNTrainings.push(newData);
+      }
+    }
 
-    await EducationalHistoryEntity.update({ officer: { id: educationalHistoryId } }, educationalHistoryData);
+    // Optionally delete missing next of kin records
+    const newIds = educationalHistoryData.map(n => n.id).filter(id => id);
+    for (const existingTraining of existingTrainings) {
+      if (!newIds.includes(existingTraining.id)) {
+        await EducationalHistoryEntity.delete(existingTraining.id);
+      }
+    }
 
-    const updateEducationalHistory: EducationalHistory = await EducationalHistoryEntity.findOne({ where: { officerId: educationalHistoryId } });
-    return updateEducationalHistory;
+    return updatedNTrainings;
   }
 
   public async deleteEducationalHistory(educationalHistoryId: number): Promise<EducationalHistory> {

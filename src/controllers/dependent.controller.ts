@@ -27,8 +27,8 @@ export class DependentsController {
 
   public createDependents = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const dependentsData: Dependents = req.body;
-      const createDependentsData: Dependents = await this.dependents.createDependents(dependentsData);
+      const dependentsData: Dependents[] = req.body;
+      const createDependentsData: Dependents[] = await this.dependents.createDependents(dependentsData);
       res.status(201).json({ data: createDependentsData, message: 'created' });
     } catch (error) {
       next(error);
@@ -38,8 +38,8 @@ export class DependentsController {
   public updateDependents = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const dependentsId = Number(req.params.id);
-      const dependentsData: Dependents = req.body;
-      const updateDependentsData: Dependents = await this.dependents.updateDependents(dependentsId, dependentsData);
+      const dependentsData: Dependents[] = req.body;
+      const updateDependentsData: Dependents[] = await this.dependents.updateDependents(dependentsId, dependentsData);
       res.status(200).json({ data: updateDependentsData, message: 'updated' });
     } catch (error) {
       next(error);

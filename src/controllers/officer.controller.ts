@@ -19,7 +19,6 @@ export class OfficerBioDataController {
   public getOfficerBioDataById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const OfficerBioDataId = Number(req.params.id);
-      console.log(OfficerBioDataId, 'ID');
       const findOneOfficerBioDataData: OfficerBioData = await this.OfficerBioData.findOfficerBioDataById(OfficerBioDataId);
       res.status(200).json({ data: findOneOfficerBioDataData, message: 'findOne' });
     } catch (error) {

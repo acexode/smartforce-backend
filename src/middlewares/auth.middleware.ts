@@ -41,15 +41,18 @@ export const AuthMiddleware = async (req: RequestWithUser, res: Response, next: 
 
 export const AuthoriseRole = (Roles: Roles[]) => {
   return (req: RequestWithUser, res: Response, next: NextFunction) => {
-    console.log(req.user);
+    console.log(req.user, 'req user');
     try {
-      if (Roles.includes(req.user.role)) {
-        next();
+      const paramId = parseInt(req.params.id, 10);
+      const officerId = req.body.officerId || (Array.isArray(req.body) && req.body[0]?.officerId);
+
+      if (Roles.includes(req.user.role) || paramId === req.user.id || officerId === req.user.id) {
+        return next();
       } else {
-        next(new HttpException(403, 'UnAuthorised'));
+        return next(new HttpException(403, 'Unauthorized'));
       }
     } catch (error) {
-      next(new HttpException(401, 'Wrong authentication token'));
+      return next(new HttpException(401, 'Wrong authentication token'));
     }
   };
 };

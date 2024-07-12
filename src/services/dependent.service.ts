@@ -18,18 +18,43 @@ export class DependentsService extends Repository<DependentsEntity> {
     return findDependents;
   }
 
-  public async createDependents(dependentsData: Dependents): Promise<Dependents> {
-    const createDependentsData: Dependents = await DependentsEntity.create({ ...dependentsData, officer: { id: dependentsData.officerId } }).save();
-    return createDependentsData;
+  public async createDependents(dependentsData: Dependents[]): Promise<Dependents[]> {
+    const createdData: Dependents[] = [];
+
+    for (const tData of dependentsData) {
+      const newData: Dependents = await DependentsEntity.create({ ...tData, officer: { id: tData.officerId } }).save();
+      createdData.push(newData);
+    }
+    return createdData;
   }
 
-  public async updateDependents(dependentsId: number, dependentsData: Dependents): Promise<Dependents> {
-    const findDependents: Dependents = await DependentsEntity.findOne({ where: { officerId: dependentsId } });
-    if (!findDependents) throw new HttpException(409, "Dependents doesn't exist");
+  public async updateDependents(officerId: number, dependentsData: Dependents[]): Promise<Dependents[]> {
+    const existingTrainings = await DependentsEntity.find({ where: { officerId } });
+    const updateDependents: Dependents[] = [];
+    for (const data of dependentsData) {
+      if (data.id) {
+        // Existing Training
+        const existingTraining = existingTrainings.find(n => n.id === data.id);
+        if (existingTraining) {
+          await DependentsEntity.update(data.id, data);
+          updateDependents.push(await DependentsEntity.findOne(data.id));
+        }
+      } else {
+        // New Training
+        const newData = DependentsEntity.create({ ...data, officerId });
+        await newData.save();
+        updateDependents.push(newData);
+      }
+    }
 
-    await DependentsEntity.update({ officer: { id: dependentsId } }, dependentsData);
+    // Optionally delete missing next of kin records
+    const newIds = dependentsData.map(n => n.id).filter(id => id);
+    for (const existingTraining of existingTrainings) {
+      if (!newIds.includes(existingTraining.id)) {
+        await DependentsEntity.delete(existingTraining.id);
+      }
+    }
 
-    const updateDependents: Dependents = await DependentsEntity.findOne({ where: { officerId: dependentsId } });
     return updateDependents;
   }
 

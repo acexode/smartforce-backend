@@ -13,7 +13,6 @@ export const createOTPMessage = (otp: string): string => {
 };
 
 export const formatPhoneNumber = (phoneNumber: string): string => {
-  console.log(phoneNumber);
   if (phoneNumber.startsWith('0')) {
     return '+234' + phoneNumber.substring(1);
   }

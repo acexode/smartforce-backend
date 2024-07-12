@@ -12,7 +12,6 @@ export class OfficerBioDataService extends Repository<OfficerBioDataEntity> {
   }
 
   public async findOfficerBioDataById(OfficerBioDataId: number): Promise<OfficerBioData> {
-    console.log(OfficerBioDataId, 'OfficerBioDataId');
     const findOfficerBioData: OfficerBioData = await OfficerBioDataEntity.findOne({
       where: { id: OfficerBioDataId },
       relations: [

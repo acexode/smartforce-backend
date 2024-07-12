@@ -38,7 +38,6 @@ export class WorkExperienceController {
   public updateWorkExperience = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const workExperienceId = Number(req.params.id);
-      console.log('ID ');
       const workExperienceData: any = req.body;
       console.log(workExperienceData.workExperiences);
       const updateWorkExperienceData: WorkExperience[] = await this.workExperience.updateWorkExperience(
